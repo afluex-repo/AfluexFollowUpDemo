@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "EmployeeRegistration";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="breadcrumb-title pe-3">Employee</div>
+    <div class="ps-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 p-0">
+                <li class="breadcrumb-item">
+                    <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Registration</li>
+            </ol>
+        </nav>
+    </div>
+
+</div>
+<!--end breadcrumb-->
+
+<div class="row">
+    <div class="col-xl-12 mx-auto">
+
+        <div class="card">
+            <div class="card-body">
+                <div class="border p-4 rounded">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label">User Type <span style="color: red">*</span></label>
+                            <select class="form-select" required>
+                                <option selected disabled value="">Choose...Template</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Name<span style="color: red">*</span></label>
+                            <input class="form-control" type="text" placeholder="Enter Name">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Contact No<span style="color: red">*</span></label>
+                            <input class="form-control" type="text" placeholder="Enter Contact">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label class="form-label">Email Id <span style="color: red">*</span></label>
+                            <input class="form-control" type="text" placeholder="Enter Email">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label"> Address <span style="color: red">*</span></label>
+                            <textarea type="textarea" class="form-control" placeholder="Enter Address"></textarea>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="formFile" class="form-label">File Upload <span style="color: red">*</span></label>
+                            <input class="form-control" type="file" id="formFile">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-9">
+                           
+                       
+                                <input type="submit" name="Save" text="Save" class="btn btn-primary" value="Save" />
+                                <a href="/Master/CategoryMaster" class="btn btn-dark">Reset</a>
+                                <a href="/Master/CategoryList" class="btn btn-info">Back To List</a>
+                            </div>
+                     </div> 
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
