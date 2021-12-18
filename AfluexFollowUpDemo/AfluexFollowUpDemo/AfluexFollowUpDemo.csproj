@@ -897,8 +897,12 @@
     <Content Include="assets\fonts\LineIcons.woff2" />
     <Content Include="cdn.jsdelivr.net\npm\bootstrap-icons%401.5.0\font\fonts\bootstrap-icons63f3.woff" />
     <Content Include="cdn.jsdelivr.net\npm\bootstrap-icons%401.5.0\font\fonts\bootstrap-icons63f3.woff2" />
+    <None Include="Properties\PublishProfiles\AfluexFollowUpDemo.pubxml" />
     <None Include="Properties\PublishProfiles\FollowUp.pubxml" />
     <Content Include="Views\DWR\DWRMaster.cshtml" />
+    <Content Include="Views\EmployeeDWR\EmployeeDWR.cshtml" />
+    <Content Include="Views\Employee\EmployeeDashBoard.cshtml" />
+    <Content Include="Views\EmployeeProcpect\EmployeeProspect.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>D:\Mona Afluex\PublishFolder\AfluexFollowUpDemo</_PublishTargetUrl>
+    <_PublishTargetUrl>E:\reenaproject\Repository\Published\AfluexFollowUpDemo</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
@@ -2041,13 +2041,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/18/2021 12:54:04</publishTime>
     </File>
     <File Include="bin/AfluexFollowUpDemo.dll">
-      <publishTime>12/18/2021 13:14:20</publishTime>
+      <publishTime>12/18/2021 13:16:15</publishTime>
     </File>
     <File Include="bin/ApplicationInsights.config">
       <publishTime>12/18/2021 12:54:03</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:04</publishTime>
     </File>
     <File Include="bin/Microsoft.AI.DependencyCollector.dll">
       <publishTime>12/18/2021 12:54:04</publishTime>
@@ -2077,19 +2077,19 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
       <publishTime>12/18/2021 12:54:05</publishTime>
@@ -2098,61 +2098,61 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/roslyn/System.Collections.Immutable.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/roslyn/System.Reflection.Metadata.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/roslyn/vbc.exe">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/roslyn/VBCSCompiler.exe.config">
       <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/Swashbuckle.Core.dll">
-      <publishTime>08/07/2017 01:30:56</publishTime>
+      <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/System.Web.Http.WebHost.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/System.Web.Webpages.Deployment.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/System.Web.Webpages.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/System.Web.Webpages.Razor.dll">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="bin/WebActivatorEx.dll">
       <publishTime>12/18/2021 12:54:05</publishTime>
     </File>
     <File Include="cdn.jsdelivr.net/npm/bootstrap-icons%401.5.0/font/bootstrap-icons.css">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:04</publishTime>
     </File>
     <File Include="cdn.jsdelivr.net/npm/bootstrap-icons%401.5.0/font/fonts/bootstrap-icons63f3.woff">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:04</publishTime>
     </File>
     <File Include="cdn.jsdelivr.net/npm/bootstrap-icons%401.5.0/font/fonts/bootstrap-icons63f3.woff2">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:04</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>12/18/2021 12:54:03</publishTime>
@@ -2161,112 +2161,115 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/18/2021 12:54:04</publishTime>
     </File>
     <File Include="scripts/ai.0.22.9-build00167.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:04</publishTime>
     </File>
     <File Include="scripts/ai.0.22.9-build00167.min.js">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:04</publishTime>
     </File>
     <File Include="Views/Admin/DashBoard.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 13:11:03</publishTime>
+    </File>
+    <File Include="Views/DWR/DWRMaster.cshtml">
+      <publishTime>12/16/2021 11:42:11</publishTime>
     </File>
     <File Include="Views/EmployeeDWR/DWRMaster.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/17/2021 13:18:30</publishTime>
     </File>
     <File Include="Views/EmployeeLead/AddLead.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/10/2021 16:51:40</publishTime>
     </File>
     <File Include="Views/EmployeeLead/ListLead.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/10/2021 16:52:45</publishTime>
     </File>
     <File Include="Views/EmployeeProcpect/GetProspecctList.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/10/2021 16:54:24</publishTime>
     </File>
     <File Include="Views/EmployeeProcpect/Procpect.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:03</publishTime>
     </File>
     <File Include="Views/EmployeeRegistration/DashBoard.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 13:11:03</publishTime>
     </File>
     <File Include="Views/EmployeeRegistration/EmployeeRegistration.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 13:09:59</publishTime>
     </File>
     <File Include="Views/EmployeeRegistration/GetEmpolyeeRegistrationList.cshtml">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 13:10:07</publishTime>
     </File>
     <File Include="Views/Home/DashBoard.cshtml">
-      <publishTime>12/13/2021 16:46:02</publishTime>
+      <publishTime>12/18/2021 13:10:14</publishTime>
     </File>
     <File Include="Views/Home/ForgetPassword.cshtml">
-      <publishTime>12/14/2021 13:26:13</publishTime>
+      <publishTime>12/10/2021 15:05:50</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>12/13/2021 16:44:51</publishTime>
+      <publishTime>12/18/2021 13:10:23</publishTime>
     </File>
     <File Include="Views/Lead/AddLead.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/09/2021 11:22:02</publishTime>
     </File>
     <File Include="Views/Lead/ListLead.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/09/2021 11:05:49</publishTime>
     </File>
     <File Include="Views/Master/AddEmailTemplate.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/08/2021 18:41:31</publishTime>
     </File>
     <File Include="Views/Master/BusinessChanceList.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/09/2021 12:07:32</publishTime>
     </File>
     <File Include="Views/Master/BusinessChanceMaster.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/09/2021 12:08:01</publishTime>
     </File>
     <File Include="Views/Master/CategoryList.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/11/2021 16:12:37</publishTime>
     </File>
     <File Include="Views/Master/CategoryMaster.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/18/2021 13:10:44</publishTime>
     </File>
     <File Include="Views/Master/DataSourceList.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/09/2021 11:56:37</publishTime>
     </File>
     <File Include="Views/Master/DataSourceMaster.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/09/2021 12:05:29</publishTime>
     </File>
     <File Include="Views/Master/InterActionList.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/09/2021 11:56:56</publishTime>
     </File>
     <File Include="Views/Master/InterActionMaster.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/09/2021 11:52:43</publishTime>
     </File>
     <File Include="Views/Master/ProductCategoryList.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/09/2021 12:00:45</publishTime>
     </File>
     <File Include="Views/Master/ProductCategoryMaster.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/09/2021 12:19:39</publishTime>
     </File>
     <File Include="Views/Master/ProspectActivityList.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/09/2021 11:58:45</publishTime>
     </File>
     <File Include="Views/Master/ProspectActivityMaster.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/09/2021 12:01:47</publishTime>
     </File>
     <File Include="Views/Master/SendEmail.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/08/2021 18:37:15</publishTime>
     </File>
     <File Include="Views/Procpect/GetProspecctList.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/09/2021 11:48:42</publishTime>
     </File>
     <File Include="Views/Procpect/Procpect.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/18/2021 13:10:55</publishTime>
     </File>
     <File Include="Views/Shared/_AdminLayout.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/16/2021 11:40:30</publishTime>
     </File>
     <File Include="Views/Shared/_UserLayout.cshtml">
-      <publishTime>12/13/2021 16:42:12</publishTime>
+      <publishTime>12/18/2021 11:07:07</publishTime>
     </File>
     <File Include="Views/web.config">
-      <publishTime>01/01/0001 00:00:00</publishTime>
+      <publishTime>12/18/2021 12:54:03</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/18/2021 13:14:21</publishTime>
+      <publishTime>12/18/2021 13:16:16</publishTime>
     </File>
   </ItemGroup>
 </Project>
