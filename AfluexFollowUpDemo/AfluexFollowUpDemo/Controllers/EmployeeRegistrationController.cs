@@ -1,4 +1,5 @@
-﻿using AfluexFollowUpDemo.Models;
+﻿using AfluexFollowUpDemo.Filter;
+using AfluexFollowUpDemo.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,108 +7,106 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace AluexFollowUpDemo.Controllers
+namespace AfluexFollowUpDemo.Controllers
 {
-    public class EmployeeRegistrationController : Controller
+    public class EmployeeRegistrationController : BaseController
     {
         // GET: EmployeeRegistration
-        public ActionResult EmployeeRegistration()
+        public ActionResult EmployeeRegistration(string Pk_Id)
         {
-            Session.Abandon();
-            return View();
+            EmployeeRegistration model = new EmployeeRegistration();
+            #region BindUsertype
+            int count = 0;
+            List<SelectListItem> ddlUserName = new List<SelectListItem>();
+            DataSet ds = model.BindUserType();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlUserName.Add(new SelectListItem { Text = "Select User Type", Value = "0" });
+                    }
+                    ddlUserName.Add(new SelectListItem { Text = r["UserName"].ToString(), Value = r["Pk_UserTypeID"].ToString() });
+                    count = count + 1;
+                }
+            }
+
+            ViewBag.ddlUserName = ddlUserName;
+            #endregion
+            if (Pk_Id != null)
+            {
+                EmployeeRegistration obj = new EmployeeRegistration();
+                try
+                {
+                    obj.Pk_Id = Pk_Id;
+                    DataSet ds1 = obj.GetEmployeeList();
+                    if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+                    {
+                        obj.Pk_Id = ds1.Tables[0].Rows[0]["Pk_Id"].ToString();
+                        obj.Fk_UserTypeId = ds1.Tables[0].Rows[0]["Fk_UserTypeId"].ToString();
+                        obj.Name = ds1.Tables[0].Rows[0]["Name"].ToString();
+                        obj.ContactNo = ds1.Tables[0].Rows[0]["ContactNo"].ToString();
+                        obj.EmailId = ds1.Tables[0].Rows[0]["EmailId"].ToString();
+                        obj.Address = ds1.Tables[0].Rows[0]["Address"].ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    TempData["ServiceError"] = ex.Message;
+                }
+                return View(obj);
+            }
+            else
+            {
+                return View(model);
+            }
         }
         public ActionResult GetEmpolyeeRegistrationList()
         {
             return View();
         }
-        public ActionResult DashBoard()
+     
+
+        [HttpPost]
+        [ActionName("GetEmpolyeeRegistrationList")]
+        [OnAction(ButtonName = "GetDetails")]
+        public ActionResult FilterEmployee(EmployeeRegistration model)
         {
-            Lead obj = new Lead();
-            List<Lead> lst1 = new List<Lead>();
-            List<Lead> lstnext = new List<Lead>();
-            List<Lead> lstpending = new List<Lead>();
-            obj.FromDate = DateTime.Now.ToString("MM/dd/yyyy");
-            obj.ToDate = DateTime.Now.ToString("MM/dd/yyyy");
-            obj.EmployeeId = Session["ExecutiveID"].ToString();
-            DataSet ds = obj.GetDashBoardDetails();
-            if (ds != null && ds.Tables.Count > 0)
+            List<EmployeeRegistration> lst = new List<EmployeeRegistration>();
+            try
             {
-                #region TodayFollowup
-                if (ds.Tables[0].Rows.Count > 0)
+                model.Pk_Id = Session["UserID"].ToString();
+                DataSet ds = model.FilterEmployee();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables.Count > 0)
                 {
+
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
 
-                        Lead obj1 = new Lead();
-
-                        obj1.Fk_ProcpectId = r["ContactPerson"].ToString();
-                        obj1.FirstInstructionDate = r["FirstInstructionDate"].ToString();
-                        obj1.Fk_ExpectedProductCategoryId = r["ProductCategoryName"].ToString();
-                        obj1.Fk_SourceId = r["SourceName"].ToString();
-                        obj1.Fk_ExecutiveId = r["Name"].ToString();
-                        obj1.Fk_ModeInterActionId = r["InterActionName"].ToString();
-                        obj1.FollowupDate = r["FollowupDate"].ToString();
-                        obj1.Description = r["Description"].ToString();
-
-                        lst1.Add(obj1);
+                        EmployeeRegistration obj = new EmployeeRegistration();
+                        obj.Pk_Id = r["Pk_Id"].ToString();
+                        obj.Fk_UserTypeId = r["UserName"].ToString();
+                        obj.Name = r["Name"].ToString();
+                        obj.ContactNo = r["ContactNo"].ToString();
+                        obj.EmailId = r["EmailId"].ToString();
+                        obj.Address = r["Address"].ToString();
+                        obj.UserImage = string.IsNullOrEmpty(r["UserImage"].ToString()) ? " ../SoftwareImages/d2.jpg" : r["UserImage"].ToString();
+                        lst.Add(obj);
                     }
-                    #endregion TodayFollowup
-                    obj.lstLead = lst1;
+                    model.lstemployee = lst;
+
                 }
 
-                #region NextFollowup
-                if (ds.Tables[1].Rows.Count > 0)
-                {
-
-
-                    foreach (DataRow r in ds.Tables[1].Rows)
-
-                    {
-
-                        Lead obj1 = new Lead();
-
-                        obj1.Fk_ProcpectId = r["ContactPerson"].ToString();
-                        obj1.FirstInstructionDate = r["FirstInstructionDate"].ToString();
-                        obj1.Fk_ExpectedProductCategoryId = r["ProductCategoryName"].ToString();
-                        obj1.Fk_SourceId = r["SourceName"].ToString();
-                        obj1.Fk_ExecutiveId = r["Name"].ToString();
-                        obj1.Fk_ModeInterActionId = r["InterActionName"].ToString();
-                        obj1.FollowupDate = r["FollowupDate"].ToString();
-                        obj1.Description = r["Description"].ToString();
-
-                        lstnext.Add(obj1);
-                    }
-                    #endregion NextFollowup
-                    obj.lstnextLead = lstnext;
-                }
-
-                #region PendingFollowup
-                if (ds.Tables[2].Rows.Count > 0)
-                {
-                    foreach (DataRow r in ds.Tables[2].Rows)
-                    {
-
-                        Lead obj1 = new Lead();
-                        obj1.Fk_ProcpectId = r["ContactPerson"].ToString();
-                        obj1.Fk_ProcpectId = r["ContactPerson"].ToString();
-                        obj1.FirstInstructionDate = r["FirstInstructionDate"].ToString();
-                        obj1.Fk_ExpectedProductCategoryId = r["ProductCategoryName"].ToString();
-                        obj1.Fk_SourceId = r["SourceName"].ToString();
-                        obj1.Fk_ExecutiveId = r["Name"].ToString();
-                        obj1.Fk_ModeInterActionId = r["InterActionName"].ToString();
-                        obj1.FollowupDate = r["FollowupDate"].ToString();
-                        obj1.Description = r["Description"].ToString();
-
-                        lstpending.Add(obj1);
-                    }
-                    obj.lstpending = lstpending;
-                }
-                #endregion PendingFollowup
             }
-            return View(obj);
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(model);
+
         }
-
-
         public ActionResult Logout()
         {
             Session.Abandon();

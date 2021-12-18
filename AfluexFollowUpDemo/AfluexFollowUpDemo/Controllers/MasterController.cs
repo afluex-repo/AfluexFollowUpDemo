@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using AfluexFollowUpDemo.Models;
 using System.Data;
 
-namespace AluexFollowUpDemo.Controllers
+namespace AfluexFollowUpDemo.Controllers
 {
     public class MasterController : BaseController
     {

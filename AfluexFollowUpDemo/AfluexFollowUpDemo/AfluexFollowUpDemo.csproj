@@ -822,6 +822,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\DWRController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\EmployeeDWRController.cs" />
     <Compile Include="Controllers\EmployeeLeadController.cs" />
     <Compile Include="Controllers\EmployeeProcpectController.cs" />
@@ -838,9 +839,13 @@
     <Compile Include="Models\APIModel.cs" />
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\DBHelper.cs" />
+    <Compile Include="Models\EmployeeDWR.cs" />
+    <Compile Include="Models\EmployeeProspect.cs" />
+    <Compile Include="Models\EmployeeRegistration.cs" />
     <Compile Include="Models\ForgotPassword.cs" />
     <Compile Include="Models\Lead.cs" />
     <Compile Include="Models\Master.cs" />
+    <Compile Include="Models\Procpect.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace AluexFollowUpDemo.Controllers
+namespace AfluexFollowUpDemo.Controllers
 {
     public class EmployeeLeadController : Controller
     {

@@ -17,7 +17,7 @@ namespace AfluexFollowUpDemo.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            Session.Abandon();
+            //Session.Abandon();
             return View();
         }
 
@@ -75,11 +75,11 @@ namespace AfluexFollowUpDemo.Controllers
                     if (ds.Tables[0].Rows[0]["Fk_UserTypeId"].ToString() != "1")
                     {
                         ViewBag.errormsg = "";
-                        Session["ExecutiveID"] = ds.Tables[0].Rows[0]["Pk_Id"].ToString();
+                        Session["UserID"] = ds.Tables[0].Rows[0]["Pk_Id"].ToString();
                         Session["LoginID"] = ds.Tables[0].Rows[0]["LoginId"].ToString();
                         Session["Username"] = ds.Tables[0].Rows[0]["Name"].ToString();
                         Session["FK_UserTypeID"] = ds.Tables[0].Rows[0]["Fk_UserTypeId"].ToString();
-                        return RedirectToAction("DashBoard", "EmployeeRegistration");
+                        return RedirectToAction("EmployeeDashBoard", "Employee");
 
                     }
 
