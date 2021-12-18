@@ -38,8 +38,8 @@ namespace AfluexFollowUpDemo.Models
         //public List<Lead> ddlDataSource { get; set; }
         //public List<Lead> ddlName { get; set; }
         //public List<Lead> ddlInterAction { get; set; }
-        //public List<Lead> lstLead { get; set; }
-        //public List<Lead> lstpending { get; set; }
+       public List<Lead> lstLead { get; set; }
+        public List<Lead> lstpending { get; set; }
         public string EmployeeId { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }

@@ -80,7 +80,10 @@ namespace AfluexFollowUpDemo.Models
                 }
                 catch (Exception ex) { cipherText = ""; }
                 return cipherText;
+
             }
+
+
         }
         public class ProductRequest
         {
@@ -106,13 +109,15 @@ namespace AfluexFollowUpDemo.Models
             public string Pk_ProductCategoryId { get; set; }
             public string ProductCategoryName { get; set; }
             public string Pk_CategoryId { get; set; }
+
         }
+
         public class SaveProcpect
         {
             public string ContactPerson { get; set; }
             public string ContactEmailId { get; set; }
             public string ContactNo { get; set; }
-            public string Fk_IndustryCategoryId { get; set; }
+            public string Fk_IndustryCategoryId { get; set; } 
             public string CompanyName { get; set; }
             public string CompanyContactNo { get; set; }
             public string Address { get; set; }
@@ -124,7 +129,7 @@ namespace AfluexFollowUpDemo.Models
             public string LinkedInId { get; set; }
             public string ApproximateEmployee { get; set; }
             public string ApproximateCompanyTurnOver { get; set; }
-            /// public string Fk_ProcPectId { get; set; }
+           /// public string Fk_ProcPectId { get; set; }
             public string FirstInstructionDate { get; set; }
             public string Fk_ExpectedProductCategoryId { get; set; }
             public string Fk_SourceId { get; set; }
@@ -166,6 +171,7 @@ namespace AfluexFollowUpDemo.Models
                 DataSet ds = DBHelper.ExecuteQuery("InsertProcpectLeads", para);
                 return ds;
             }
+
             public static string ConvertToSystemDate(string InputDate, string InputFormat)
             {
                 string DateString = "";
@@ -203,22 +209,27 @@ namespace AfluexFollowUpDemo.Models
                 {
                     throw new Exception("Invalid Date");
                 }
+
             }
+
+
+
         }
+
         public class ProspectList
         {
             public string Pk_ProcpectId { get; set; }
             public string ContactPerson { get; set; }
-            public string ContactNo { get; set; }
-            public string CompanyName { get; set; }
+            //public string ContactNo { get; set; }
+            //public string CompanyName { get; set; }
             public string EmployeeId { get; set; }
             public DataSet ProspectDetails()
             {
                 SqlParameter[] para = {
                                       new SqlParameter("@Pk_ProcpectId", Pk_ProcpectId),
                                       new SqlParameter("@ContactPerson", ContactPerson),
-                                      new SqlParameter("@ContactNo", ContactNo),
-                                      new SqlParameter("@CompanyName", CompanyName),
+                                      //new SqlParameter("@ContactNo", ContactNo),
+                                      //new SqlParameter("@CompanyName", CompanyName),
                                      new SqlParameter("@EmployeeId",EmployeeId)
 
                                   };
@@ -238,5 +249,187 @@ namespace AfluexFollowUpDemo.Models
             public string CompanyName { get; set; }
             public string ContactNo { get; set; }
         }
+        public class Followlistdate
+        {
+            public string CompletedMeeting { get; set; }
+            public string ScheduleMeeting { get; set; }
+            public string AssignMeeting { get; set; }
+        }
+        public class TodayVisit
+        {
+            public string EmployeeId { get; set; }
+            public DataSet GetDashBoardTodaylsit()
+            {
+
+                SqlParameter[] para ={
+                                      //new SqlParameter ("@FromDate",DateTime.Now.ToString("MM/dd/yyyy")),
+                                      //new SqlParameter ("@ToDate",DateTime.Now.ToString("MM/dd/yyyy")),
+                                      new SqlParameter ("@EmployeeId",EmployeeId),
+                                      };
+                DataSet ds = DBHelper.ExecuteQuery("SP_DashboardTodayList", para);
+                return ds;
+            }
+        }
+        public class Lead
+        {
+            //public string FromDate { get; set; }
+            //public string ToDate { get; set; }
+            public string Fk_ProcpectName { get; set; }
+            public string ContactNo { get; set; }
+            public string FirstInstructionDate { get; set; }
+            public string ProductCategoryName { get; set; }
+            public string Fk_SourceName { get; set; }
+            public string Fk_ExecutiveName { get; set; }
+            public string Fk_ModeInterActionName { get; set; }
+            public string FollowupDate { get; set; }
+            public string Description { get; set; }
+            public string schedulemeeting { get; set; }
+          
+        }
+
+
+        public class CurrentLocation {
+
+            public string EmployeeID { get; set; }
+            public decimal  Latitude { get; set; }
+            public decimal Longitude { get; set; }
+
+            public DataSet addCurrentLocation()
+            {
+                SqlParameter[] para ={
+                new SqlParameter("@FK_Loginid",EmployeeID),
+                new SqlParameter("@lat",Latitude),
+                new SqlParameter("@long",Longitude)
+            };
+                DataSet ds = DBHelper.ExecuteQuery("SP_tblCurrentlocation", para);
+                return ds;
+            }
+
+
+        }
+
+
+    
+        public class usertype
+        {
+            public DataSet BindUserType()
+            {
+
+                DataSet ds = DBHelper.ExecuteQuery("GetUserTypeName");
+                return ds;
+            }
+        }
+        public class usertypelst
+        {
+            public string userName { get; set; }
+            public string Pk_UsertypeID { get; set; }
+        }
+
+        public class EmpReg
+        {
+            public string Fk_UserTypeId { get; set; }
+            public string Name { get; set; }
+            public string ProfilePic { get; set; }
+            public string ContactNo { get; set; }
+            public string EmailId { get; set; }
+            public string Address { get; set; }
+            public string CreatedBy { get; set; }
+
+            public DataSet SaveEmployeeRegistration()
+            {
+                SqlParameter[] para = {
+                                      new SqlParameter("@Fk_UserTypeId",Fk_UserTypeId),
+                                      new SqlParameter("@Name",Name),
+                                      new SqlParameter("@ContactNo",ContactNo),
+                                      new SqlParameter("@EmailId",EmailId),
+                                      new SqlParameter("@Address",Address),
+                                      new SqlParameter("@userimage",ProfilePic),
+                                      new SqlParameter("@CreatedBy",CreatedBy)
+                                  };
+                DataSet ds = DBHelper.ExecuteQuery("SP_EmployeeRegistration", para);
+                return ds;
+            }
+        }
+
+        public class Empreg_List
+        {
+            public string name { get; set;}
+
+            public DataSet EmployeeRegistationList()
+            {
+                SqlParameter[] para =
+                {
+                    new SqlParameter("@name",name),
+                };
+                DataSet ds = DBHelper.ExecuteQuery("SP_GetEmployeeRegstrationList", para);
+                return ds;
+            }
+        }
+
+
+        //public class uploadprofile
+        //{
+        //    public string ProfilePic { get; set; }
+        //    public string loginid { get; set; }
+        //    public DataSet UpdateProFileimage()
+        //    {
+        //        SqlParameter[] pare =
+        //        { 
+        //            new SqlParameter("@userimage",ProfilePic),
+        //            new SqlParameter("@loginid",loginid),
+        //        };
+        //        DataSet ds = DBHelper.ExecuteQuery("SP_updateUserImage", pare);
+        //        return ds;
+        //    }
+            
+        //}
+
+        public class emplist
+        {
+            public string loginid { get; set; }
+            public string name { get; set; }
+            public string contactno { get; set; }
+            public string emailid { get; set; }
+            public string Fk_UserTypeId { get; set; }
+            public string username { get; set; }
+            public string Latitude { get; set; }
+            public string Longitude { get; set; }
+            
+        }
+
+        public class businesschancelst
+        {
+            public DataSet ListBusinessChance()
+            {
+                SqlParameter[] param = {
+                    //new SqlParameter("@Pk_BusinessChanceId", Pk_BusinessChanceId) 
+                };
+                DataSet ds = DBHelper.ExecuteQuery("ListBusinessChance");
+                return ds;
+            }
+        }
+        public class LstBusinessChanse
+        {
+            public string Pk_BusinessChanceId { get; set; }
+            public string BusinessChanceName { get; set; }
+        }
+        public class StateListlst
+        {
+            public string State { get; set; }
+                public string City { get; set; }
+        }
+        public class StateList
+        {
+            public string Pincode { get; set; }
+            public DataSet GetStateCity()
+            {
+                SqlParameter[] para ={new SqlParameter ("@PinCode",Pincode),
+                               };
+                DataSet ds = DBHelper.ExecuteQuery("GetStateCity", para);
+                return ds;
+            }
+        }
+
+
     }
 }
