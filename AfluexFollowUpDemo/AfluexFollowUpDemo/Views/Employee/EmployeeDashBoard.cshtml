@@ -1,7 +1,6 @@
-﻿@model AfluexFollowUpDemo.Models.Lead
-
+﻿@model FollowUpDemo.Models.Lead
 @{
-    ViewBag.Title = "DashBoard";
+    ViewBag.Title = "EmployeeDashBoard";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
@@ -27,25 +26,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                                        @if (Model != null)
-                                        {
-                                            if (Model.lstLead != null)
-                                            {
-                                                foreach (var item in Model.lstLead)
-                                                {
-                                                    <tr>
-                                                   
-                                                        <td>@item.Fk_ProcpectId</td>
-                                                        <td>@item.ContactNo</td>
-                                                        <td>@item.FirstInstructionDate</td>
-                                                        <td>@item.PrevioussDate</td>
-                                                        <td>@item.FollowupDate</td>
-                                                        <td>@item.Fk_ExpectedProductCategoryId</td>
-                                                        <td>@item.Fk_SourceId</td>
-                                                        <td>@item.Fk_ExecutiveId</td>
-                                                        <td>@item.Fk_ModeInterActionId</td>
-                                                        <td>@item.Description</td>
-                                                  
+                    @if (Model != null)
+                    {
+                        if (Model.lstLead != null)
+                        {
+                            foreach (var item in Model.lstLead)
+                            {
+                                <tr>
+
+                                    <td>@item.Fk_ProcpectId</td>
+                                    <td>@item.ContactNo</td>
+                                    <td>@item.FirstInstructionDate</td>
+                                    <td>@item.PrevioussDate</td>
+                                    <td>@item.FollowupDate</td>
+                                    <td>@item.Fk_ExpectedProductCategoryId</td>
+                                    <td>@item.Fk_SourceId</td>
+                                    <td>@item.Fk_ExecutiveId</td>
+                                    <td>@item.Fk_ModeInterActionId</td>
+                                    <td>@item.Description</td>
+
                                 </tr>
 
                             }
@@ -161,4 +160,3 @@
         </div>
     </div>
 </div>
-

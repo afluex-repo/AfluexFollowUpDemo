@@ -898,6 +898,7 @@
     <Content Include="cdn.jsdelivr.net\npm\bootstrap-icons%401.5.0\font\fonts\bootstrap-icons63f3.woff" />
     <Content Include="cdn.jsdelivr.net\npm\bootstrap-icons%401.5.0\font\fonts\bootstrap-icons63f3.woff2" />
     <None Include="Properties\PublishProfiles\FollowUp.pubxml" />
+    <Content Include="Views\DWR\DWRMaster.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -914,7 +915,6 @@
     <Folder Include="assets\images\gallery\" />
     <Folder Include="assets\images\products\" />
     <Folder Include="Views\Customer\" />
-    <Folder Include="Views\DWR\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
