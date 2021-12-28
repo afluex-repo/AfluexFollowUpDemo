@@ -44,7 +44,7 @@ namespace AfluexFollowUpDemo.Models
                 new SqlParameter("@EmployeeId",AddedBy ),
 
                                    };
-            DataSet ds = DBHelper.ExecuteQuery("GetProspectList", param);
+            DataSet ds = DBHelper.ExecuteQuery("SP_GetProspectList", param);
             return ds;
         }
         public DataSet InsertDWR()
