@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using static AfluexFollowUpDemo.Models.APIModel;
 using System.Web.Script.Serialization;
 
+
 namespace AfluexFollowUpDemo.Controllers
 {
     public class WebAPIController : ApiController
@@ -242,63 +243,105 @@ namespace AfluexFollowUpDemo.Controllers
             }
         }
 
-
-
         [Route("GetDashBoardTodayFollowup")]
         [HttpPost]
         public HttpResponseMessage GetDashBoardTodayFollowup(TodayVisit model)
         {
+
+            List<ListToday> lstToday = new List<ListToday>();
+            List<ListNextFollowup> lstNextFollowup = new List<ListNextFollowup>();
+            List<ListPending> lstPending = new List<ListPending>();
+            AllFollowupList obj = new AllFollowupList();
             List<Lead> lst3 = new List<Lead>();
             Lead obj3 = new Lead();
             try
             {
-                //model.FromDate = DateTime.Now.ToString("MM/dd/yyyy");
-                //model.ToDate = DateTime.Now.ToString("MM/dd/yyyy");
+                // model.FromDate = DateTime.Now.ToString("MM/dd/yyyy");
+                // model.ToDate =   DateTime.Now.ToString("MM/dd/yyyy");
                 DataSet ds = model.GetDashBoardTodaylsit();
-                if (ds != null && ds.Tables[1].Rows.Count > 0)
+                // if (ds != null && ds.Tables[1].Rows.Count > 0)
                 {
-                    Followlistdate obj = new Followlistdate();
-                    obj.CompletedMeeting = ds.Tables[1].Rows[0]["CompletedMeeting"].ToString();
-                    obj.ScheduleMeeting = ds.Tables[1].Rows[0]["ScheduleMeeting"].ToString();
-                    obj.AssignMeeting = ds.Tables[1].Rows[0]["AssignMeeting"].ToString();
+                    Followlistdate obj1 = new Followlistdate();
+                    obj1.CompletedMeeting = ds.Tables[3].Rows[0]["CompletedMeeting"].ToString();
+                    obj1.ScheduleMeeting = ds.Tables[3].Rows[0]["ScheduleMeeting"].ToString();
+                    obj1.AssignMeeting = ds.Tables[3].Rows[0]["AssignMeeting"].ToString();
                 }
-                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    #region TodayFollowup
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
-
-                        Lead obj2 = new Lead();
-
-                        obj2.Fk_ProcpectName = r["ContactPerson"].ToString();
-                        obj2.ContactNo = r["ContactNo"].ToString();
-                        obj2.FirstInstructionDate = r["FirstInstructionDate"].ToString();
-                        obj2.ProductCategoryName = r["ProductCategoryName"].ToString();
-                        obj2.Fk_SourceName = r["SourceName"].ToString();
-                        obj2.Fk_ExecutiveName = r["Name"].ToString();
-                        obj2.Fk_ModeInterActionName = r["InterActionName"].ToString();
-                        obj2.FollowupDate = r["FollowupDate"].ToString();
-                        obj2.Description = r["Description"].ToString();
-                        obj2.schedulemeeting = r["schedulemeeting"].ToString();
-                        lst3.Add(obj2);
+                        ListToday ob = new ListToday();
+                        ob.ProcpectID = r["Fk_ProcpectId"].ToString();
+                        ob.LeadID = r["Fk_LeadId"].ToString();
+                        ob.ContactPerson = r["ContactPerson"].ToString();
+                        ob.Mobile = r["ContactNo"].ToString();
+                        ob.FirstInstructionDate = r["FirstInstructionDate"].ToString();
+                        ob.ProductCategoryName = r["ProductCategoryName"].ToString();
+                        ob.DataSource = r["SourceName"].ToString();
+                        ob.ExecutiveName = r["Name"].ToString();
+                        ob.ModeOfInteraction = r["InterActionName"].ToString();
+                        ob.FollowupDate = r["FollowupDate"].ToString();
+                        ob.Description = r["Description"].ToString();
+                        lstToday.Add(ob);
                     }
-                    #endregion TodayFollowup
+                }
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[1].Rows)
+                    {
+                        ListNextFollowup ob = new ListNextFollowup();
+                        ob.ProcpectID = r["Fk_ProcpectId"].ToString();
+                        ob.LeadID = r["Fk_LeadId"].ToString();
+                        ob.Mobile = r["ContactNo"].ToString();
+                        ob.ContactPerson = r["ContactPerson"].ToString();
+                        ob.FirstInstructionDate = r["FirstInstructionDate"].ToString();
+                        ob.ProductCategoryName = r["ProductCategoryName"].ToString();
+                        ob.DataSource = r["SourceName"].ToString();
+                        ob.ExecutiveName = r["Name"].ToString();
+                        ob.ModeOfInteraction = r["InterActionName"].ToString();
+                        ob.FollowupDate = r["FollowupDate"].ToString();
+                        ob.Description = r["Description"].ToString();
+                        lstNextFollowup.Add(ob);
+                    }
+                }
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[2].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[2].Rows)
+                    {
+
+                        ListPending ob = new ListPending();
+                        ob.ProcpectID = r["Fk_ProcpectId"].ToString();
+                        ob.LeadID = r["Fk_LeadId"].ToString();
+                        ob.Mobile = r["ContactNo"].ToString();
+                        ob.ContactPerson = r["ContactPerson"].ToString();
+                        ob.FirstInstructionDate = r["FirstInstructionDate"].ToString();
+                        ob.ProductCategoryName = r["ProductCategoryName"].ToString();
+                        ob.DataSource = r["SourceName"].ToString();
+                        ob.ExecutiveName = r["Name"].ToString();
+                        ob.ModeOfInteraction = r["InterActionName"].ToString();
+                        ob.FollowupDate = r["FollowupDate"].ToString();
+                        ob.Description = r["Description"].ToString();
+                        lstPending.Add(ob);
+                    }
+
 
                     return Request.CreateResponse(HttpStatusCode.OK,
                   new
                   {
                       StatusCode = HttpStatusCode.OK,
                       Message = "Record Found",
-                      CompletedMeeting = ds.Tables[1].Rows[0]["CompletedMeeting"].ToString(),
-                      ScheduleMeeting = ds.Tables[1].Rows[0]["ScheduleMeeting"].ToString(),
-                      AssignMeeting = ds.Tables[1].Rows[0]["AssignMeeting"].ToString(),
-                      lstTodayFollowup = lst3
+                      CompletedMeeting = ds.Tables[3].Rows[0]["CompletedMeeting"].ToString(),
+                      ScheduleMeeting = ds.Tables[3].Rows[0]["ScheduleMeeting"].ToString(),
+                      AssignMeeting = ds.Tables[3].Rows[0]["AssignMeeting"].ToString(),
+                      TodayList = lstToday,
+                      NextFollowUp = lstNextFollowup,
+                      PendingList = lstPending
 
 
                   });
                 }
-                
-           
+
+
                 else
                 {
                     return Request.CreateResponse(HttpStatusCode.OK,
@@ -309,7 +352,9 @@ namespace AfluexFollowUpDemo.Controllers
                      CompletedMeeting = ds.Tables[1].Rows[0]["CompletedMeeting"].ToString(),
                      ScheduleMeeting = ds.Tables[1].Rows[0]["ScheduleMeeting"].ToString(),
                      AssignMeeting = ds.Tables[1].Rows[0]["AssignMeeting"].ToString(),
-                     lstTodayFollowup = lst3
+                     TodayList = lstToday,
+                     NextFollowUp = lstNextFollowup,
+                     PendingList = lstPending
                  });
                 }
             }
@@ -323,7 +368,6 @@ namespace AfluexFollowUpDemo.Controllers
                   });
             }
         }
-
 
         [Route("AddCuurentLogtion")]
         [HttpPost]
@@ -586,11 +630,14 @@ namespace AfluexFollowUpDemo.Controllers
                     {
                         emplist obj1 = new emplist();
                         obj1.loginid = r["loginid"].ToString();
+                        obj1.Password = r["password"].ToString();
                         obj1.name = r["name"].ToString();
                         obj1.contactno = r["contactno"].ToString();
                         obj1.emailid = r["emailid"].ToString();
                         obj1.Fk_UserTypeId = r["Fk_UserTypeId"].ToString();
                         obj1.username = r["username"].ToString();
+                        obj1.Time = r["Time"].ToString();
+                        obj1.Date = r["Date"].ToString();
                         obj1.Latitude = r["lat"].ToString();
                         obj1.Longitude = r["long"].ToString();
                         lst.Add(obj1);
@@ -641,7 +688,7 @@ namespace AfluexFollowUpDemo.Controllers
                 DataSet ds = obj.ListBusinessChance();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    
+
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
                         LstBusinessChanse list1 = new LstBusinessChanse();
@@ -672,7 +719,7 @@ namespace AfluexFollowUpDemo.Controllers
             }
             catch (Exception ex)
             {
-               
+
                 return Request.CreateResponse(HttpStatusCode.OK,
                               new
                               {
@@ -691,9 +738,9 @@ namespace AfluexFollowUpDemo.Controllers
         [HttpPost]
         public HttpResponseMessage StateList(StateList obj)
         {
-           
+
             List<StateListlst> lst = new List<StateListlst>();
-        
+
             DataSet ds = obj.GetStateCity();
             if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
@@ -702,7 +749,7 @@ namespace AfluexFollowUpDemo.Controllers
                     StateListlst obj1 = new StateListlst();
                     obj1.State = r["StateName"].ToString();
                     obj1.City = r["CityName"].ToString();
-                   
+
                     lst.Add(obj1);
                 }
                 return Request.CreateResponse(HttpStatusCode.OK,
@@ -711,7 +758,7 @@ namespace AfluexFollowUpDemo.Controllers
                   StatusCode = HttpStatusCode.OK,
                   Message = "Record Found",
                   StateListlst = lst,
-                 
+
               });
             }
             else
@@ -744,7 +791,7 @@ namespace AfluexFollowUpDemo.Controllers
                     obj1.Lead_id = r["Pk_LeadId"].ToString();
                     obj1.Procpect_Id = r["Fk_ProcpectId"].ToString();
                     obj1.ProductCategoryName = r["ProductCategoryName"].ToString();
-                    obj1.ContactPerson =r["ContactPerson"].ToString();
+                    obj1.ContactPerson = r["ContactPerson"].ToString();
 
                     lst.Add(obj1);
                 }
@@ -786,9 +833,11 @@ namespace AfluexFollowUpDemo.Controllers
                     obj.PK_ListID = r["Pk_DwrId"].ToString();
                     obj.LeadID = r["LeadId"].ToString();
                     obj.ContactPerson = r["ContactPerson"].ToString();
+                    obj.MobileNo = r["ContactNo"].ToString();
                     obj.LeadName = r["ProductCategoryName"].ToString();
                     obj.Remark = r["Remark"].ToString();
                     obj.BusinessChanceName = r["ChanceName"].ToString();
+                    obj.BusinessChanceID = r["Pk_BusinessChanceId"].ToString();
                     obj.InterActionName = r["InterActionName"].ToString();
                     obj.ExecutiveName = r["Name"].ToString();
                     obj.MeetingDate = r["MeetingDate"].ToString();
@@ -796,20 +845,20 @@ namespace AfluexFollowUpDemo.Controllers
                     obj.FollowupDate = r["FollowupDate"].ToString();
                     obj.FirstInstructionDate = r["FirstInstructionDate"].ToString();
                     obj.Pk_ProcpectId = r["Fk_ProcpectId"].ToString();
-                 
+
 
                     lst.Add(obj);
                 }
-             
-            
-            return Request.CreateResponse(HttpStatusCode.OK,
-              new
-              {
-                  StatusCode = HttpStatusCode.OK,
-                  Message = "Record Found",
-                  dwrlst = lst,
 
-              });
+
+                return Request.CreateResponse(HttpStatusCode.OK,
+                  new
+                  {
+                      StatusCode = HttpStatusCode.OK,
+                      Message = "Record Found",
+                      dwrlst = lst,
+
+                  });
             }
             else
             {
@@ -838,7 +887,7 @@ namespace AfluexFollowUpDemo.Controllers
                     lstProspect obj = new lstProspect();
                     obj.Pk_ProcpectId = r["Pk_ProcpectId"].ToString();
                     obj.ProcpectName = r["ContactPerson"].ToString();
-                   
+
 
                     lst.Add(obj);
                 }
@@ -870,10 +919,10 @@ namespace AfluexFollowUpDemo.Controllers
         [HttpPost]
         public HttpResponseMessage AddLead(savelead obj)
         {
-            
+
             try
             {
-             
+
                 DataSet ds = obj.InsertLead();
                 if (ds != null && ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
                 {
@@ -919,10 +968,10 @@ namespace AfluexFollowUpDemo.Controllers
             }
         }
 
-        [Route("AllLeadList")]
+        [Route("AllProspectsList")]
         [HttpPost]
-        public HttpResponseMessage AllLeadList(leadLIst obj1)
-         {
+        public HttpResponseMessage AllProspectsList(leadLIst obj1)
+        {
 
             List<LstLead> lst = new List<LstLead>();
             DataSet ds = obj1.LeadList();
@@ -933,7 +982,11 @@ namespace AfluexFollowUpDemo.Controllers
                 {
                     LstLead obj = new LstLead();
                     obj.Pk_LeadeId = r["Pk_LeadId"].ToString();
+                    obj.ProcpectID = r["Fk_ProcpectId"].ToString();
                     obj.Fk_ProcpectName = r["ContactPerson"].ToString();
+
+                    obj.EmailID = r["ContactEmailId"].ToString();
+                    obj.Mobile = r["ContactNo"].ToString();
                     obj.FirstInstructionDate = r["FirstInstructionDate"].ToString();
                     obj.Fk_ExpectedProductCategoryName = r["ProductCategoryName"].ToString();
                     obj.Fk_SourceName = r["SourceName"].ToString();
@@ -952,7 +1005,7 @@ namespace AfluexFollowUpDemo.Controllers
                   {
                       StatusCode = HttpStatusCode.OK,
                       Message = "Record Found",
-                      LstLead = lst,
+                      LstProspectsList = lst,
 
                   });
             }
@@ -963,7 +1016,7 @@ namespace AfluexFollowUpDemo.Controllers
              {
                  StatusCode = HttpStatusCode.InternalServerError,
                  Message = "Record Not Found",
-                 LstLead = lst
+                 LstProspectsList = lst
              });
             }
         }
@@ -976,7 +1029,8 @@ namespace AfluexFollowUpDemo.Controllers
 
             try
             {
-
+                obj.MeetingDate = DateTime.Now.ToString("MM/dd/yyyy");
+                obj.NextFollowupDate = DateTime.Now.ToString("MM/dd/yyyy");
                 DataSet ds = obj.SAVE_DWR();
                 if (ds != null && ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
                 {
@@ -1021,8 +1075,425 @@ namespace AfluexFollowUpDemo.Controllers
                    });
             }
         }
+
+
+        [Route("GetSourceList")]
+        [HttpPost]
+        public HttpResponseMessage GetSourceList()
+        {
+            List<ListSourceData> lst1 = new List<ListSourceData>();
+            SourceList model = new SourceList();
+            try
+            {
+                DataSet ds = model.ListDataSource();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        ListSourceData obj = new ListSourceData();
+                        obj.SourceId = r["Pk_SourceId"].ToString();
+                        obj.SourceName = r["SourceName"].ToString();
+
+                        lst1.Add(obj);
+                    }
+                    return Request.CreateResponse(HttpStatusCode.OK,
+                  new
+                  {
+                      StatusCode = HttpStatusCode.OK,
+                      Message = "Record Found",
+                      lstSourceList = lst1
+                  });
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK,
+                 new
+                 {
+                     StatusCode = HttpStatusCode.InternalServerError,
+                     lstSourceList = lst1
+
+                 });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK,
+                 new
+                 {
+                     StatusCode = HttpStatusCode.InternalServerError,
+                     Message = "Record Not Found",
+                 });
+            }
+        }
+
+        [Route("AllEMPLeadProspect")]
+        [HttpPost]
+        public HttpResponseMessage AllEMPLeadProspect(AllEMpProspectLead obj1)
+        {
+
+            List<lstLeadProspect> lst = new List<lstLeadProspect>();
+            DataSet ds = obj1.GetProspectList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    lstLeadProspect obj = new lstLeadProspect();
+                    obj.Pk_ProcpectId = r["Pk_ProcpectId"].ToString();
+                    obj.ProcpectName = r["ContactPerson"].ToString();
+
+
+                    lst.Add(obj);
+                }
+
+
+                return Request.CreateResponse(HttpStatusCode.OK,
+                  new
+                  {
+                      StatusCode = HttpStatusCode.OK,
+                      Message = "Record Found",
+                      lstLeadProspect = lst,
+
+                  });
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK,
+             new
+             {
+                 StatusCode = HttpStatusCode.InternalServerError,
+                 Message = "Record Not Found",
+                 lstLeadProspect = lst
+             });
+            }
+        }
+
+        [Route("AllEMPLeadProspectDetailes")]
+        [HttpPost]
+        public HttpResponseMessage AllEMPLeadProspectDetailes(AllEMpProspectLeadDetails obj1)
+        {
+
+            List<ProspectDetailesLst> lst = new List<ProspectDetailesLst>();
+            DataSet ds = obj1.GetProspectList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    ProspectDetailesLst obj = new ProspectDetailesLst();
+                    obj.ProcpectId = r["Pk_ProcpectId"].ToString();
+                    obj.ProcpectName = r["ContactPerson"].ToString();
+                    obj.ContactNo = r["ContactNo"].ToString();
+
+                    obj.CompanyName = r["CompanyName"].ToString();
+                    obj.CompanyEmailId = r["ContactEmailId"].ToString();
+                    obj.CompanyContactNo = r["CompanyContactNo"].ToString();
+                    obj.CompanyAddress = r["Address"].ToString();
+
+                    lst.Add(obj);
+                }
+
+
+                return Request.CreateResponse(HttpStatusCode.OK,
+                  new
+                  {
+                      StatusCode = HttpStatusCode.OK,
+                      Message = "Record Found",
+                      LstProspectDetailesLst = lst,
+
+                  });
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK,
+             new
+             {
+                 StatusCode = HttpStatusCode.InternalServerError,
+                 Message = "Record Not Found",
+                 LstProspectDetailesLst = lst
+             });
+            }
+        }
+
+
+        [Route("GetEmployeeLeadList")]
+        [HttpPost]
+        public HttpResponseMessage GetEmployeeLeadList(AllLeadListDetails obj1)
+        {
+
+            List<LeadListLst> lst = new List<LeadListLst>();
+            DataSet ds = obj1.GetLeadList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    LeadListLst obj = new LeadListLst();
+                    obj.ProcpectId = r["Fk_ProcpectId"].ToString();
+                    obj.LeadId = r["Pk_LeadId"].ToString();
+                    obj.ContactPerson = r["ContactPerson"].ToString();
+                    obj.ContactEmailId = r["ContactEmailId"].ToString();
+                    obj.ContactNo = r["ContactNo"].ToString();
+                    obj.ProductCategoryName = r["ProductCategoryName"].ToString();
+                    obj.ProductCategoryId = r["Fk_ExpectedProductCategoryId"].ToString();
+                    obj.SourceName = r["SourceName"].ToString();
+                    obj.InterActionName = r["InterActionName"].ToString();
+                    obj.FollowupDate = r["FollowupDate"].ToString();
+                    obj.FirstInstructionDate = r["FirstInstructionDate"].ToString();
+                    obj.Description = r["Description"].ToString();
+                    lst.Add(obj);
+                }
+
+
+                return Request.CreateResponse(HttpStatusCode.OK,
+                  new
+                  {
+                      StatusCode = HttpStatusCode.OK,
+                      Message = "Record Found",
+                      LstLeadListLst = lst,
+
+                  });
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK,
+             new
+             {
+                 StatusCode = HttpStatusCode.InternalServerError,
+                 Message = "Record Not Found",
+                 LstLeadListLst = lst
+             });
+            }
+        }
+
+        //[Route("FollowupReport")]
+        //[HttpPost]
+        //public HttpResponseMessage FollowupReport(AllFollowupReport obj1)
+        //{
+
+        //    List<ListToday> lstToday = new List<ListToday>();
+        //    List<ListNextFollowup> lstNextFollowup = new List<ListNextFollowup>();
+        //    List<ListPending> lstPending = new List<ListPending>();
+        //    AllFollowupList obj = new AllFollowupList();
+        //    DataSet ds = obj1.GetDashBoardDetails();
+        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count>0)
+        //    {
+        //        foreach (DataRow r in ds.Tables[0].Rows)
+        //        {
+        //            ListToday ob = new ListToday();
+        //            ob.ContactPerson = r["ContactPerson"].ToString();
+        //            ob.FirstInstructionDate = r["FirstInstructionDate"].ToString();
+        //            ob.ProductCategoryName = r["ProductCategoryName"].ToString();
+        //            ob.DataSource = r["SourceName"].ToString();
+        //            ob.ExecutiveName = r["Name"].ToString();
+        //            ob.ModeOfInteraction = r["InterActionName"].ToString();
+        //            ob.FollowupDate = r["FollowupDate"].ToString();
+        //            ob.Description = r["Description"].ToString();
+        //            lstToday.Add(ob);
+        //        }
+        //    }
+        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+        //    {
+        //        foreach (DataRow r in ds.Tables[1].Rows)
+        //        {
+        //            ListNextFollowup ob = new ListNextFollowup();
+        //            ob.ContactPerson = r["ContactPerson"].ToString();
+        //            ob.FirstInstructionDate = r["FirstInstructionDate"].ToString();
+        //            ob.ProductCategoryName = r["ProductCategoryName"].ToString();
+        //            ob.DataSource = r["SourceName"].ToString();
+        //            ob.ExecutiveName = r["Name"].ToString();
+        //            ob.ModeOfInteraction = r["InterActionName"].ToString();
+        //            ob.FollowupDate = r["FollowupDate"].ToString();
+        //            ob.Description = r["Description"].ToString();
+        //            lstNextFollowup.Add(ob);
+        //        }
+        //    }
+        //    if (ds != null && ds.Tables.Count > 0 && ds.Tables[2].Rows.Count > 0)
+        //    {
+        //        foreach (DataRow r in ds.Tables[2].Rows)
+        //        {
+
+        //            ListPending ob = new ListPending();
+        //            ob.ContactPerson = r["ContactPerson"].ToString();
+        //            ob.FirstInstructionDate = r["FirstInstructionDate"].ToString();
+        //            ob.ProductCategoryName = r["ProductCategoryName"].ToString();
+        //            ob.DataSource = r["SourceName"].ToString();
+        //            ob.ExecutiveName = r["Name"].ToString();
+        //            ob.ModeOfInteraction = r["InterActionName"].ToString();
+        //            ob.FollowupDate = r["FollowupDate"].ToString();
+        //            ob.Description = r["Description"].ToString();
+        //            lstPending.Add(ob);
+        //        }
+        //        return Request.CreateResponse(HttpStatusCode.OK,
+        //      new
+        //      {
+        //          StatusCode = HttpStatusCode.OK,
+        //          Message = "Record Found",
+        //          TodayList = lstToday,
+        //          NextFollowUp = lstNextFollowup,
+        //          PendingList = lstPending
+        //      });
+        //    }
+        //    else
+        //    {
+        //        return Request.CreateResponse(HttpStatusCode.InternalServerError,
+        //     new
+        //     {
+        //         StatusCode = HttpStatusCode.InternalServerError,
+        //         Message = "Record Not Found",
+        //         //lstSubCategory = "Record Not Found"
+        //         TodayList = lstToday,
+        //         NextFollowUp = lstNextFollowup,
+        //         PendingList = lstPending
+
+        //     });
+        //    }
+
+        //}  
+
+        [Route("UpdateProcpect")]
+        [HttpPost]
+        public HttpResponseMessage UpdateProcpect(UpdateProcpect obj)
+        {
+            obj.dob = string.IsNullOrEmpty(obj.dob) ? null : SaveProcpect.ConvertToSystemDate(obj.dob, "dd/MM/yyyy");
+            obj.anniversary = string.IsNullOrEmpty(obj.anniversary) ? null : SaveProcpect.ConvertToSystemDate(obj.anniversary, "dd/MM/yyyy");
+            try
+            {
+                // obj.AddedBy = Pk_ProcpectId;
+                DataSet ds = obj.UpdateProcpectData();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Msg"].ToString() == "1")
+                    {
+
+                        return Request.CreateResponse(HttpStatusCode.OK,
+                          new
+                          {
+                              StatusCode = HttpStatusCode.OK,
+                              Message = "Procpect Update successfully",
+                          });
+                    }
+                    else
+                    {
+                        return Request.CreateResponse(HttpStatusCode.InternalServerError,
+                          new
+                          {
+                              StatusCode = HttpStatusCode.OK,
+                              Message = ds.Tables[0].Rows[0]["ErrorMessage"].ToString()
+                          });
+                    }
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK,
+                        new
+                        {
+                            StatusCode = HttpStatusCode.InternalServerError,
+                            Message = "Error occurred"
+                        });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK,
+                   new
+                   {
+                       StatusCode = HttpStatusCode.InternalServerError,
+                       Message = "Error: " + ex.Message,
+
+                   });
+            }
+        }
+
+        [Route("GetAllProcpectDetails")]
+        [HttpPost]
+        public HttpResponseMessage GetAllProcpectDetails(AllProcpectDetails obj)
+        {
+
+            try
+            {
+
+                DataSet ds = obj.GetallProcpect();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows.Count >0 )
+                    {
+
+                        return Request.CreateResponse(HttpStatusCode.OK,
+                            new
+                            {
+                                StatusCode = HttpStatusCode.OK,
+                                Message = "Login Successful",
+                                Data = new
+                                {
+                                   ProcpectId           = ds.Tables[0].Rows[0]["Pk_ProcpectId"].ToString(),
+                                   ContactPerson          = ds.Tables[0].Rows[0]["ContactPerson"].ToString(),
+                                   ContactEmailId       = ds.Tables[0].Rows[0]["ContactEmailId"].ToString(),
+                                   ContactNo              = ds.Tables[0].Rows[0]["ContactNo"].ToString(),
+                                   Fk_IndustryCategoryId  = ds.Tables[0].Rows[0]["Fk_IndustryCategoryId"].ToString(),
+                                   CategoryName           = ds.Tables[0].Rows[0]["CategoryName"].ToString(),
+                                   CompanyName            =   ds.Tables[0].Rows[0]["CompanyName"].ToString(),
+                                   CompanyContactNo        =      ds.Tables[0].Rows[0]["CompanyContactNo"].ToString(),
+                                    Address                     = ds.Tables[0].Rows[0]["Address"].ToString(),
+                                    Pincode              = ds.Tables[0].Rows[0]["Pincode"].ToString(),
+                                    Designation               = ds.Tables[0].Rows[0]["Designation"].ToString(),
+                                    WebSite                 = ds.Tables[0].Rows[0]["WebSite"].ToString(),
+                                    SkypeId                = ds.Tables[0].Rows[0]["SkypeId"].ToString(),
+                                    FacebookId              = ds.Tables[0].Rows[0]["FacebookId"].ToString(),
+                                    TwitterId              = ds.Tables[0].Rows[0]["TwitterId"].ToString(),
+                                    LinkedInId              = ds.Tables[0].Rows[0]["LinkedInId"].ToString(),
+                                    ApproximateEmployee  = ds.Tables[0].Rows[0]["ApproximateEmployee"].ToString(),
+                                    ApproximateCompanyTurnOver = ds.Tables[0].Rows[0]["ApproximateCompanyTurnOver"].ToString(),
+                                    dob = ds.Tables[0].Rows[0]["dob"].ToString(),
+                                    anniversary = ds.Tables[0].Rows[0]["anniversary"].ToString(),
+                                    Fk_ExpectedProductCategoryId = ds.Tables[0].Rows[0]["Fk_ExpectedProductCategoryId"].ToString(),
+                                    ProductCategoryName = ds.Tables[0].Rows[0]["ProductCategoryName"].ToString(),
+                                    Fk_ExecutiveId = ds.Tables[0].Rows[0]["Fk_ExecutiveId"].ToString(),
+                                    Fk_SourceId = ds.Tables[0].Rows[0]["Fk_SourceId"].ToString(),
+                                    Fk_ModeInterActionId = ds.Tables[0].Rows[0]["Fk_ModeInterActionId"].ToString(),
+
+
+                                }
+                            });
+                    }
+                    else
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK,
+                          new
+                          {
+                              StatusCode = HttpStatusCode.InternalServerError,
+                                  //  Message = "Error: " + ds.Tables[0].Rows[0]["ErrorMessage"].ToString(),
+                                  Message = "No record Found",
+
+                          });
+                    }
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK,
+                         new
+                         {
+                             StatusCode = HttpStatusCode.InternalServerError,
+                                 // Message = "Error: ",
+                                 Message = "No record Found",
+                         });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK,
+                    new
+                    {
+                        StatusCode = HttpStatusCode.InternalServerError,
+                            // Message = "Error: " + ex.Message,
+                            Message = "No record Found",
+
+                    });
+            }
+        }
     }
 }
+
 
 
 
