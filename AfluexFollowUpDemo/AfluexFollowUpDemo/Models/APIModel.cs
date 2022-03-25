@@ -431,5 +431,171 @@ namespace AfluexFollowUpDemo.Models
         }
 
 
+        public class LeadList
+        {
+            public string Pk_ProcpectId { get; set; }
+            public DataSet GetLead()
+            {
+                SqlParameter[] para ={new SqlParameter ("@Pk_ProcpectId",Pk_ProcpectId),
+                               };
+                DataSet ds = DBHelper.ExecuteQuery("SP_GetLead", para);
+                return ds;
+            }
+
+        }
+
+         public class LeadListlst
+        {
+            public string Lead_id { get; set; }
+            public string Procpect_Id { get; set; }
+            public string Pk_ProductCategoryId { get; set; }
+            public string ProductCategoryName { get; set; }
+            public string ContactPerson { get; set; }
+        }
+
+
+        public class DWRList
+        {
+           
+            public string Pk_ProcpectId { get; set; }
+            public string Fk_LeadId { get; set; }
+            public DataSet GetDWRList()
+            { SqlParameter [] para={ new SqlParameter("@Fk_LeadId",Fk_LeadId),
+                                     new SqlParameter("@Pk_ProcpectId",Pk_ProcpectId) };
+                DataSet ds = DBHelper.ExecuteQuery("SP_GetDWRList", para);//SP_GetDWRList
+                return ds;
+            }
+        }
+        public class dwrlst
+        {
+            public string PK_ListID { get; set; }
+            public string LeadID { get; set; }
+            public string Pk_ProcpectId { get; set; }
+            public string ContactPerson { get; set; }
+          
+           // public string NextFollowupDate { get; set; }
+            public string Remark { get; set; }
+            public string BusinessChanceName { get; set; }
+            public string InterActionName { get; set; }
+            public string ExecutiveName { get; set; }
+            public string MeetingDate { get; set; }
+            public string MeetingTime { get; set; }
+            public string LeadName { get; set; }
+            public string FirstInstructionDate { get; set; }
+            public string FollowupDate { get; set; }
+         //   public string Description { get; set; }
+
+        }
+
+        public class allProspectList
+
+       {
+            public string LoginID { get; set; }
+            public string ContactPerson { get; set; }
+            public DataSet GetProspectList()
+            {
+                SqlParameter[] param = { new SqlParameter("@LoginID",LoginID ),
+                                         new SqlParameter("@ContactPerson",ContactPerson )
+                                   };
+                DataSet ds = DBHelper.ExecuteQuery("SP_ProspectLIst", param);
+                return ds;
+            }
+        }
+
+        public class lstProspect
+        {
+            public string Pk_ProcpectId { get; set; }
+            public string ProcpectName { get; set; }
+
+        }
+
+
+        public class savelead
+       {
+            public string  Procpect_Id { get; set; }
+            public string ExpectedProductCategoryID { get; set; }
+            public string ExecutiveNameID  { get; set; }
+            public string SourceDataID { get; set; }
+            public string FModeInterActionID { get; set; }
+            public string FollowupDate { get; set; }
+            public string Description { get; set; }
+            public string FirstInstructionDate { get; set; }
+            public string LoginID { get; set; }
+            public DataSet InsertLead()
+            {
+                SqlParameter[] param = { new SqlParameter("@Fk_ProcpectId",Procpect_Id),
+                                   new SqlParameter("@Fk_ExpectedProductCategoryId",ExpectedProductCategoryID),
+                                   new SqlParameter("@Fk_SourceId",SourceDataID),
+                                   new SqlParameter("@Fk_ExecutiveId",ExecutiveNameID),
+                                   new SqlParameter("@Fk_ModeInterActionId",FModeInterActionID),
+                                   new SqlParameter("@Description",Description),
+                                   new SqlParameter("@FollowupDate",FollowupDate),
+                                   new SqlParameter("@FirstInstructionDate",FirstInstructionDate),
+                                   new SqlParameter("@AddedBy",LoginID)};
+                DataSet ds = DBHelper.ExecuteQuery("InsertLead", param);
+                return ds;
+            }
+        }
+
+        public class leadLIst
+        {
+            public string loginid { get; set; }
+            public DataSet LeadList()
+            {
+                SqlParameter[] param = { new SqlParameter("@Pk_LeadeId", null),
+                new SqlParameter("@AddedBy", loginid)
+
+            };
+                DataSet ds = DBHelper.ExecuteQuery("LeadList", param);
+                return ds;
+            }
+        }
+        public class LstLead
+        {
+            public string Pk_LeadeId { get; set; }
+            public string Fk_ProcpectName { get; set; }
+            public string FirstInstructionDate { get; set; }
+            public string Fk_ExpectedProductCategoryName { get; set; }
+            public string Fk_SourceName { get; set; }
+            public string Fk_ExecutiveName { get; set; }
+            public string Fk_ModeInterActionName { get; set; }
+            public string FollowupDate { get; set; }
+            public string Description { get; set; }
+
+        }
+
+        public class SAVEDWR
+        {
+            public string ProcpectId { get; set; }
+            public string LeadId { get; set; }
+            public string NextFollowupDate { get; set; }
+            public string Remark { get; set; }
+            public string BusinessChanceId { get; set; }
+            public string ModeInterActionId { get; set; }
+          //  public string SubmittedByName { get; set; }
+            public string MeetingDate { get; set; }
+            public string MeetingTime { get; set; }
+            public string LoginID { get; set; }
+            public DataSet SAVE_DWR()
+            {
+                SqlParameter[] param = { new SqlParameter("@Fk_ProcpectId",ProcpectId),
+                                    new SqlParameter("@Fk_LeadId", LeadId),
+                                    new SqlParameter("@NextFollowupDate", NextFollowupDate),
+                                    new SqlParameter("@Remark", Remark),
+                                    new SqlParameter("@Fk_BusinessChanceId", BusinessChanceId),
+                                    new SqlParameter("@Fk_ModeInterActionId", ModeInterActionId),
+                                    new SqlParameter("@Fk_ExecutiveId", LoginID),
+                                    new SqlParameter("@MeetingDate", MeetingDate),
+                                    new SqlParameter("@MeetingTime", MeetingTime),
+                                   new SqlParameter("@AddedBy",LoginID)};
+                DataSet ds = DBHelper.ExecuteQuery("InsertDWR", param);
+                return ds;
+
+            }
+        }
+
+
+
+
     }
 }

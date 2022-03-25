@@ -6,12 +6,26 @@
 
 <div class="row">
     <div class="col-xl-12 mx-auto">
-@using (Html.BeginForm("Procpect", "Procpect", FormMethod.Post, new {@id = "signupFrom", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Procpect", "Procpect", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
 {
         <div class="card">
             <div class="card-body">
-                @TempData["ProcpectError"]
+              
                 <div class="border p-4 rounded">
+                    @if (@TempData["ProcpectError"] != null)
+                    {
+                        <div class="alert border-0 bg-success alert-dismissible fade show py-2">
+                            <div class="d-flex align-items-center">
+                                <div class="fs-3 text-white">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <div class="text-white">@TempData["ProcpectError"]!</div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
                     <div class="row">
                         <div class="col-md-4">
                             <label class="form-label">Contact Person <span style="color: red">*</span></label>
@@ -172,15 +186,6 @@
     </div>
 </div>
 <script>
-    // Date Picker
-    //jQuery('.mydatepicker, #datepicker, .input-group.date').datepicker(
-    //    {
-    //        dateFormat: 'dd/mm/yy',
-
-    //        changeYear: true,
-    //        changeMonth: true
-
-    //    });
 
 </script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
@@ -385,9 +390,5 @@
 
 
 </script>
-@*<script>
-  $( function() {
-      $("#FollowupDate").datepicker();
-  } );
-</script>*@
+
 

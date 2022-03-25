@@ -10,6 +10,7 @@ namespace AfluexFollowUpDemo.Models
     public class Procpect:Common
     {
         public string Pk_ProcpectId { get; set; }
+        public string DeletedBy { get; set; }
         public string ContactPerson { get; set; }
         public string ContactEmailId { get; set; }
         public string ContactNo { get; set; }
@@ -82,8 +83,8 @@ namespace AfluexFollowUpDemo.Models
             SqlParameter[] para = {
                                       new SqlParameter("@Pk_ProcpectId", Pk_ProcpectId),
                                       new SqlParameter("@ContactPerson", ContactPerson),
-                                      new SqlParameter("@ContactNo", ContactNo),
-                                      new SqlParameter("@CompanyName", CompanyName),
+                                      //new SqlParameter("@ContactNo", ContactNo),
+                                      //new SqlParameter("@CompanyName", CompanyName),
                                      new SqlParameter("@EmployeeId",EmployeeId)
 
                                   };
@@ -147,7 +148,12 @@ namespace AfluexFollowUpDemo.Models
             return ds;
         }
 
-
+        public DataSet DeleteProspect()
+        {
+            SqlParameter[] para = { new SqlParameter("@Pk_ProcpectId", Pk_ProcpectId), new SqlParameter("@DeletedBy", DeletedBy) };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteProspect", para);
+            return ds;
+        }
         public DataSet BindExecutive()
         {
             DataSet ds = DBHelper.ExecuteQuery("GetExecutiveName");

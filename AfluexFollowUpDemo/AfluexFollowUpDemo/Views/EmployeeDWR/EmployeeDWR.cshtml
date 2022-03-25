@@ -33,6 +33,7 @@
                         <div class="col-md-4">
                             <label class="form-label">Lead</label>
                             @Html.DropDownListFor(q => q.Fk_LeadId, new SelectList(ViewBag.ddlLead, "Value", "Text"), new { @class = "form-select", @onchange = "return GetDWRdetails();" })
+                            @Html.HiddenFor(m => m.Pk_LeadeId)
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Executive Name</label>
@@ -142,9 +143,9 @@
             maxDate: '+1Y+6M',
 })
 
-    function GetDWRdetails() {
-               debugger
-               var value = $('#Pk_LeadeId').val();
+           function GetDWRdetails() {
+
+               var value = $('#Fk_LeadId').val();
 
                $.ajax({
                    url: '/EmployeeDWR/GetLeadDetailsByID', type: 'post', dataType: 'json',
@@ -217,118 +218,118 @@
                    }
                });
            }
-    function GetLeadDetailsByID() {
+           function GetLeadDetailsByID() {
 
-            var value = $('#Pk_LeadeId').val();
+               var value = $('#Pk_LeadeId').val();
 
-            $.ajax({
-                url: '/EmployeeDWR/GetLeadDetailsByID', type: 'post', dataType: 'json',
-                data: { 'Pk_LeadeId': value }, success: function (data) {
-                    if (data.Result == "Yes") {
-                        document.getElementById("spFk_ExecutiveId").innerText = data.Fk_ExecutiveId;
-                        document.getElementById("spFk_SourceId").innerText = data.Fk_SourceId;
-                        document.getElementById("spFirstInstructionDate").innerText = data.FirstInstructionDate;
-                        document.getElementById("spFollowupDate").innerText = data.FollowupDate;
-                        document.getElementById("spFk_ModeInterActionId").innerText = data.Fk_ModeInterActionId;
-                        $('#ContactEmailId').val() = data.ContactEmailId;
-                          $('#ContactNo').val(data.ContactNo);
-                          $('#CompanyName').val(data.CompanyName);
-                          $('#Address').val(data.Address);
-                          $('#CompanyContactNo').val(data.CompanyContactNo);
-
-
-
-                    }
-                    else {
-                       // alert("Invalid Teacher LoginID");
-                        $('#Pk_ProcpectId').val('');
-                        $('#ContactEmailId').val('');
-                         $('#ContactNo').val('');
-                         $('#CompanyName').val('');
-                         $('#Address').val('');
-                         $('#CompanyContactNo').val('');
-
-                    }
-                }
-
-            });
-
-        }
-
-    function validateservice() {
-        $(".errortext").removeClass("errortext");
-        if ($('#Fk_ProcpectId').val() == '0') {
-            $("#Fk_ProcpectId").addClass('errortext');
-            $('#Fk_ProcpectId').focus();
-            return false;
-        }
-        if ($('#Fk_LeadId').val() == '0') {
-            $("#Fk_LeadId").addClass('errortext');
-            $('#Fk_LeadId').focus();
-            return false;
-        }
-        if ($('#NextFollowupDate').val() == '') {
-            $("#NextFollowupDate").addClass('errortext');
-            $('#NextFollowupDate').focus();
-            return false;
-        }
-        if ($('#Remark').val() == '') {
-            $("#Remark").addClass('errortext');
-            $('#Remark').focus();
-            return false;
-        }
-        if ($('#Fk_ModeInterActionId').val() == '0') {
-            $("#Fk_ModeInterActionId").addClass('errortext');
-            $('#Fk_ModeInterActionId').focus();
-            return false;
-        }
-        if ($('#Fk_BusinessChanceId').val() == '0') {
-            $("#Fk_BusinessChanceId").addClass('errortext');
-            $('#Fk_BusinessChanceId').focus();
-            return false;
-        }
-        if ($('#Fk_ExecutiveId').val() == '0') {
-            $("#Fk_ExecutiveId").addClass('errortext');
-            $('#Fk_ExecutiveId').focus();
-            return false;
-        }
-        if ($('#MeetingDate').val() == '') {
-            $("#MeetingDate").addClass('errortext');
-            $('#MeetingDate').focus();
-            return false;
-        }
-        if ($('#MeetingTime').val() == '') {
-            $("#MeetingTime").addClass('errortext');
-            $('#MeetingTime').focus();
-            return false;
-        }
+               $.ajax({
+                   url: '/EmployeeDWR/GetLeadDetailsByID', type: 'post', dataType: 'json',
+                   data: { 'Pk_LeadeId': value }, success: function (data) {
+                       if (data.Result == "Yes") {
+                           document.getElementById("spFk_ExecutiveId").innerText = data.Fk_ExecutiveId;
+                           document.getElementById("spFk_SourceId").innerText = data.Fk_SourceId;
+                           document.getElementById("spFirstInstructionDate").innerText = data.FirstInstructionDate;
+                           document.getElementById("spFollowupDate").innerText = data.FollowupDate;
+                           document.getElementById("spFk_ModeInterActionId").innerText = data.Fk_ModeInterActionId;
+                           $('#ContactEmailId').val() = data.ContactEmailId;
+                           $('#ContactNo').val(data.ContactNo);
+                           $('#CompanyName').val(data.CompanyName);
+                           $('#Address').val(data.Address);
+                           $('#CompanyContactNo').val(data.CompanyContactNo);
 
 
-        return true;
-    }
 
-    function OnchangeLead() {
-        var value = $('#Fk_ProcpectId').val();
-        $.ajax({
-            url: "/EmployeeDWR/GetLeadByProspect",
-            Type: "Get",
-            DataType: "JSON",
-            data: { Fk_ProcpectId: value },
-            success: function (data) {
+                       }
+                       else {
+                           // alert("Invalid Teacher LoginID");
+                           $('#Pk_ProcpectId').val('');
+                           $('#ContactEmailId').val('');
+                           $('#ContactNo').val('');
+                           $('#CompanyName').val('');
+                           $('#Address').val('');
+                           $('#CompanyContactNo').val('');
 
-                $("#Fk_LeadId").html("");
-                $("#Fk_LeadId").empty();
-                $("#Fk_LeadId").append(
-                      $('<option></option>').val(0).html('--Select Lead--'));
-                $.each(data.ddlLead, function (index, Shelfcount) {
-                    $("#Fk_LeadId").append(
-                          $('<option></option>').val(Shelfcount.Value).html(Shelfcount.Text));
+                       }
+                   }
 
-                });
-            }
-        });
+               });
 
-    }
+           }
+
+           function validateservice() {
+               $(".errortext").removeClass("errortext");
+               if ($('#Fk_ProcpectId').val() == '0') {
+                   $("#Fk_ProcpectId").addClass('errortext');
+                   $('#Fk_ProcpectId').focus();
+                   return false;
+               }
+               if ($('#Fk_LeadId').val() == '0') {
+                   $("#Fk_LeadId").addClass('errortext');
+                   $('#Fk_LeadId').focus();
+                   return false;
+               }
+               if ($('#NextFollowupDate').val() == '') {
+                   $("#NextFollowupDate").addClass('errortext');
+                   $('#NextFollowupDate').focus();
+                   return false;
+               }
+               if ($('#Remark').val() == '') {
+                   $("#Remark").addClass('errortext');
+                   $('#Remark').focus();
+                   return false;
+               }
+               if ($('#Fk_ModeInterActionId').val() == '0') {
+                   $("#Fk_ModeInterActionId").addClass('errortext');
+                   $('#Fk_ModeInterActionId').focus();
+                   return false;
+               }
+               if ($('#Fk_BusinessChanceId').val() == '0') {
+                   $("#Fk_BusinessChanceId").addClass('errortext');
+                   $('#Fk_BusinessChanceId').focus();
+                   return false;
+               }
+               if ($('#Fk_ExecutiveId').val() == '0') {
+                   $("#Fk_ExecutiveId").addClass('errortext');
+                   $('#Fk_ExecutiveId').focus();
+                   return false;
+               }
+               if ($('#MeetingDate').val() == '') {
+                   $("#MeetingDate").addClass('errortext');
+                   $('#MeetingDate').focus();
+                   return false;
+               }
+               if ($('#MeetingTime').val() == '') {
+                   $("#MeetingTime").addClass('errortext');
+                   $('#MeetingTime').focus();
+                   return false;
+               }
+
+
+               return true;
+           }
+
+           function OnchangeLead() {
+               var value = $('#Fk_ProcpectId').val();
+               $.ajax({
+                   url: "/EmployeeDWR/GetLeadByProspect",
+                   Type: "Get",
+                   DataType: "JSON",
+                   data: { Fk_ProcpectId: value },
+                   success: function (data) {
+
+                       $("#Fk_LeadId").html("");
+                       $("#Fk_LeadId").empty();
+                       $("#Fk_LeadId").append(
+                             $('<option></option>').val(0).html('--Select Lead--'));
+                       $.each(data.ddlLead, function (index, Shelfcount) {
+                           $("#Fk_LeadId").append(
+                                 $('<option></option>').val(Shelfcount.Value).html(Shelfcount.Text));
+
+                       });
+                   }
+               });
+
+           }
 
 </script>
 <script>

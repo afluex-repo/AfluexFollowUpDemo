@@ -1,4 +1,4 @@
-﻿
+﻿@model AfluexFollowUpDemo.Models.Master
 @{
     ViewBag.Title = "ProspectActivityMaster";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -12,33 +12,54 @@
                 <li class="breadcrumb-item">
                     <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">  Prospect Activity Master</li>
+                <li class="breadcrumb-item active" aria-current="page"> Prospect Activity Master</li>
             </ol>
         </nav>
     </div>
 
 </div>
 <!--end breadcrumb-->
-
+@using (Html.BeginForm("ProspectActivityMaster", "Master", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+{
 <div class="row">
     <div class="col-xl-12 mx-auto">
-
         <div class="card">
             <div class="card-body">
                 <div class="border p-4 rounded">
-
+                    @if (@TempData["Error"] != null)
+                    {
+                        <div class="alert border-0 bg-success alert-dismissible fade show py-2">
+                            <div class="d-flex align-items-center">
+                                <div class="fs-3 text-white">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <div class="text-white">@TempData["Error"]!</div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
                     <div class="row mb-3">
                         <label for="inputEnterYourName" class="col-sm-3 col-form-label"> Activity Name<span style="color: red">*</span></label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="inputEnterYourName" placeholder="Enter Prospect Activity Name">
+                             @Html.TextBoxFor(m => m.ActivityName, new { @class = "form-control", @Placeholder = "Prospect Activity Name" })
+                            @Html.HiddenFor(m => m.Pk_ActivityId)
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label"></label>
                         <div class="col-sm-9">
-                            <input type="submit" name="Save" text="Save" class="btn btn-primary" value="Save" />
-                            <a href="/Master/CategoryMaster" class="btn btn-dark">Reset</a>
-                            <a href="/Master/ProductCategoryList" class="btn btn-info">Back To List</a>
+                            @if (Model.Pk_ActivityId != null)
+                            {
+                                <input type="submit" value="Update " class="btn btn-success" name="btnUpdate" onclick="return validateservice();" />
+                            }
+                            else
+                            {
+                            <input type="submit" name="btnSave" text="Save" class="btn btn-primary" value="Save" />
+                            }
+                            <a href="/Master/ProspectActivityMaster" class="btn btn-dark">Reset</a>
+                            <a href="/Master/ProspectActivityList" class="btn btn-info">Back To List</a>
 
                         </div>
                     </div>
@@ -47,4 +68,23 @@
         </div>
     </div>
 </div>
+}
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #f5c1cb !important;
+    }
+</style>
+<script>
 
+    function validateservice() {
+        $(".errortext").removeClass("errortext");
+        if ($('#ActivityName').val() == '') {
+            $("#ActivityName").addClass('errortext');
+            $('#ActivityName').focus();
+            return false;
+        }
+        return true;
+    }
+
+</script>

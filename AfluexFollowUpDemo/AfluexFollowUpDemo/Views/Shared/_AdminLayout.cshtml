@@ -72,7 +72,7 @@
                         <li class="nav-item dropdown dropdown-large">
                             <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
                                 <div class="user-setting d-flex align-items-center gap-1">
-                                    <img src="~/assets/images/avatars/avatar-1.png" class="user-img" alt="">
+                                    <img src="~/assets/images/avatars/user.png" class="user-img" alt="">
                                     <div class="user-name d-none d-sm-block">@Session["Username"]</div>
                                 </div>
                             </a>
@@ -80,7 +80,7 @@
                                 <li>
                                     <a class="dropdown-item" href="#">
                                         <div class="d-flex align-items-center">
-                                            <img src="~/assets/images/avatars/avatar-1.png" alt="" class="rounded-circle" width="60" height="60">
+                                            <img src="~/assets/images/avatars/user.png" alt="" class="rounded-circle" width="60" height="60">
                                             <div class="ms-3">
                                                 <h6 class="mb-0 dropdown-user-name">@Session["Username"]</h6>
                                                 @*<small class="mb-0 dropdown-user-designation text-secondary">HR Manager</small>*@
@@ -301,11 +301,12 @@
                     <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Employee">
                         <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-Employee" type="button"><i class="bi bi-briefcase-fill"></i></button>
                     </li>
-                    <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Lead">
-                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-Lead" type="button"><i class="bi bi-bag-check-fill"></i></button>
-                    </li>
+                   
                     <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Procpect">
                         <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-Procpect" type="button"><i class="bi bi-bookmark-star-fill"></i></button>
+                    </li>
+                    <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Lead">
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-Lead" type="button"><i class="bi bi-bag-check-fill"></i></button>
                     </li>
                     <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="FollowUp">
                         <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-forms" type="button"><i class="bi bi-file-earmark-break-fill"></i></button>
@@ -372,19 +373,7 @@
                             <a href="/EmployeeRegistration/GetEmpolyeeRegistrationList" class="list-group-item"><i class="bi bi-bar-chart"></i>RegistrationList</a>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="pills-Lead">
-                        <div class="list-group list-group-flush">
-                            <div class="list-group-item">
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-0">Lead</h5>
-                                </div>
-
-                            </div>
-                            <a href="/Lead/AddLead" class="list-group-item"><i class="bi bi-box-seam"></i>Add Lead</a>
-                            <a href="/Lead/ListLead" class="list-group-item"><i class="bi bi-box-seam"></i>List Lead</a>
-
-                        </div>
-                    </div>
+                    
                     <div class="tab-pane fade" id="pills-Procpect">
                         <div class="list-group list-group-flush">
                             <div class="list-group-item">
@@ -395,6 +384,19 @@
                             </div>
                             <a href="/Procpect/Procpect" class="list-group-item"><i class="bi bi-bell"></i>Procpect</a>
                             <a href="/Procpect/GetProspecctList" class="list-group-item"><i class="bi bi-arrows-collapse"></i>GetProspecctList</a>
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="pills-Lead">
+                        <div class="list-group list-group-flush">
+                            <div class="list-group-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-0">Lead</h5>
+                                </div>
+
+                            </div>
+                            <a href="/Lead/AddLead" class="list-group-item"><i class="bi bi-box-seam"></i>Add Lead</a>
+                            <a href="/Lead/ListLead" class="list-group-item"><i class="bi bi-box-seam"></i>List Lead</a>
 
                         </div>
                     </div>
@@ -416,11 +418,6 @@
         </aside>
         <main class="page-content">
             @RenderBody()
-
-
-
-
-
         </main>
         <!--end page main-->
         <!--start overlay-->

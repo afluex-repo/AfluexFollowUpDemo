@@ -700,8 +700,8 @@ namespace AfluexFollowUpDemo.Controllers
                 foreach (DataRow r in ds.Tables[0].Rows)
                 {
                     StateListlst obj1 = new StateListlst();
-                    obj1.State = ds.Tables[0].Rows[0]["StateName"].ToString();
-                    obj1.City = ds.Tables[0].Rows[0]["CityName"].ToString();
+                    obj1.State = r["StateName"].ToString();
+                    obj1.City = r["CityName"].ToString();
                    
                     lst.Add(obj1);
                 }
@@ -723,6 +723,302 @@ namespace AfluexFollowUpDemo.Controllers
                  Message = "Record Not Found",
                  lstSubCategory = "Record Not Found"
              });
+            }
+        }
+
+
+        [Route("LeadList")]
+        [HttpPost]
+        public HttpResponseMessage LeadList(LeadList obj)
+        {
+
+            List<LeadListlst> lst = new List<LeadListlst>();
+
+            DataSet ds = obj.GetLead();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    LeadListlst obj1 = new LeadListlst();
+                    obj1.Pk_ProductCategoryId = r["Pk_ProductCategoryId"].ToString();
+                    obj1.Lead_id = r["Pk_LeadId"].ToString();
+                    obj1.Procpect_Id = r["Fk_ProcpectId"].ToString();
+                    obj1.ProductCategoryName = r["ProductCategoryName"].ToString();
+                    obj1.ContactPerson =r["ContactPerson"].ToString();
+
+                    lst.Add(obj1);
+                }
+                return Request.CreateResponse(HttpStatusCode.OK,
+              new
+              {
+                  StatusCode = HttpStatusCode.OK,
+                  Message = "Record Found",
+                  LeadListlst = lst,
+
+              });
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.OK,
+             new
+             {
+                 StatusCode = HttpStatusCode.OK,
+                 Message = "Record Not Found",
+                 LeadListlst = lst,
+
+             });
+            }
+        }
+
+        [Route("DWRList")]
+        [HttpPost]
+        public HttpResponseMessage DWRList(DWRList obj1)
+        {
+
+            List<dwrlst> lst = new List<dwrlst>();
+            DataSet ds = obj1.GetDWRList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    dwrlst obj = new dwrlst();
+                    obj.PK_ListID = r["Pk_DwrId"].ToString();
+                    obj.LeadID = r["LeadId"].ToString();
+                    obj.ContactPerson = r["ContactPerson"].ToString();
+                    obj.LeadName = r["ProductCategoryName"].ToString();
+                    obj.Remark = r["Remark"].ToString();
+                    obj.BusinessChanceName = r["ChanceName"].ToString();
+                    obj.InterActionName = r["InterActionName"].ToString();
+                    obj.ExecutiveName = r["Name"].ToString();
+                    obj.MeetingDate = r["MeetingDate"].ToString();
+                    obj.MeetingTime = r["MeetingTime"].ToString();
+                    obj.FollowupDate = r["FollowupDate"].ToString();
+                    obj.FirstInstructionDate = r["FirstInstructionDate"].ToString();
+                    obj.Pk_ProcpectId = r["Fk_ProcpectId"].ToString();
+                 
+
+                    lst.Add(obj);
+                }
+             
+            
+            return Request.CreateResponse(HttpStatusCode.OK,
+              new
+              {
+                  StatusCode = HttpStatusCode.OK,
+                  Message = "Record Found",
+                  dwrlst = lst,
+
+              });
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError,
+             new
+             {
+                 StatusCode = HttpStatusCode.InternalServerError,
+                 Message = "Record Not Found",
+                 dwrlst = lst
+             });
+            }
+        }
+
+        [Route("AllProcpectIdList")]
+        [HttpPost]
+        public HttpResponseMessage AllProcpectIdList(allProspectList obj1)
+        {
+
+            List<lstProspect> lst = new List<lstProspect>();
+            DataSet ds = obj1.GetProspectList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    lstProspect obj = new lstProspect();
+                    obj.Pk_ProcpectId = r["Pk_ProcpectId"].ToString();
+                    obj.ProcpectName = r["ContactPerson"].ToString();
+                   
+
+                    lst.Add(obj);
+                }
+
+
+                return Request.CreateResponse(HttpStatusCode.OK,
+                  new
+                  {
+                      StatusCode = HttpStatusCode.OK,
+                      Message = "Record Found",
+                      lstProspect = lst,
+
+                  });
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError,
+             new
+             {
+                 StatusCode = HttpStatusCode.InternalServerError,
+                 Message = "Record Not Found",
+                 lstProspect = lst
+             });
+            }
+        }
+
+
+        [Route("AddLead")]
+        [HttpPost]
+        public HttpResponseMessage AddLead(savelead obj)
+        {
+            
+            try
+            {
+             
+                DataSet ds = obj.InsertLead();
+                if (ds != null && ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
+                {
+                    if (ds != null && ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK,
+                              new
+                              {
+                                  StatusCode = HttpStatusCode.OK,
+                                  Message = "Lead Added has been successfully",
+                              });
+                    }
+                    else
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK,
+                          new
+                          {
+                              StatusCode = HttpStatusCode.OK,
+                              Message = "Lead already exists"
+                          });
+                    }
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK,
+                        new
+                        {
+                            StatusCode = HttpStatusCode.InternalServerError,
+                            Message = "Error occurred"
+                        });
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK,
+                   new
+                   {
+                       StatusCode = HttpStatusCode.InternalServerError,
+                       Message = "Error: " + ex.Message,
+
+                   });
+            }
+        }
+
+        [Route("AllLeadList")]
+        [HttpPost]
+        public HttpResponseMessage AllLeadList(leadLIst obj1)
+         {
+
+            List<LstLead> lst = new List<LstLead>();
+            DataSet ds = obj1.LeadList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    LstLead obj = new LstLead();
+                    obj.Pk_LeadeId = r["Pk_LeadId"].ToString();
+                    obj.Fk_ProcpectName = r["ContactPerson"].ToString();
+                    obj.FirstInstructionDate = r["FirstInstructionDate"].ToString();
+                    obj.Fk_ExpectedProductCategoryName = r["ProductCategoryName"].ToString();
+                    obj.Fk_SourceName = r["SourceName"].ToString();
+                    obj.Fk_ExecutiveName = r["Name"].ToString();
+                    obj.Fk_ModeInterActionName = r["InterActionName"].ToString();
+                    obj.FollowupDate = r["FollowupDate"].ToString();
+                    obj.Description = r["Description"].ToString();
+
+
+                    lst.Add(obj);
+                }
+
+
+                return Request.CreateResponse(HttpStatusCode.OK,
+                  new
+                  {
+                      StatusCode = HttpStatusCode.OK,
+                      Message = "Record Found",
+                      LstLead = lst,
+
+                  });
+            }
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError,
+             new
+             {
+                 StatusCode = HttpStatusCode.InternalServerError,
+                 Message = "Record Not Found",
+                 LstLead = lst
+             });
+            }
+        }
+
+
+        [Route("AddDWR")]
+        [HttpPost]
+        public HttpResponseMessage AddDWR(SAVEDWR obj)
+        {
+
+            try
+            {
+
+                DataSet ds = obj.SAVE_DWR();
+                if (ds != null && ds.Tables[0].Rows.Count > 0 && ds.Tables.Count > 0)
+                {
+                    if (ds != null && ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK,
+                              new
+                              {
+                                  StatusCode = HttpStatusCode.OK,
+                                  Message = "Daily Work Report is Successfully Added",
+                              });
+                    }
+                    else
+                    {
+                        return Request.CreateResponse(HttpStatusCode.OK,
+                          new
+                          {
+                              StatusCode = HttpStatusCode.OK,
+                              Message = "Daily Work Report already exists"
+                          });
+                    }
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK,
+                        new
+                        {
+                            StatusCode = HttpStatusCode.InternalServerError,
+                            Message = "Error occurred"
+                        });
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK,
+                   new
+                   {
+                       StatusCode = HttpStatusCode.InternalServerError,
+                       Message = "Error: " + ex.Message,
+
+                   });
             }
         }
     }

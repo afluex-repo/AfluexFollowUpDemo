@@ -224,13 +224,13 @@ namespace AfluexFollowUpDemo.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GetLeadDetailsByID(string Pk_LeadeId)
+        public ActionResult GetLeadDetailsByID(string Fk_LeadeId)
         {
             EmployeeDWR model = new EmployeeDWR();
             try
             {
 
-                model.Pk_LeadeId = Pk_LeadeId;
+                model.Pk_LeadeId = Fk_LeadeId;
 
                 List<EmployeeDWR> list = new List<EmployeeDWR>();
 
