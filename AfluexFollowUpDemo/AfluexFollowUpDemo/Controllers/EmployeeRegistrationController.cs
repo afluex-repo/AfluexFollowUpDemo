@@ -3,6 +3,7 @@ using AfluexFollowUpDemo.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -66,7 +67,71 @@ namespace AfluexFollowUpDemo.Controllers
         {
             return View();
         }
-     
+        public ActionResult DeleteEmployeeRegistration(string Pk_Id)
+        {
+            EmployeeRegistration obj = new EmployeeRegistration();
+            try
+            {
+                obj.DeletedBy = Session["UserID"].ToString();
+                obj.Pk_Id = Pk_Id;
+                DataSet ds = new DataSet();
+                ds = obj.DeleteEmployee();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["EmployeeDelete"] = "Employee Deleted Successfully";
+                    }
+                    else
+                    {
+                        TempData["EmployeeDelete"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["EmployeeDelete"] = ex.Message;
+
+            }
+            ViewBag.saverrormsg = "";
+            return RedirectToAction("GetEmpolyeeRegistrationList");
+        }
+        [HttpPost]
+        [ActionName("EmployeeRegistration")]
+        [OnAction(ButtonName = "btnUpdate")]
+        public ActionResult UpdateEmployeeRegistration(EmployeeRegistration obj, string Pk_Id, HttpPostedFileBase postedFile)
+        {
+            try
+            {
+                if (postedFile != null)
+                {
+                    obj.UserImage = "../SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
+                    postedFile.SaveAs(Path.Combine(Server.MapPath(obj.UserImage)));
+                }
+
+                obj.UpdatedBy = Session["UserID"].ToString();
+                obj.Pk_Id = obj.Pk_Id;
+                DataSet ds = new DataSet();
+                ds = obj.UpdateEmployeeRegistration();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        Session["dt"] = null;
+                        TempData["ServiceError"] = "Employee Registration Updated Successfully";
+                    }
+                    else
+                    {
+                        TempData["ServiceError"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ServiceError"] = ex.Message;
+            }
+            return RedirectToAction("EmployeeRegistration");
+        }
 
         [HttpPost]
         [ActionName("GetEmpolyeeRegistrationList")]

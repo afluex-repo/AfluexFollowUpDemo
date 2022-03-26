@@ -1,4 +1,4 @@
-﻿
+﻿@model AfluexFollowUpDemo.Models.Master
 @{
     ViewBag.Title = "BusinessChanceList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -18,6 +18,8 @@
                             <input class="form-control ps-5" type="text" placeholder="search">
                         </form>
                     </div>
+@using (Html.BeginForm("BusinessChanceList", "Master", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+{
                     <div class="table-responsive mt-3">
                         <table class="table align-middle">
                             <thead class="table-secondary">
@@ -29,30 +31,41 @@
                                 </tr>
                             </thead>
                             <tbody>
+@if (Model != null)
+            {
+                if (Model.lstChance != null)
+                {
+                    int i = 1;
+                    foreach (var item in Model.lstChance)
+                    {
                                 <tr>
-                                    <td>1</td>
+                                    @Html.HiddenFor(m => m.Pk_BusinessChanceId)
+                                    <td>@i</td>
                                     <td>
                                         <div class="d-flex align-items-center gap-3 cursor-pointer">
-                                            <img src="assets/images/avatars/avatar-1.png" class="rounded-circle" width="44" height="44" alt="">
+                                            
                                             <div class="">
-                                                <p class="mb-0">Thomas Hardy</p>
+                                                <p class="mb-0">@item.ChanceName</p>
                                             </div>
                                         </div>
                                     </td>
 
                                     <td>
                                         <div class="table-actions d-flex align-items-center gap-3 fs-6">
-                                            <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Views"><i class="bi bi-eye-fill"></i></a>
-                                            <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i class="bi bi-pencil-fill"></i></a>
-                                            <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bi bi-trash-fill"></i></a>
+                                           <a href="/Master/BusinessChanceMaster?Pk_BusinessChanceId=@item.Pk_BusinessChanceId" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i class="bi bi-pencil-fill"></i></a>
+                                            
                                         </div>
                                     </td>
                                 </tr>
-
+            i = i + 1;
+        }
+    }
+}
                             </tbody>
 
                         </table>
                     </div>
+}
                 </div>
             </div>
         </div>

@@ -749,7 +749,7 @@ namespace AfluexFollowUpDemo.Controllers
                     StateListlst obj1 = new StateListlst();
                     obj1.State = r["StateName"].ToString();
                     obj1.City = r["CityName"].ToString();
-
+                   
                     lst.Add(obj1);
                 }
                 return Request.CreateResponse(HttpStatusCode.OK,

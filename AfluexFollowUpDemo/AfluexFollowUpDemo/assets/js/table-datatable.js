@@ -28,6 +28,14 @@ $(function() {
             .appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
 
-  
+    $(document).ready(function () {
+        var table3 = $('#example3').DataTable({
+            lengthChange: false,
+            buttons: ['copy', 'excel', 'pdf', 'print']
+        });
+
+        table3.buttons().container()
+            .appendTo('#example3_wrapper .col-md-6:eq(0)');
+    });
 
 });

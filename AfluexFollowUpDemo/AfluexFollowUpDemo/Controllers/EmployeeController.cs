@@ -29,9 +29,7 @@ namespace AfluexFollowUpDemo.Controllers
                 {
                     foreach (DataRow r in ds.Tables[0].Rows)
                     {
-
                         Lead obj1 = new Lead();
-
                         obj1.Fk_ProcpectId = r["ContactPerson"].ToString();
                         obj1.FirstInstructionDate = r["FirstInstructionDate"].ToString();
                         obj1.Fk_ExpectedProductCategoryId = r["ProductCategoryName"].ToString();
@@ -40,7 +38,6 @@ namespace AfluexFollowUpDemo.Controllers
                         obj1.Fk_ModeInterActionId = r["InterActionName"].ToString();
                         obj1.FollowupDate = r["FollowupDate"].ToString();
                         obj1.Description = r["Description"].ToString();
-
                         lst1.Add(obj1);
                     }
                     #endregion TodayFollowup

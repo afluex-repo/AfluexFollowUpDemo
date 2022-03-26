@@ -59,6 +59,41 @@ namespace AfluexFollowUpDemo.Models
         public string AddedBy { get; set; }
         public String UpdatedBy { get; set; }
 
+        public DataSet ListDataSource()
+        {
+            SqlParameter[] param = { new SqlParameter("@Pk_SourceId", Pk_SourceId) };
+            DataSet ds = DBHelper.ExecuteQuery("ListDataSource", param);
+            return ds;
+        }
+        public DataSet InsertDataSource()
+        {
+            SqlParameter[] param = {new SqlParameter("@SourceName",SourceName),
+                                   new SqlParameter("@AddedBy",AddedBy)};
+            DataSet ds = DBHelper.ExecuteQuery("InsertDataSource", param);
+            return ds;
+        }
+        public DataSet UpdateDataSource()
+        {
+            SqlParameter[] param = { new SqlParameter("@Pk_SourceId", Pk_SourceId),
+                                   new SqlParameter("@SourceName",SourceName),
+                                   new SqlParameter("@UpdatedBy",UpdatedBy)};
+            DataSet ds = DBHelper.ExecuteQuery("UpdateDataSource", param);
+            return ds;
+        }
+        public DataSet ListInterAction()
+        {
+            SqlParameter[] param = { new SqlParameter("@PK_InterActionId", PK_InterActionId) };
+            DataSet ds = DBHelper.ExecuteQuery("ListInterAction", param);
+            return ds;
+        }
+        public DataSet UpdateInterAction()
+        {
+            SqlParameter[] param = { new SqlParameter("@PK_InterActionId", PK_InterActionId),
+                                   new SqlParameter("@InterActionName",InterActionName),
+                                   new SqlParameter("@UpdatedBy",UpdatedBy)};
+            DataSet ds = DBHelper.ExecuteQuery("UpdateInterAction", param);
+            return ds;
+        }
         public DataSet InsertCategory()
         {
             SqlParameter[] param = {new SqlParameter("@CategoryName",CategoryName),
@@ -84,6 +119,73 @@ namespace AfluexFollowUpDemo.Models
                                    new SqlParameter("@CategoryName",CategoryName),
                                    new SqlParameter("@UpdatedBy",UpdatedBy)};
             DataSet ds = DBHelper.ExecuteQuery("UpdateCategory", param);
+            return ds;
+        }
+
+        public DataSet InsertInterAction()
+        {
+            SqlParameter[] param = {new SqlParameter("@InterActionName",InterActionName),
+                                   new SqlParameter("@AddedBy",AddedBy)};
+            DataSet ds = DBHelper.ExecuteQuery("InsertInterAction", param);
+            return ds;
+        }
+        public DataSet InsertProspectActivity()
+        {
+            SqlParameter[] param = {new SqlParameter("@ActivityName",ActivityName),
+                                   new SqlParameter("@AddedBy",AddedBy)};
+            DataSet ds = DBHelper.ExecuteQuery("InsertProspectActivity", param);
+            return ds;
+        }
+        public DataSet ListActivity()
+        {
+            SqlParameter[] param = { new SqlParameter("@Pk_ActivityId", Pk_ActivityId) };
+            DataSet ds = DBHelper.ExecuteQuery("ListActivity", param);
+            return ds;
+        }
+        public DataSet UpdateActivity()
+        {
+            SqlParameter[] param = { new SqlParameter("@Pk_ActivityId", Pk_ActivityId),
+                                   new SqlParameter("@ActivityName",ActivityName),
+                                   new SqlParameter("@UpdatedBy",UpdatedBy)};
+            DataSet ds = DBHelper.ExecuteQuery("UpdateProspectActivity", param);
+            return ds;
+        }
+
+        public DataSet ListBusinessChance()
+        {
+            SqlParameter[] param = { new SqlParameter("@Pk_BusinessChanceId", Pk_BusinessChanceId) };
+            DataSet ds = DBHelper.ExecuteQuery("ListBusinessChance", param);
+            return ds;
+        }
+        public DataSet InsertBusinessChance()
+        {
+            SqlParameter[] param = {new SqlParameter("@ChanceName",ChanceName),
+                                   new SqlParameter("@AddedBy",AddedBy)};
+            DataSet ds = DBHelper.ExecuteQuery("InsertBusinessChance", param);
+            return ds;
+        }
+
+        public DataSet UpdateBusinessChance()
+        {
+            SqlParameter[] param = { new SqlParameter("@Pk_BusinessChanceId", Pk_BusinessChanceId),
+                                   new SqlParameter("@ChanceName",ChanceName),
+                                   new SqlParameter("@UpdatedBy",UpdatedBy)};
+            DataSet ds = DBHelper.ExecuteQuery("UpdateBusiness", param);
+            return ds;
+        }
+        public DataSet ExpectedProductCategoryInsert()
+        {
+            SqlParameter[] param = {new SqlParameter("@ProductCategoryName",ProductCategoryName),
+                                   new SqlParameter("@AddedBy",AddedBy)};
+            DataSet ds = DBHelper.ExecuteQuery("ExpectedProductCategoryInsert", param);
+            return ds;
+        }
+        public DataSet UpdateProductCategory()
+        {
+            SqlParameter[] param = { new SqlParameter("@Pk_ProductCategoryId", Pk_ProductCategoryId),
+                                   new SqlParameter("@ProductCategoryName",ProductCategoryName),
+                                   new SqlParameter("@UpdatedBy",UpdatedBy)};
+            DataSet ds = DBHelper.ExecuteQuery("UpdateExpectedProductCategory", param);
             return ds;
         }
     }

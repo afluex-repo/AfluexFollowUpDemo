@@ -1,4 +1,4 @@
-﻿
+﻿@model AfluexFollowUpDemo.Models.Master
 @{
     ViewBag.Title = "ProductCategoryList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -18,41 +18,54 @@
                             <input class="form-control ps-5" type="text" placeholder="search">
                         </form>
                     </div>
-                    <div class="table-responsive mt-3">
-                        <table class="table align-middle">
-                            <thead class="table-secondary">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
+@using (Html.BeginForm("ProductCategoryList", "Master", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+{
+    <div class="table-responsive mt-3">
+        <table class="table align-middle table-bordered">
+            <thead class="table-secondary">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    if (Model.lstProductCategory != null)
+                    {
+                        int i = 1;
+                        foreach (var item in Model.lstProductCategory)
+                        {
+                            <tr>
+                                @Html.HiddenFor(m => m.Pk_ProductCategoryId)
+                                <td>@i</td>
+                                <td>
 
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-3 cursor-pointer">
-                                            <img src="assets/images/avatars/avatar-1.png" class="rounded-circle" width="44" height="44" alt="">
-                                            <div class="">
-                                                <p class="mb-0">Thomas Hardy</p>
-                                            </div>
+                                    <div class="d-flex align-items-center gap-3 cursor-pointer">
+                                        <div class="">
+                                            <p class="mb-0">@item.ProductCategoryName</p>
                                         </div>
-                                    </td>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="table-actions d-flex align-items-center gap-3 fs-6">
+                                        <a href="/Master/ProductCategoryMaster?Pk_ProductCategoryId=@item.Pk_ProductCategoryId" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i class="bi bi-pencil-fill"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            i = i + 1;
+                        }
 
-                                    <td>
-                                        <div class="table-actions d-flex align-items-center gap-3 fs-6">
-                                            <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Views"><i class="bi bi-eye-fill"></i></a>
-                                            <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i class="bi bi-pencil-fill"></i></a>
-                                            <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bi bi-trash-fill"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
+                    }
+                }
 
-                            </tbody>
 
-                        </table>
-                    </div>
+            </tbody>
+
+        </table>
+    </div>
+}
                 </div>
             </div>
         </div>

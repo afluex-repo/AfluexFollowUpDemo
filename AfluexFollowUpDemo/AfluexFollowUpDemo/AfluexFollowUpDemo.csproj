@@ -710,6 +710,7 @@
     <Content Include="assets\flags\4x3\zw.svg" />
     <Content Include="assets\fonts\boxiconsd41d.svg" />
     <Content Include="assets\fonts\LineIcons.svg" />
+    <Content Include="assets\images\avatars\user.png" />
     <Content Include="assets\images\brand-logo-2.png" />
     <Content Include="assets\images\error\404-error.png" />
     <Content Include="assets\images\error\505-error.png" />
@@ -914,10 +915,10 @@
     <Folder Include="App_Data\" />
     <Folder Include="assets\extra-libs\taskboard\css\images\" />
     <Folder Include="assets\extra-libs\toastr\dist\build\" />
-    <Folder Include="assets\images\avatars\" />
     <Folder Include="assets\images\bg-themes\" />
     <Folder Include="assets\images\gallery\" />
     <Folder Include="assets\images\products\" />
+    <Folder Include="SoftwareImages\" />
     <Folder Include="Views\Customer\" />
   </ItemGroup>
   <PropertyGroup>
