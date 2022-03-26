@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
 
@@ -63,8 +65,120 @@ namespace AfluexFollowUpDemo.Controllers
                 return View(model);
             }
         }
+        [HttpPost]
+        [ActionName("EmployeeRegistration")]
+        [OnAction(ButtonName = "btnSave")]
+        public ActionResult SaveEmployeeRegistration(EmployeeRegistration obj, HttpPostedFileBase postedFile)
+        {
+            if (TempData["ServiceError"] == null)
+            {
+                ViewBag.errormsg = "none";
+
+            }
+            string FormName = "";
+            string Controller = "";
+            try
+            {
+                if (postedFile != null)
+                {
+                    obj.UserImage = "../SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
+                    postedFile.SaveAs(Path.Combine(Server.MapPath(obj.UserImage)));
+                }
+
+                string mailbody = "";
+                obj.CreatedBy = Session["UserID"].ToString();
+                DataSet ds = obj.SaveEmployeeRegistration();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds != null && ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        try
+                        {
+                            string str2 = BLSMS.Registration(ds.Tables[0].Rows[0]["Name"].ToString(), ds.Tables[0].Rows[0]["LoginId"].ToString(), ds.Tables[0].Rows[0]["Password"].ToString());
+                          //  BLSMS.SendSMS(obj.ContactNo, str2);
+
+                            try
+                            {
+
+                                mailbody = obj.EmailId + ";" + BLSMS.Registration(ds.Tables[0].Rows[0]["Name"].ToString(), ds.Tables[0].Rows[0]["LoginId"].ToString(), ds.Tables[0].Rows[0]["Password"].ToString());
+                                // var fromAddress = new MailAddress("contact.afluex@gmail.com");
+                                var fromAddress = new MailAddress("developer5.afluex@gmail.com");
+                                var toAddress = new MailAddress(obj.EmailId);
+
+                                System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient
+                                {
+
+                                    Host = "smtp.gmail.com",
+                                    Port = 587,
+                                    EnableSsl = true,
+                                    DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network,
+                                    UseDefaultCredentials = false,
+                                    //  Credentials = new NetworkCredential(fromAddress.Address, "krishna@9919")
+                                    Credentials = new NetworkCredential(fromAddress.Address, "Afluex@123")
+
+                                };
+                                using (var message = new MailMessage(fromAddress, toAddress)
+                                {
+                                    IsBodyHtml = true,
+                                    Subject = "Registration",
+                                    Body = mailbody,
+                                })
+                                    smtp.Send(message);
+                            }
+                            catch (Exception ex)
+                            {
+                                TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                            }
+                            finally
+                            {
+                                
+                            }
+                        }
+                        catch { }
+
+                        TempData["ServiceError"] = "Employee Registration Successfully!\nName : " + ds.Tables[0].Rows[0]["Name"].ToString() + ", Login ID : " + ds.Tables[0].Rows[0]["LoginId"].ToString() + ", Password : " + ds.Tables[0].Rows[0]["Password"].ToString();
+                        FormName = "EmployeeRegistration";
+                        Controller = "EmployeeRegistration";
+                    }
+                    else
+                    {
+                        TempData["ServiceError"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        FormName = "EmployeeRegistration";
+                        Controller = "EmployeeRegistration";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ServiceError"] = ex.Message;
+            }
+            return RedirectToAction(FormName, Controller);
+        }
+
+
         public ActionResult GetEmpolyeeRegistrationList()
         {
+            EmployeeRegistration model = new EmployeeRegistration();
+            #region BindUsertype
+            int count = 0;
+            List<SelectListItem> ddlUserName = new List<SelectListItem>();
+            DataSet ds = model.BindUserType();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlUserName.Add(new SelectListItem { Text = "Select User Type", Value = "0" });
+                    }
+                    ddlUserName.Add(new SelectListItem { Text = r["UserName"].ToString(), Value = r["Pk_UserTypeID"].ToString() });
+                    count = count + 1;
+                }
+            }
+
+            ViewBag.ddlUserName = ddlUserName;
+
+            #endregion BindUsertype
             return View();
         }
         public ActionResult DeleteEmployeeRegistration(string Pk_Id)
@@ -138,6 +252,26 @@ namespace AfluexFollowUpDemo.Controllers
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult FilterEmployee(EmployeeRegistration model)
         {
+            #region BindUsertype
+            int count = 0;
+            List<SelectListItem> ddlUserName = new List<SelectListItem>();
+            DataSet ds1 = model.BindUserType();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+                    if (count == 0)
+                    {
+                        ddlUserName.Add(new SelectListItem { Text = "Select User Type", Value = "0" });
+                    }
+                    ddlUserName.Add(new SelectListItem { Text = r["UserName"].ToString(), Value = r["Pk_UserTypeID"].ToString() });
+                    count = count + 1;
+                }
+            }
+
+            ViewBag.ddlUserName = ddlUserName;
+
+            #endregion BindUsertype
             List<EmployeeRegistration> lst = new List<EmployeeRegistration>();
             try
             {

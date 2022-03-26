@@ -83,9 +83,7 @@ namespace AfluexFollowUpDemo.Models
             SqlParameter[] para = {
                                       new SqlParameter("@Pk_ProcpectId", Pk_ProcpectId),
                                       new SqlParameter("@ContactPerson", ContactPerson),
-                                      //new SqlParameter("@ContactNo", ContactNo),
-                                      //new SqlParameter("@CompanyName", CompanyName),
-                                     new SqlParameter("@EmployeeId",EmployeeId)
+                                      new SqlParameter("@EmployeeId",EmployeeId)
 
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetProspectList", para);

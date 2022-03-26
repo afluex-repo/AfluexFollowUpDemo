@@ -113,8 +113,86 @@ namespace AfluexFollowUpDemo.Controllers
 
         public ActionResult DashBoard()
         {
-           
-            return View();
+
+            Lead obj = new Lead();
+            List<Lead> lst1 = new List<Lead>();
+            List<Lead> lstnext = new List<Lead>();
+            List<Lead> lstpending = new List<Lead>();
+            obj.FromDate = DateTime.Now.ToString("MM/dd/yyyy");
+            obj.ToDate = DateTime.Now.ToString("MM/dd/yyyy");
+            DataSet ds = obj.GetDashBoardDetails();
+            if (ds != null && ds.Tables[0].Rows.Count > 0)
+            {
+                #region TodayFollowup
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+
+                    Lead obj1 = new Lead();
+                    obj1.Fk_ProcpectId = r["ContactPerson"].ToString();
+                    obj1.ContactNo = r["ContactNo"].ToString();
+                    obj1.FirstInstructionDate = r["FirstInstructionDate"].ToString();
+                    obj1.Fk_ExpectedProductCategoryId = r["ProductCategoryName"].ToString();
+                    obj1.Fk_SourceId = r["SourceName"].ToString();
+                    obj1.Fk_ExecutiveId = r["Name"].ToString();
+                    obj1.Fk_ModeInterActionId = r["InterActionName"].ToString();
+                    obj1.FollowupDate = r["FollowupDate"].ToString();
+                    obj1.Description = r["Description"].ToString();
+                    obj1.PrevioussDate = r["Previoussdate"].ToString();
+                    lst1.Add(obj1);
+                }
+                #endregion TodayFollowup
+                obj.lstLead = lst1;
+
+
+            }
+            if (ds != null && ds.Tables[1].Rows.Count > 0)
+            {
+                #region NextFollowup
+                foreach (DataRow r in ds.Tables[1].Rows)
+                {
+
+                    Lead obj1 = new Lead();
+
+                    obj1.Fk_ProcpectId = r["ContactPerson"].ToString();
+                    obj1.ContactNo = r["ContactNo"].ToString();
+                    obj1.FirstInstructionDate = r["FirstInstructionDate"].ToString();
+                    obj1.Fk_ExpectedProductCategoryId = r["ProductCategoryName"].ToString();
+                    obj1.Fk_SourceId = r["SourceName"].ToString();
+                    obj1.Fk_ExecutiveId = r["Name"].ToString();
+                    obj1.Fk_ModeInterActionId = r["InterActionName"].ToString();
+                    obj1.FollowupDate = r["FollowupDate"].ToString();
+                    obj1.Description = r["Description"].ToString();
+                    obj1.PrevioussDate = r["Previoussdate"].ToString();
+                    lstnext.Add(obj1);
+                }
+                #endregion NextFollowup
+                obj.lstnextLead = lstnext;
+            }
+
+            if (ds != null && ds.Tables[2].Rows.Count > 0)
+            {
+                #region PendingFollowup
+                foreach (DataRow r in ds.Tables[2].Rows)
+                {
+
+                    Lead obj1 = new Lead();
+                    obj1.Fk_ProcpectId = r["ContactPerson"].ToString();
+                    obj1.ContactNo = r["ContactNo"].ToString();
+                    obj1.Fk_ProcpectId = r["ContactPerson"].ToString();
+                    obj1.FirstInstructionDate = r["FirstInstructionDate"].ToString();
+                    obj1.Fk_ExpectedProductCategoryId = r["ProductCategoryName"].ToString();
+                    obj1.Fk_SourceId = r["SourceName"].ToString();
+                    obj1.Fk_ExecutiveId = r["Name"].ToString();
+                    obj1.Fk_ModeInterActionId = r["InterActionName"].ToString();
+                    obj1.FollowupDate = r["FollowupDate"].ToString();
+                    obj1.Description = r["Description"].ToString();
+                    obj1.PrevioussDate = r["Previoussdate"].ToString();
+                    lstpending.Add(obj1);
+                }
+                obj.lstpending = lstpending;
+                #endregion PendingFollowup
+            }
+            return View(obj);
         }
         public ActionResult ForgetPassword()
         {
@@ -126,6 +204,20 @@ namespace AfluexFollowUpDemo.Controllers
         [OnAction(ButtonName = "btnforget")]
         public ActionResult ChangePassword(ForgotPassword model)
         {
+            if (model.LoginId == null)
+            {
+                ViewBag.errormsg = "";
+                TempData["Error"] = "Please Enter LoginId";
+                return RedirectToAction("ForgetPassword");
+
+            }
+            if (model.EmailId == null)
+            {
+                ViewBag.errormsg = "";
+                TempData["Error"] = "Please Enter EmailId";
+                return RedirectToAction("ForgetPassword");
+            }
+
             DataSet ds = model.PasswordForget();
             if (ds != null && ds.Tables.Count > 0)
             {
@@ -160,13 +252,13 @@ namespace AfluexFollowUpDemo.Controllers
                     }
                     catch (Exception ex)
                     {
-
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
 
                     }
                 else
                 {
-                    TempData["Login"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                 }
             }
             
