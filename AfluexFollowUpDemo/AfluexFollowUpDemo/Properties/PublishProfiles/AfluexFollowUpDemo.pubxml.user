@@ -6,7 +6,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>E:\reenaproject\Repository\Published\AfluexFollowUpDemo</_PublishTargetUrl>
+    <_PublishTargetUrl>D:\reena Pro\Repository\Publish</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="ApplicationInsights.config">
@@ -2041,7 +2041,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/18/2021 12:54:04</publishTime>
     </File>
     <File Include="bin/AfluexFollowUpDemo.dll">
-      <publishTime>12/18/2021 13:16:15</publishTime>
+      <publishTime>12/28/2021 11:51:14</publishTime>
     </File>
     <File Include="bin/ApplicationInsights.config">
       <publishTime>12/18/2021 12:54:03</publishTime>
@@ -2172,14 +2172,23 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Views/DWR/DWRMaster.cshtml">
       <publishTime>12/16/2021 11:42:11</publishTime>
     </File>
+    <File Include="Views/Employee/EmployeeDashBoard.cshtml">
+      <publishTime>12/18/2021 13:44:54</publishTime>
+    </File>
     <File Include="Views/EmployeeDWR/DWRMaster.cshtml">
       <publishTime>12/17/2021 13:18:30</publishTime>
+    </File>
+    <File Include="Views/EmployeeDWR/EmployeeDWR.cshtml">
+      <publishTime>12/18/2021 17:09:07</publishTime>
     </File>
     <File Include="Views/EmployeeLead/AddLead.cshtml">
       <publishTime>12/10/2021 16:51:40</publishTime>
     </File>
     <File Include="Views/EmployeeLead/ListLead.cshtml">
       <publishTime>12/10/2021 16:52:45</publishTime>
+    </File>
+    <File Include="Views/EmployeeProcpect/EmployeeProspect.cshtml">
+      <publishTime>12/18/2021 16:05:51</publishTime>
     </File>
     <File Include="Views/EmployeeProcpect/GetProspecctList.cshtml">
       <publishTime>12/10/2021 16:54:24</publishTime>
@@ -2269,7 +2278,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/18/2021 12:54:03</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>12/18/2021 13:16:16</publishTime>
+      <publishTime>12/28/2021 11:51:15</publishTime>
     </File>
   </ItemGroup>
 </Project>
