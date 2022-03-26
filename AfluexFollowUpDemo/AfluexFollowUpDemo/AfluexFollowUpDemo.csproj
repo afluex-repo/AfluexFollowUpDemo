@@ -838,8 +838,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\APIModel.cs" />
+    <Compile Include="Models\BLSMS.cs" />
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\DBHelper.cs" />
+    <Compile Include="Models\DWR.cs" />
     <Compile Include="Models\EmployeeDWR.cs" />
     <Compile Include="Models\EmployeeProspect.cs" />
     <Compile Include="Models\EmployeeRegistration.cs" />
@@ -868,7 +870,7 @@
     <Content Include="Views\Home\DashBoard.cshtml" />
     <Content Include="Views\Home\ForgetPassword.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Lead\AddLead.cshtml" />
+    <Content Include="Views\Lead\LeadMaster.cshtml" />
     <Content Include="Views\Lead\ListLead.cshtml" />
     <Content Include="Views\Master\AddEmailTemplate.cshtml" />
     <Content Include="Views\Master\BusinessChanceList.cshtml" />

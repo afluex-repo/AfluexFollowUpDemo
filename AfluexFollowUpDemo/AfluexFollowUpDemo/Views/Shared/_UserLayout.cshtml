@@ -72,7 +72,7 @@
                         <li class="nav-item dropdown dropdown-large">
                             <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
                                 <div class="user-setting d-flex align-items-center gap-1">
-                                    <img src="~/assets/images/avatars/avatar-1.png" class="user-img" alt="">
+                                    <img src="~/assets/images/avatars/user.png" class="user-img" alt="">
                                     <div class="user-name d-none d-sm-block">@Session["Username"]</div>
                                 </div>
                             </a>
@@ -80,7 +80,7 @@
                                 <li>
                                     <a class="dropdown-item" href="#">
                                         <div class="d-flex align-items-center">
-                                            <img src="~/assets/images/avatars/avatar-1.png" alt="" class="rounded-circle" width="60" height="60">
+                                            <img src="~/assets/images/avatars/user.png" alt="" class="rounded-circle" width="60" height="60">
                                             <div class="ms-3">
                                                 <h6 class="mb-0 dropdown-user-name">@Session["Username"]</h6>
                                                 @*<small class="mb-0 dropdown-user-designation text-secondary">HR Manager</small>*@
@@ -89,14 +89,14 @@
                                     </a>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li>
+                                @*<li>
                                     <a class="dropdown-item" href="#">
                                         <div class="d-flex align-items-center">
                                             <div class="setting-icon"><i class="bi bi-person-fill"></i></div>
                                             <div class="setting-text ms-3"><span>Profile</span></div>
                                         </div>
                                     </a>
-                                </li>
+                                </li>*@
                                 <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <a class="dropdown-item" href="/Home/index">

@@ -126,7 +126,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label class="form-label">FirstInstruction Date <span style="color: red">*</span></label>
-                            @Html.TextBoxFor(m => m.FirstInstructionDate, new { @class = "form-control", @readonly="true" })
+                            @Html.TextBoxFor(m => m.FirstInstructionDate, new { @class = "form-control", @readonly="true" , @Placeholder = "FirstInstruction Date" })
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Expected Product Category <span style="color: red">*</span></label>
@@ -151,7 +151,7 @@
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Followup Date <span style="color: red">*</span></label>
-                            @Html.TextBoxFor(m => m.FollowupDate, new { @class = "form-control form-control-lg", @readonly = "true"  })
+                            @Html.TextBoxFor(m => m.FollowupDate, new { @class = "form-control", @readonly = "true", @Placeholder = "Followup Date " })
                         </div>
 
                     </div>
@@ -174,8 +174,9 @@
                                     {
 
                                         <input type="submit" name="btnSave" text="Save" class="btn btn-primary" value="Save" onclick="return validateservice();" />
-                                    <a href="/Procpect/Procpect" class="btn btn-dark">Reset</a>
+                                   
                                     }
+                                    <a href="/Procpect/Procpect" class="btn btn-dark">Reset</a>
                                  </div>
                             </div>
                         </div>
