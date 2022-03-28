@@ -741,8 +741,197 @@ namespace AfluexFollowUpDemo.Controllers
             return RedirectToAction(FormName, Controller);
 
         }
+        
+        #region DeleteCategoryMaster
+        public ActionResult DeleteCategoryMaster(string Pk_CategoryId)
+        {
+            Master obj = new Master();
+            try
+            {
+                obj.DeletedBy = Session["UserID"].ToString();
+                obj.Pk_CategoryId = Pk_CategoryId;
+                DataSet ds = new DataSet();
+                ds = obj.DeleteCategoryMaster();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Success"] = "Category Deleted Successfully";
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
 
+            }
+            //ViewBag.saverrormsg = "";
+            return RedirectToAction("CategoryList", "Master");
+        }
+        #endregion
 
+        #region DeleteInterractionMaster
+        public ActionResult DeleteInterractionMaster(string PK_InterActionId)
+        {
+            Master obj = new Master();
+            try
+            {
+                obj.DeletedBy = Session["UserID"].ToString();
+                obj.PK_InterActionId = PK_InterActionId;
+                DataSet ds = new DataSet();
+                ds = obj.DeleteInterractionMaster();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Success"] = "InterAction Deleted Successfully";
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
 
+            }
+            //ViewBag.saverrormsg = "";
+            return RedirectToAction("InterActionList", "Master");
+        }
+        #endregion
+
+        #region DeleteDataSourceMaster
+        public ActionResult DeleteDataSourceMaster(string Pk_SourceId)
+        {
+            Master obj = new Master();
+            try
+            {
+                obj.DeletedBy = Session["UserID"].ToString();
+                obj.Pk_SourceId = Pk_SourceId;
+                DataSet ds = new DataSet();
+                ds = obj.DeleteDataSourceMaster();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Success"] = "DataSource Deleted Successfully";
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+
+            }
+            //ViewBag.saverrormsg = "";
+            return RedirectToAction("DataSourceList", "Master");
+        }
+        #endregion
+
+        #region DeleteProspectActivityMaster
+        public ActionResult DeleteProspectActivityMaster(string Pk_ActivityId)
+        {
+            Master obj = new Master();
+            try
+            {
+                obj.DeletedBy = Session["UserID"].ToString();
+                obj.Pk_ActivityId = Pk_ActivityId;
+                DataSet ds = new DataSet();
+                ds = obj.DeleteProspectActivityMaster();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Success"] = "DataSource Deleted Successfully";
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+
+            }
+            //ViewBag.saverrormsg = "";
+            return RedirectToAction("ProspectActivityList", "Master");
+        }
+        #endregion
+
+        #region DeleteBusinessChance
+        public ActionResult DeleteBusinessChance(string Pk_BusinessChanceId)
+        {
+            Master obj = new Master();
+            try
+            {
+                obj.DeletedBy = Session["UserID"].ToString();
+                obj.Pk_BusinessChanceId = Pk_BusinessChanceId;
+                DataSet ds = new DataSet();
+                ds = obj.DeleteBusinessChance();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Success"] = "Business Chance Deleted Successfully";
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+
+            }
+            //ViewBag.saverrormsg = "";
+            return RedirectToAction("BusinessChanceList", "Master");
+        }
+        #endregion
+
+        #region DeleteProductCategory
+        public ActionResult DeleteProductCategory(string Pk_ProductCategoryId)
+        {
+            Master obj = new Master();
+            try
+            {
+                obj.DeletedBy = Session["UserID"].ToString();
+                obj.Pk_ProductCategoryId = Pk_ProductCategoryId;
+                DataSet ds = new DataSet();
+                ds = obj.DeleteProductCategory();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Success"] = "Product Category Deleted Successfully";
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+
+            }
+            //ViewBag.saverrormsg = "";
+            return RedirectToAction("ProductCategoryList", "Master");
+        }
+        #endregion
     }
 }
