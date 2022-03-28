@@ -1,4 +1,4 @@
-﻿
+﻿@model AfluexFollowUpDemo.Models.EmployeeDWR
 @{
     ViewBag.Title = "EmployeeDWR";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
@@ -19,6 +19,8 @@
 
 </div>
 <!--end breadcrumb-->
+@using (Html.BeginForm("EmployeeDWR", "EmployeeDWR", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+{
 
 <div class="row">
     <div class="col-xl-12 mx-auto">
@@ -29,78 +31,99 @@
                     <div class="row">
                         <div class="col-md-4">
                             <label class="form-label">Prospect Name <span style="color: red">*</span></label>
-                            <select class="form-select" required>
-                                <option selected disabled value="">Choose...Template</option>
-                                <option>...</option>
-                            </select>
+                            @Html.DropDownListFor(q => q.Fk_ProcpectId, new SelectList(ViewBag.ddlProspect, "Value", "Text"), new { @class = "form-select", @OnChange = "return OnchangeLead();" })
+                           
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Lead<span style="color: red">*</span></label>
-                            <select class="form-select" required>
-                                <option selected disabled value="">Choose...Template</option>
-                                <option>...</option>
-                            </select>
+                      
+                                <span id="spContactEmailID"></span>
+                                @Html.DropDownListFor(q => q.Fk_LeadId, new SelectList(ViewBag.ddlLead, "Value", "Text"), new { @class = "form-select", @onchange = "return GetDWRdetails();" })
+                                
                         </div>
                         <div class="col-md-4">
                             <label class="form-label">Executive Name<span style="color: red">*</span></label>
-                            <input class="form-control" type="text" placeholder="Enter Executive Name">
+                            <span id="spFk_ExecutiveId"></span>
+                             @Html.DisplayFor(q => q.Fk_ExecutiveId) 
+                          
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
                             <label class="form-label">Source Name <span style="color: red">*</span></label>
-                            <input class="form-control" type="text" placeholder="Enter Source Name">
+                            <span id="spFk_SourceId"></span>
+                            @Html.DisplayFor(q => q.Fk_SourceId)
                         </div>
                         <div class="col-md-4">
                             <label class="form-label"> First Instruction Date <span style="color: red">*</span></label>
-                            <input type="date" class="form-control" placeholder="Enter Address" />
+                            <span id="spFirstInstructionDate"></span>
+
+                            @Html.DisplayFor(q => q.FirstInstructionDate)
                         </div>
                         <div class="col-md-4">
                             <label for="formFile" class="form-label">
                                 Followup Date
                                 <span style="color: red">*</span>
                             </label>
-                            <input class="form-control" type="date">
+                            <span id="spFollowupDate"></span>
+
+                            @Html.DisplayFor(q => q.FollowupDate)
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-4">
                             <label class="form-label">Mode Of InterAction<span style="color: red">*</span></label>
-                            <input class="form-control" type="text" placeholder="Enter Mode Of InterAction">
+                            @Html.DropDownListFor(q => q.Fk_ModeInterActionId, new SelectList(ViewBag.ddlInterAction, "Value", "Text"), new { @class = "form-control" })
                         </div>
                         <div class="col-md-4">
                             <label class="form-label"> Business Chance<span style="color: red">*</span></label>
-                            <input type="date" class="form-control" placeholder="Enter Business Chance" />
+                          @Html.DropDownListFor(q => q.Fk_BusinessChanceId, new SelectList(ViewBag.ddlChance, "Value", "Text"), new { @class = "form-control" })
                         </div>
                         <div class="col-md-4">
                             <label for="formFile" class="form-label">
-                                Submitted By Name<span style="color: red">*</span>
+                                Next Followup date <span style="color: red">*</span>
                             </label>
-                            <input class="form-control" type="text" placeholder="Submitted By Name">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label class="form-label">Meeting Date<span style="color: red">*</span></label>
-                            <input class="form-control" type="date" placeholder="Enter Email">
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label"> Meeting Time <span style="color: red">*</span></label>
-                            <input type="text" class="form-control" placeholder="Enter Meeting Time" />
-                        </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Remark  <span style="color: red">*</span></label>
-                            <textarea class="form-control" type="text" placeholder="Enter Remark "></textarea>
-                        </div>
+                            @Html.HiddenFor(m => m.Pk_DwrId)
 
-                    </div>
+                            @Html.TextBoxFor(f => f.NextFollowupDate, new { @class = "form-control form-control-lg mydatepicker", @Placeholder = "Next Followup Date", @ReadOnly = "ReadOnly" })
+                        </div>
+                        <div class="col-md-4">
+                            <label for="formFile" class="form-label">
+                                Submitted By Name <span style="color: red">*</span>
+                            </label>
+                            @Html.DropDownListFor(q => q.Fk_ExecutiveId, new SelectList(ViewBag.ddlName, "Value", "Text"), new { @class = "form-control" })
+                        </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Meeting Date<span style="color: red">*</span></label>
+                                @Html.TextBoxFor(f => f.MeetingDate, new { @class = "form-control form-control-lg mydatepicker", @Placeholder = "Meeting Date", @ReadOnly = "ReadOnly" })
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label"> Meeting Time <span style="color: red">*</span></label>
+                                @Html.TextBoxFor(f => f.MeetingTime, new { @class = "form-control", @Placeholder = "Meeting Time" })
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Remark  <span style="color: red">*</span></label>
+                                @Html.TextAreaFor(f => f.Remark, new { @class = "form-control form-control-lg mydatepicker", @Placeholder = "Description " })
+                            </div>
+
+                        </div>
                     <br />
                     <div class="row">
                         <div class="col-md-9">
-                            <input type="submit" name="Save" text="Save" class="btn btn-primary" value="Save" />
-                            <a href="/Master/CategoryMaster" class="btn btn-dark">Reset</a>
-                            <a href="/Master/CategoryList" class="btn btn-info">Back To List</a>
+                            @if (Model != null)
+                            {
+                                <input type="submit" value="Update " class="btn btn-success" name="btnUpdate" onclick="return validateservice();" />
+
+                            }
+                            else
+                            {
+
+                                <input type="submit" value="Save " class="btn btn-success" name="btnSave" onclick="return validateservice();" />
+
+                              
+                            }
+                            <a href="/Lead/LeadMaster" class="btn btn-dark">Reset</a>
                         </div>
                     </div>
                 </div>
@@ -166,3 +189,4 @@
     </div>
 </div>
 
+}

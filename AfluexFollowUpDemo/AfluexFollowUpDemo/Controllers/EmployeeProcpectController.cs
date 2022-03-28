@@ -176,19 +176,19 @@ namespace AfluexFollowUpDemo.Controllers
                 {
                     if (ds != null && ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["ProcpectError"] = "EmployeeProspect Save  Successfully";
+                        TempData["ProcpectError"] = "EmployeeProspect Save Successfully";
 
                     }
                     else
                     {
-                        TempData["ProcpectError"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        @TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
 
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["ProcpectError"] = ex.Message;
+                @TempData["Error"] = ex.Message;
             }
             return RedirectToAction("EmployeeProspect", "EmployeeProcpect");
         }
@@ -212,6 +212,112 @@ namespace AfluexFollowUpDemo.Controllers
         public ActionResult GetProspecctList()
         {
             return View();
+        }
+        [HttpPost]
+        [ActionName("GetProspecctList")]
+        [OnAction(ButtonName = "GetDetails")]
+        public ActionResult GetEmployeeProspectList(EmployeeProspect model)
+        {
+
+            List<EmployeeProspect> lst = new List<EmployeeProspect>();
+            try
+            {
+                model.FromDate= string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+                model.Todate = string.IsNullOrEmpty(model.Todate) ? null : Common.ConvertToSystemDate(model.Todate, "dd/MM/yyyy");
+                model.EmployeeId = Session["UserID"].ToString();
+                model.Pk_ProcpectId = model.Pk_ProcpectId;
+                DataSet ds = model.ProspectList();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        EmployeeProspect obj = new EmployeeProspect();
+                        obj.Pk_ProcpectId = r["Pk_ProcpectId"].ToString();
+                        obj.ContactPerson = r["ContactPerson"].ToString();
+                        obj.ContactEmailId = r["ContactEmailId"].ToString();
+                        obj.ContactNo = r["ContactNo"].ToString();
+                        obj.Fk_IndustryCategoryId = r["CategoryName"].ToString();
+                        obj.CompanyName = r["CompanyName"].ToString();
+                        obj.CompanyContactNo = r["CompanyContactNo"].ToString();
+                        obj.Address = r["Address"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstProcpect = lst;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(model);
+
+        }
+
+        public ActionResult DeleteProspect(string Pk_ProcpectId)
+        {
+            EmployeeProspect obj = new EmployeeProspect();
+            try
+            {
+
+                obj.DeletedBy = Session["UserID"].ToString();
+                obj.Pk_ProcpectId = Pk_ProcpectId;
+                DataSet ds = new DataSet();
+
+
+                ds = obj.DeleteProspect();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+
+                        TempData["Success"] = "ProsPect Deleted Successfully";
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ProcpectDelete"] = ex.Message;
+
+            }
+            ViewBag.saverrormsg = "";
+            return RedirectToAction("GetProspecctList");
+        }
+
+        [HttpPost]
+        [ActionName("EmployeeProspect")]
+        [OnAction(ButtonName = "btnUpdate")]
+        public ActionResult UpdateProspect(EmployeeProspect obj, string Pk_ProcpectId)
+        {
+            try
+            {
+                obj.UpdatedBy = Session["UserID"].ToString();
+                obj.Pk_ProcpectId = obj.Pk_ProcpectId;
+                DataSet ds = new DataSet();
+                ds = obj.UpdateProspect();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        Session["dt"] = null;
+                        TempData["Success"] = "Prospect Updated Successfully";
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ProcpectError"] = ex.Message;
+            }
+            return RedirectToAction("GetProspecctList");
         }
     }
 }

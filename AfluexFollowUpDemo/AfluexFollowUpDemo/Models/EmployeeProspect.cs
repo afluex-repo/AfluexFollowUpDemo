@@ -49,6 +49,8 @@ namespace AfluexFollowUpDemo.Models
         public string Fk_UserTypeId { get; internal set; }
         public string CreatedBy { get; internal set; }
         public string Result { get; internal set; }
+        public string FromDate { get; set; }
+        public string Todate  { get; set; }
         public DataSet GetStateCity()
         {
             SqlParameter[] para ={new SqlParameter ("@PinCode",Pincode),
@@ -88,9 +90,9 @@ namespace AfluexFollowUpDemo.Models
         {
             SqlParameter[] para = {
                                       new SqlParameter("@Pk_ProcpectId", Pk_ProcpectId),
-                                      new SqlParameter("@ContactPerson", ContactPerson),
-                                      new SqlParameter("@ContactNo", ContactNo),
-                                      new SqlParameter("@CompanyName", CompanyName),
+                                     new SqlParameter("@ContactPerson", ContactPerson),
+                                      new SqlParameter("@FromDate", FromDate),
+                                      new SqlParameter("@ToDate", Todate),
                                      new SqlParameter("@EmployeeId",EmployeeId)
 
                                   };
@@ -154,5 +156,16 @@ namespace AfluexFollowUpDemo.Models
             DataSet ds = DBHelper.ExecuteQuery("UpdateProspect", para);
             return ds;
         }
+
+
+        public DataSet DeleteProspect()
+        {
+            SqlParameter[] para = { new SqlParameter("@Pk_ProcpectId", Pk_ProcpectId), new SqlParameter("@DeletedBy", DeletedBy) };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteProspect", para);
+            return ds;
+        }
+
+       
+
     }
 }

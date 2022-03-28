@@ -198,7 +198,9 @@
       //  maxDate: '+1Y+6M',
     })
     $('#FollowupDate').datepicker({
-        dateFormat:'dd/mm/yy'
+        dateFormat: 'dd/mm/yy',
+         minDate: 0,
+         maxDate: '+1Y+6M',
     })
 
     function GetProspectDetailsByID() {
