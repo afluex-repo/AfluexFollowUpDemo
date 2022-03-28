@@ -207,6 +207,8 @@ namespace AfluexFollowUpDemo.Controllers
             List<Procpect> lst = new List<Procpect>();
             try
             {
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+                model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
                 model.EmployeeId = Session["UserID"].ToString();
                 model.Pk_ProcpectId = model.Pk_ProcpectId;
                 DataSet ds = model.ProspectList();
