@@ -276,6 +276,7 @@ namespace AfluexFollowUpDemo.Controllers
             try
             {
                 model.Pk_Id = Session["UserID"].ToString();
+                model.Fk_UserTypeId= model.Fk_UserTypeId == "0" ? null : model.Fk_UserTypeId;
                 DataSet ds = model.FilterEmployee();
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables.Count > 0)
                 {

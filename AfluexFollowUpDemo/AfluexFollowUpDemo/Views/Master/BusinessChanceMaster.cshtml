@@ -52,13 +52,12 @@
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label"></label>
                         <div class="col-sm-9">
-@if (Model.Pk_BusinessChanceId != null)
-{
-    <input type="submit" value="Update " class="btn btn-success" name="btnUpdate" onclick="return validateservice();" />
-
-}
-else { 
-                            <input type="submit" name="btnSave" text="Save" class="btn btn-primary" value="Save" />
+                            @if (Model.Pk_BusinessChanceId != null)
+                            {
+                                <input type="submit" value="Update " class="btn btn-success" name="btnUpdate" onclick="return validateservice();" />
+                            }
+                            else {
+                            <input type="submit" name="btnSave" text="Save" class="btn btn-primary" value="Save"  onclick="return validateservice();"/>
                             }
                             <a href="/Master/BusinessChanceMaster" class="btn btn-dark">Reset</a>
                             <a href="/Master/BusinessChanceList" class="btn btn-info">Back To List</a>
@@ -71,3 +70,22 @@ else {
     </div>
 </div>
 }
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: red !important;
+    }
+</style>
+<script>
+    function validateservice()
+    {
+        $(".errortext").removeClass("errortext");
+        if ($('#ChanceName').val() == '') {
+            $("#ChanceName").addClass('errortext');
+            $('#ChanceName').focus();
+            return false;
+        }
+
+        return true;
+    }
+</script>
