@@ -843,6 +843,7 @@
     <Compile Include="Models\DBHelper.cs" />
     <Compile Include="Models\DWR.cs" />
     <Compile Include="Models\EmployeeDWR.cs" />
+    <Compile Include="Models\EmployeeLead.cs" />
     <Compile Include="Models\EmployeeProspect.cs" />
     <Compile Include="Models\EmployeeRegistration.cs" />
     <Compile Include="Models\ForgotPassword.cs" />

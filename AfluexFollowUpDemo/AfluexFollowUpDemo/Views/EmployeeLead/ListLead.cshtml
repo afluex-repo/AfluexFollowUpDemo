@@ -1,4 +1,5 @@
-﻿
+﻿@model AfluexFollowUpDemo.Models.EmployeeLead
+
 @{
     ViewBag.Title = "ListLead";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
@@ -6,6 +7,8 @@
 
 <h6 class="mb-0 text-uppercase">Lead List Followup</h6>
 <hr />
+@using (Html.BeginForm("ListLead", "EmployeeLead", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+{
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">
@@ -13,53 +16,55 @@
                 <div class="card-body">
                     <div class="d-flex align-items-center">
                         <h5 class="mb-0">Lead List Details</h5>
-
                     </div>
                     <div class="table-responsive mt-3">
                         <table id="example2" class="table table-bordered mb-0">
-                            <thead class="table-secondary">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Address</th>
-                                    <th>City</th>
-                                    <th>Pin Code</th>
-                                    <th>Country</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        <div class="d-flex align-items-center gap-3 cursor-pointer">
-                                            <img src="assets/images/avatars/avatar-1.png" class="rounded-circle" width="44" height="44" alt="">
-                                            <div class="">
-                                                <p class="mb-0">Thomas Hardy</p>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>89 Chicago UK</td>
-                                    <td>Chicago</td>
-                                    <td>8574201</td>
-                                    <td>United Kingdom</td>
-                                    <td>
-                                        <div class="table-actions d-flex align-items-center gap-3 fs-6">
-                                            <a href="javascript:;" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Views"><i class="bi bi-eye-fill"></i></a>
-                                            <a href="javascript:;" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit"><i class="bi bi-pencil-fill"></i></a>
-                                            <a href="javascript:;" class="text-danger" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Delete"><i class="bi bi-trash-fill"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
+                         <thead>
+                            <tr>
+                               
+                                <th>Contact Person</th>
+                                <th>FirstDateOfInteeraction</th>
+                                <th>Expected Product Category</th>
+                                <th>Data Source</th>
+                                <th>Executive Name</th>
+                                <th>Mode Of Interaction</th>
+                                <th>Followup Date</th>
+                                <th>Description </th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null)
+                            {
+                                if (Model.lstLead != null)
+                                {
+                                    foreach (var item in Model.lstLead)
+                                    {
+                                        <tr>
+                                            @Html.HiddenFor(m => m.Pk_LeadeId)
+                                            <td>@item.Fk_ProcpectId</td>
+                                            <td>@item.FirstInstructionDate</td>
+                                            <td>@item.Fk_ExpectedProductCategoryId</td>
+                                            <td>@item.Fk_SourceId</td>
+                                            <td>@item.Fk_ExecutiveId</td>
+                                            <td>@item.Fk_ModeInterActionId</td>
+                                            <td>@item.FollowupDate</td>
+                                            <td>@item.Description</td>
+                                            <td>
+                                                <a href="/EmployeeLead/DeleteLead?Pk_LeadeId=@item.Pk_LeadeId" class="label label-primary" onclick="return confirm('Are you want to delete?;')"><i class="bi bi-trash-fill"></i></a>
+                                                &nbsp;
+                                             </td>
+                                        </tr>
+                                    }
+                                }
+                            }
 
-                            </tbody>
-
-                        </table>
+                        </tbody></table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
+}
 
