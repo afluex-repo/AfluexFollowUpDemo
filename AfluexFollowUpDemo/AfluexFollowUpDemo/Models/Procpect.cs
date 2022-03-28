@@ -14,6 +14,8 @@ namespace AfluexFollowUpDemo.Models
         public string ContactPerson { get; set; }
         public string ContactEmailId { get; set; }
         public string ContactNo { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
         public string Fk_IndustryCategoryId { get; set; }
         public string CompanyName { get; set; }
         public string CompanyContactNo { get; set; }
@@ -83,8 +85,10 @@ namespace AfluexFollowUpDemo.Models
             SqlParameter[] para = {
                                       new SqlParameter("@Pk_ProcpectId", Pk_ProcpectId),
                                       new SqlParameter("@ContactPerson", ContactPerson),
-                                      new SqlParameter("@EmployeeId",EmployeeId)
-
+                                      new SqlParameter("@EmployeeId",EmployeeId),
+                                       new SqlParameter("@FromDate", FromDate),
+                                        new SqlParameter("@ToDate", ToDate),
+                                     
                                   };
             DataSet ds = DBHelper.ExecuteQuery("GetProspectList", para);
             return ds;

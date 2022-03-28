@@ -58,6 +58,7 @@ namespace AfluexFollowUpDemo.Models
         public string DateFormat { get; set; }
         public string AddedBy { get; set; }
         public String UpdatedBy { get; set; }
+        public String DeletedBy { get; set; }
 
         public DataSet ListDataSource()
         {
@@ -187,6 +188,66 @@ namespace AfluexFollowUpDemo.Models
                                    new SqlParameter("@UpdatedBy",UpdatedBy)};
             DataSet ds = DBHelper.ExecuteQuery("UpdateExpectedProductCategory", param);
             return ds;
+        }
+        
+        public DataSet DeleteCategoryMaster()
+        {
+            SqlParameter[] para = { new SqlParameter("@Pk_CategoryId", Pk_CategoryId),
+                new SqlParameter("@DeletedBy", DeletedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteCategory", para);
+            return ds;
+
+        }
+
+        public DataSet DeleteInterractionMaster()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_InterActionId", PK_InterActionId),
+                new SqlParameter("@DeletedBy", DeletedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteInterractionMode", para);
+            return ds;
+
+        }
+
+        public DataSet DeleteDataSourceMaster()
+        {
+            SqlParameter[] para = { new SqlParameter("@Pk_SourceId", Pk_SourceId),
+                new SqlParameter("@DeletedBy", DeletedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteDataSource", para);
+            return ds;
+
+        }
+
+        public DataSet DeleteProspectActivityMaster()
+        {
+            SqlParameter[] para = { new SqlParameter("@Pk_ActivityId", Pk_ActivityId),
+                new SqlParameter("@DeletedBy", DeletedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteProspectActivity", para);
+            return ds;
+
+        }
+
+        public DataSet DeleteBusinessChance()
+        {
+            SqlParameter[] para = { new SqlParameter("@Pk_BusinessChanceId", Pk_BusinessChanceId),
+                new SqlParameter("@DeletedBy", DeletedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteBusinessChance", para);
+            return ds;
+
+        }
+
+        public DataSet DeleteProductCategory()
+        {
+            SqlParameter[] para = { new SqlParameter("@Pk_ProductCategoryId", Pk_ProductCategoryId),
+                new SqlParameter("@DeletedBy", DeletedBy)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteProductCategory", para);
+            return ds;
+
         }
     }
 }

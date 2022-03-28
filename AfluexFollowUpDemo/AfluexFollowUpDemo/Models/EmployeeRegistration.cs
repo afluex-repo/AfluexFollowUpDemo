@@ -24,6 +24,9 @@ namespace AfluexFollowUpDemo.Models
         public List<EmployeeRegistration> lstemployee { get; set; }
         public string postedFile { get; set; }
         public  string UpdatedBy { get; set; }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+
         public DataSet BindUserType()
         {
 
