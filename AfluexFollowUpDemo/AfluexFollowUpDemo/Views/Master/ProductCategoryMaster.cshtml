@@ -72,3 +72,22 @@
     </div>
 </div>
 }
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: red !important;
+    }
+</style>
+<script>
+    function validateservice()
+    {
+        $(".errortext").removeClass("errortext");
+        if ($('#ProductCategoryName').val() == '') {
+            $("#ProductCategoryName").addClass('errortext');
+            $('#ProductCategoryName').focus();
+            return false;
+        }
+
+        return true;
+    }
+</script>

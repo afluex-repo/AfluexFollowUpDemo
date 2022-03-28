@@ -77,7 +77,8 @@ namespace AfluexFollowUpDemo.Models
         public DataSet FilterEmployee()
         {
             SqlParameter[] para = {
-                                      new SqlParameter("@Fk_UserTypeId",UserName),
+                                      //new SqlParameter("@Pk_Id",Pk_Id),
+                                      new SqlParameter("@Fk_UserTypeId",Fk_UserTypeId),
                                       new SqlParameter("@Name",Name),
                                       new SqlParameter("@ContactNo",ContactNo)
                                   };

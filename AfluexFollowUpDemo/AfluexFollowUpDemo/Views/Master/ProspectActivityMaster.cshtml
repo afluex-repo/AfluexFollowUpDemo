@@ -56,7 +56,7 @@
                             }
                             else
                             {
-                            <input type="submit" name="btnSave" text="Save" class="btn btn-primary" value="Save" />
+                            <input type="submit" name="btnSave" text="Save" class="btn btn-primary" value="Save"  onclick="return validateservice();" />
                             }
                             <a href="/Master/ProspectActivityMaster" class="btn btn-dark">Reset</a>
                             <a href="/Master/ProspectActivityList" class="btn btn-info">Back To List</a>
@@ -72,7 +72,7 @@
 <style>
     .errortext {
         border: 1px solid red !important;
-        background-color: #f5c1cb !important;
+        background-color: red !important;
     }
 </style>
 <script>
