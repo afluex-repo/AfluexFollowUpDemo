@@ -98,7 +98,11 @@ namespace AfluexFollowUpDemo.Models
         }
         public DataSet LeadList()
         {
-            SqlParameter[] param = { new SqlParameter("@Pk_LeadeId", Pk_LeadeId) };
+            SqlParameter[] param = { new SqlParameter("@Pk_LeadeId", Pk_LeadeId),
+                                     new SqlParameter("@name",ContactPerson),
+                                    new SqlParameter("@AddedBy", AddedBy),
+                                    new SqlParameter("@FromDate", FromDate),
+                                    new SqlParameter("@ToDate", ToDate)};
             DataSet ds = DBHelper.ExecuteQuery("LeadList", param);
             return ds;
         }

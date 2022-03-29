@@ -225,6 +225,8 @@ namespace AfluexFollowUpDemo.Controllers
         {
             EmployeeLead model = new EmployeeLead();
             List<EmployeeLead> lst1 = new List<EmployeeLead>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
             model.AddedBy = Session["UserID"].ToString();
             DataSet ds = model.LeadList();
 
@@ -262,7 +264,7 @@ namespace AfluexFollowUpDemo.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["Error"] = "Lead is Successfully Deleted";
+                        TempData["success"] = "Lead is Successfully Deleted";
                     }
                     else if (ds.Tables[0].Rows[0][0].ToString() == "0")
                     {
@@ -274,7 +276,41 @@ namespace AfluexFollowUpDemo.Controllers
             {
                 TempData["Error"] = ex.Message;
             }
-            return RedirectToAction("GetEmployeeLeadList");
+            return RedirectToAction("ListLead", "EmployeeLead");
         }
+        [HttpPost]
+        [ActionName("ListLead")]
+        [OnAction(ButtonName = "GetDetails")]
+        public ActionResult ListLead(EmployeeLead model)
+        {
+          
+            List<EmployeeLead> lst1 = new List<EmployeeLead>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.AddedBy = Session["UserID"].ToString();
+            DataSet ds = model.LeadList();
+
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow r in ds.Tables[0].Rows)
+                {
+                    EmployeeLead obj = new EmployeeLead();
+                    obj.Pk_LeadeId = r["Pk_LeadId"].ToString();
+                    obj.Fk_ProcpectId = r["ContactPerson"].ToString();
+                    obj.FirstInstructionDate = r["FirstInstructionDate"].ToString();
+                    obj.Fk_ExpectedProductCategoryId = r["ProductCategoryName"].ToString();
+                    obj.Fk_SourceId = r["SourceName"].ToString();
+                    obj.Fk_ExecutiveId = r["Name"].ToString();
+                    obj.Fk_ModeInterActionId = r["InterActionName"].ToString();
+                    obj.FollowupDate = r["FollowupDate"].ToString();
+                    obj.Description = r["Description"].ToString();
+
+                    lst1.Add(obj);
+                }
+                model.lstLead = lst1;
+            }
+            return View(model);
+        }
+
     }
 }

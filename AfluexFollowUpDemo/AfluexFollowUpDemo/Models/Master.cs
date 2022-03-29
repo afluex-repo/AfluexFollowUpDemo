@@ -4,12 +4,14 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace AfluexFollowUpDemo.Models
 {
     public class Master
     {
-
+        public string PK_TemplateID { get; set; }
+        
         public string Side { get; set; }
         public string SiteImage { get; set; }
         public string SiteOwner { get; set; }
@@ -57,9 +59,51 @@ namespace AfluexFollowUpDemo.Models
         public string SGST { get; set; }
         public string DateFormat { get; set; }
         public string AddedBy { get; set; }
-        public String UpdatedBy { get; set; }
-        public String DeletedBy { get; set; }
+        public string UpdatedBy { get; set; }
+        public string DeletedBy { get; set; }
+        public string Subject { get; set; }
+        [AllowHtml]
+        public string EmailBodyHTML { get; set; }
+        public string SelectedFilePath { get; set; }
+        public string Result { get; set; }
+        public List<Master> lstTemplates { get; set; }
+        public List<Master> lstVendor { get; set; }
+        public string Name { get; set; }
+        public string Body { get; set; }
+        public string Email { get; set; }
+        public string Description { get; set; }
+        public string PK_EmailID { get; set; }
+        public string EncryptKey { get; set; }
+        public string SenderEmailDisplay { get; set; }
+        public DataSet SaveEmails()
+        {
+            SqlParameter[] para ={   new SqlParameter ("@Name", Name),
+                                     new SqlParameter ("@Email", Email),
+                                     new SqlParameter ("@Description", Description),
+                                     new SqlParameter("@AddedBy", AddedBy), };
 
+            DataSet ds = DBHelper.ExecuteQuery("SaveEmailData", para);
+            return ds;
+        }
+        public DataSet GetEmailData()
+        {
+            DataSet ds = DBHelper.ExecuteQuery("GetEmail");
+            return ds;
+        }
+
+        public DataSet DeletEmail()
+        {
+            SqlParameter[] para ={   new SqlParameter ("@PK_EmailID", PK_EmailID),
+                                     new SqlParameter ("@DeletedBy", AddedBy), };
+            DataSet ds = DBHelper.ExecuteQuery("DeleteEmail", para);
+            return ds;
+        }
+        public DataSet GetAllTemplates()
+        {
+            SqlParameter[] para = { new SqlParameter("@PK_TemplateID", PK_TemplateID) };
+            DataSet ds = DBHelper.ExecuteQuery("GetAllTemplates", para);
+            return ds;
+        }
         public DataSet ListDataSource()
         {
             SqlParameter[] param = { new SqlParameter("@Pk_SourceId", Pk_SourceId) };
@@ -249,5 +293,16 @@ namespace AfluexFollowUpDemo.Models
             return ds;
 
         }
+
+        public DataSet SaveEmailTemplate()
+        {
+            SqlParameter[] para ={   new SqlParameter ("@TemplateSubject", Subject),
+                                     new SqlParameter ("@TemplateBody", EmailBodyHTML),
+                                     new SqlParameter ("@FilePath", SelectedFilePath),
+                                     new SqlParameter("@AddedBy", AddedBy), };
+            DataSet ds = DBHelper.ExecuteQuery("SaveEmailTemplate", para);
+            return ds;
+        }
+
     }
 }

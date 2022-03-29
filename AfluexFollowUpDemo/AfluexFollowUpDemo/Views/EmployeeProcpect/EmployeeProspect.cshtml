@@ -24,7 +24,7 @@
                <div class="card">
                    <div class="card-body">
                         <div class="border p-4 rounded">
-                            @if (@TempData["ProcpectError"] != null)
+                            @if (@TempData["Success"] != null)
                             {
                                 <div class="alert border-0 bg-success alert-dismissible fade show py-2">
                                     <div class="d-flex align-items-center">
@@ -32,7 +32,7 @@
                                             <i class="bi bi-check-circle-fill"></i>
                                         </div>
                                         <div class="ms-3">
-                                            <div class="text-white">@TempData["ServiceError"]!</div>
+                                            <div class="text-white">@TempData["Success"]!</div>
                                         </div>
                                     </div>
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -46,7 +46,7 @@
                                             <i class="bi bi-check-circle-fill"></i>
                                         </div>
                                         <div class="ms-3">
-                                            <div class="text-white">@TempData["ServiceError"]!</div>
+                                            <div class="text-white">@TempData["Error"]!</div>
                                         </div>
                                     </div>
                                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -418,6 +418,5 @@
         border-color: #f7a5a5;
     }
 </style>
-
 
 

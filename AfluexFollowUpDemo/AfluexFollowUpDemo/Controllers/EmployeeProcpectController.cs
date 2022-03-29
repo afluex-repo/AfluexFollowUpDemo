@@ -148,7 +148,7 @@ namespace AfluexFollowUpDemo.Controllers
                 }
                 catch (Exception ex)
                 {
-                    TempData["ServiceError"] = ex.Message;
+                    TempData["Error"] = ex.Message;
                 }
                 return View(obj);
             }
@@ -161,8 +161,7 @@ namespace AfluexFollowUpDemo.Controllers
         [OnAction(ButtonName = "btnSave")]
         public ActionResult SaveProspect(EmployeeProspect obj)
         {
-
-            if (TempData["ProcpectError"] == null)
+             if (TempData["Error"] == null)
             {
                 ViewBag.errormsg = "none";
             }
@@ -176,13 +175,12 @@ namespace AfluexFollowUpDemo.Controllers
                 {
                     if (ds != null && ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["ProcpectError"] = "EmployeeProspect Save Successfully";
+                        TempData["Success"] = "EmployeeProspect Save Successfully";
 
                     }
                     else
                     {
                         @TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
-
                     }
                 }
             }
@@ -218,7 +216,6 @@ namespace AfluexFollowUpDemo.Controllers
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult GetEmployeeProspectList(EmployeeProspect model)
         {
-
             List<EmployeeProspect> lst = new List<EmployeeProspect>();
             try
             {
@@ -315,7 +312,7 @@ namespace AfluexFollowUpDemo.Controllers
             }
             catch (Exception ex)
             {
-                TempData["ProcpectError"] = ex.Message;
+                TempData["Error"] = ex.Message;
             }
             return RedirectToAction("GetProspecctList");
         }
