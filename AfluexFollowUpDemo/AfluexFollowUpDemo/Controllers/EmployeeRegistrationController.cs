@@ -70,7 +70,7 @@ namespace AfluexFollowUpDemo.Controllers
         [OnAction(ButtonName = "btnSave")]
         public ActionResult SaveEmployeeRegistration(EmployeeRegistration obj, HttpPostedFileBase postedFile)
         {
-            if (TempData["ServiceError"] == null)
+            if (TempData["Error"] == null)
             {
                 ViewBag.errormsg = "none";
 
@@ -94,13 +94,13 @@ namespace AfluexFollowUpDemo.Controllers
                     {
                         try
                         {
-                            string str2 = BLSMS.Registration(ds.Tables[0].Rows[0]["Name"].ToString(), ds.Tables[0].Rows[0]["LoginId"].ToString(), ds.Tables[0].Rows[0]["Password"].ToString());
+                            //string str2 = BLSMS.Registration(ds.Tables[0].Rows[0]["Name"].ToString(), ds.Tables[0].Rows[0]["LoginId"].ToString(), //ds.Tables[0].Rows[0]["Password"].ToString());
                           //  BLSMS.SendSMS(obj.ContactNo, str2);
 
                             try
                             {
 
-                                mailbody = obj.EmailId + ";" + BLSMS.Registration(ds.Tables[0].Rows[0]["Name"].ToString(), ds.Tables[0].Rows[0]["LoginId"].ToString(), ds.Tables[0].Rows[0]["Password"].ToString());
+                                mailbody = obj.EmailId + ";" + "Dear :"+(ds.Tables[0].Rows[0]["Name"].ToString())+ " Your LoginID :" +ds.Tables[0].Rows[0]["LoginId"].ToString()+" and Password :"+ ds.Tables[0].Rows[0]["Password"].ToString();
                                 // var fromAddress = new MailAddress("contact.afluex@gmail.com");
                                 var fromAddress = new MailAddress("developer5.afluex@gmail.com");
                                 var toAddress = new MailAddress(obj.EmailId);
@@ -136,13 +136,13 @@ namespace AfluexFollowUpDemo.Controllers
                         }
                         catch { }
 
-                        TempData["ServiceError"] = "Employee Registration Successfully!\nName : " + ds.Tables[0].Rows[0]["Name"].ToString() + ", Login ID : " + ds.Tables[0].Rows[0]["LoginId"].ToString() + ", Password : " + ds.Tables[0].Rows[0]["Password"].ToString();
+                        TempData["Success"] = "Employee Registration Successfully!\nName : " + ds.Tables[0].Rows[0]["Name"].ToString() + ", Login ID : " + ds.Tables[0].Rows[0]["LoginId"].ToString() + ", Password : " + ds.Tables[0].Rows[0]["Password"].ToString();
                         FormName = "EmployeeRegistration";
                         Controller = "EmployeeRegistration";
                     }
                     else
                     {
-                        TempData["ServiceError"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                         FormName = "EmployeeRegistration";
                         Controller = "EmployeeRegistration";
                     }
@@ -150,7 +150,7 @@ namespace AfluexFollowUpDemo.Controllers
             }
             catch (Exception ex)
             {
-                TempData["ServiceError"] = ex.Message;
+                TempData["Error"] = ex.Message;
             }
             return RedirectToAction(FormName, Controller);
         }
@@ -194,17 +194,17 @@ namespace AfluexFollowUpDemo.Controllers
                 {
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["EmployeeDelete"] = "Employee Deleted Successfully";
+                        TempData["Success"] = "Employee Deleted Successfully";
                     }
                     else
                     {
-                        TempData["EmployeeDelete"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["EmployeeDelete"] = ex.Message;
+                TempData["Error"] = ex.Message;
 
             }
             ViewBag.saverrormsg = "";
@@ -232,17 +232,17 @@ namespace AfluexFollowUpDemo.Controllers
                     if (ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
                         Session["dt"] = null;
-                        TempData["ServiceError"] = "Employee Registration Updated Successfully";
+                        TempData["Success"] = "Employee Registration Updated Successfully";
                     }
                     else
                     {
-                        TempData["ServiceError"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["ServiceError"] = ex.Message;
+                TempData["Error"] = ex.Message;
             }
             return RedirectToAction("EmployeeRegistration");
         }

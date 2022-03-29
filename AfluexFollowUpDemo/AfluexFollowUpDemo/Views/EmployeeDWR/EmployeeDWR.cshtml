@@ -20,111 +20,156 @@
     @using (Html.BeginForm("EmployeeDWR", "EmployeeDWR", FormMethod.Post, new { @id = "signup-form",enctype="multipart-form"  }))
     {
     <div class="col-xl-12 mx-auto">
-        @TempData["ProcpectError"]
+      
         <div class="card">
             <div class="card-body">
                 <div class="border p-4 rounded">
+                    @if (@TempData["Error"] != null)
+                    {
+                        <div class="alert border-0 bg-danger alert-dismissible fade show py-2">
+                            <div class="d-flex align-items-center">
+                                <div class="fs-3 text-white">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <div class="text-white">@TempData["Error"]!</div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
+                    @if (@TempData["Success"] != null)
+                    {
+                        <div class="alert border-0 bg-success alert-dismissible fade show py-2">
+                            <div class="d-flex align-items-center">
+                                <div class="fs-3 text-white">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <div class="text-white">@TempData["Success"]!</div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
                     <div class="row">
-                        <div class="col-md-4">
-                            <label class="form-label">Prospect Name<span style="color: red">*</span></label>
+                        <div class="col-md-4 mt-2">
+                            <label class="form-label">Prospect Name <span style="color: red">*</span></label>
                            @Html.DropDownListFor(q => q.Fk_ProcpectId, new SelectList(ViewBag.ddlProspect, "Value", "Text"), new { @class = "form-select", @OnChange = "return OnchangeLead();" })
-                           
                         </div>
-                        <div class="col-md-4">
-                            <label class="form-label">Lead</label>
+                        <div class="col-md-4 mt-2"> <label class="form-label">Lead<span style="color: red">*</span></label>
+                            <span id="spContactEmailID"></span>
                             @Html.DropDownListFor(q => q.Fk_LeadId, new SelectList(ViewBag.ddlLead, "Value", "Text"), new { @class = "form-select", @onchange = "return GetDWRdetails();" })
-                            @Html.HiddenFor(m => m.Pk_LeadeId)
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mt-2">
                             <label class="form-label">Executive Name</label>
-                            @Html.TextBoxFor(q => q.Fk_ExecutiveId, new { @class = "form-control", @ReadOnly = "ReadOnly" })
-                            @*@Html.DisplayFor(q => q.Fk_ExecutiveId)*@
+                            <label class="form-control" id="spFk_ExecutiveId">&nbsp;</label>
+                            @Html.DisplayFor(q => q.Fk_ExecutiveId)
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
+                  
+                        <div class="col-md-4 mt-2">
                             <label class="form-label">Source Name</label>
-                            @Html.TextBoxFor(q => q.Fk_SourceId, new { @class = "form-control", @ReadOnly = "ReadOnly" })
-                         @*@Html.DisplayFor(q => q.Fk_SourceId)*@
+                            <label class="form-control" id="spFk_SourceId">&nbsp;</label>
+                           
+                            @Html.DisplayFor(q => q.Fk_SourceId)
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mt-2">
                             <label class="form-label">First Instruction Date </label>
-                            @Html.TextBoxFor(q => q.FirstInstructionDate, new { @class = "form-control", @ReadOnly = "true" })
-                            @*@Html.DisplayFor(q => q.FirstInstructionDate)*@
+                            <label class="form-control" id="spFirstInstructionDate">&nbsp;</label>
+                             @Html.DisplayFor(q => q.FirstInstructionDate)
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mt-2">
                             <label for="formFile" class="form-label"> Followup Date</label>
-                            @Html.TextBoxFor(q => q.FollowupDate, new { @class = "form-control", @ReadOnly = "true" })
+                            <label class="form-control" id="spFollowupDate">&nbsp;</label>
+                          
+                             @Html.DisplayFor(q => q.FollowupDate)
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-md-4">
+                   
+                        <div class="col-md-4 mt-2">
                             <label class="form-label">InterAction Name</label>
-                            @Html.TextBoxFor(q => q.Fk_ModeInterActionId, new { @class = "form-control", @ReadOnly = "ReadOnly" })
-
-
+                            <label class="form-control" id="spFk_ModeInterActionId">&nbsp;</label>
+                             @Html.DisplayFor(q => q.Fk_ModeInterActionId)
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mt-2">
                             <label class="form-label">Next Followup date<span style="color: red">*</span></label>
-                           @Html.HiddenFor(m => m.Pk_DwrId)
-
-                        @Html.TextBoxFor(f => f.NextFollowupDate, new { @class = "form-control", @Placeholder = "Next Followup Date", @ReadOnly = "ReadOnly" })
+                            @Html.HiddenFor(m => m.Pk_DwrId)
+                             @Html.TextBoxFor(f => f.NextFollowupDate, new { @class = "form-control", @Placeholder = "Next Followup Date", @ReadOnly = "ReadOnly" })
                         </div>
-                        <div class="col-md-4">
-                            <label for="formFile" class="form-label">
-                                Remark<span style="color: red">*</span>
+                        <div class="col-md-4 mt-2">
+                            <label for="formFile" class="form-label">Remark<span style="color: red">*</span>
                             </label>
-                           @Html.TextAreaFor(f => f.Remark, new { @class = "form-control", @Placeholder = "Description " })
+                          @Html.TextAreaFor(f => f.Remark, new { @class = "form-control", @Placeholder = "Description " })
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
+                   
+                        <div class="col-md-4 mt-2">
                             <label class="form-label">Mode Of InterAction <span style="color: red">*</span></label>
                         
-                                @Html.DropDownListFor(q => q.Fk_ModeInterActionId, new SelectList(ViewBag.ddlInterAction, "Value", "Text"), new { @class = "form-select" })
+                            @Html.DropDownListFor(q => q.Fk_ModeInterActionId, new SelectList(ViewBag.ddlInterAction, "Value", "Text"), new { @class = "form-control" })
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mt-2">
                             <label class="form-label">Business Chance <span style="color: red">*</span></label>
 
-                            @Html.DropDownListFor(q => q.Fk_BusinessChanceId, new SelectList(ViewBag.ddlChance, "Value", "Text"), new { @class = "form-select" })
+                            @Html.DropDownListFor(q => q.Fk_BusinessChanceId, new SelectList(ViewBag.ddlChance, "Value", "Text"), new { @class = "form-control" })
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mt-2">
                             <label class="form-label">Submitted By Name <span style="color: red">*</span></label>
-                            @Html.DropDownListFor(q => q.Fk_ExecutiveId, new SelectList(ViewBag.ddlName, "Value", "Text"), new { @class = "form-select" })
+                            @Html.DropDownListFor(q => q.Fk_ExecutiveId, new SelectList(ViewBag.ddlName, "Value", "Text"), new { @class = "form-control" })
                         </div>
 
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
+                  
+                        <div class="col-md-4 mt-2">
                             <label class="form-label">Meeting Date<span style="color: red">*</span></label>
                             @Html.TextBoxFor(f => f.MeetingDate, new { @class = "form-control", @Placeholder = "Meeting Date", @ReadOnly = "ReadOnly" })
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mt-2">
                             <label class="form-label">Meeting Time<span style="color: red">*</span></label>
-                            @Html.TextBoxFor(f => f.MeetingTime, new { @class = "form-control", @Placeholder = "Meeting Time" })
+                            <input type="time" id="PickUpTime" name="MeetingTime" placeholder="Meeting Time" class="form-control">
+                            @*@Html.TextBoxFor(f => f.MeetingTime, new { @class = "form-control", @Placeholder = "Meeting Time" })*@
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mt-2">
                             <label class="form-label" style="margin-top: 35px;">&nbsp;</label>
                             @if (Model != null)
                             {
                                 <input type="submit" value="Update " class="btn btn-success" name="btnUpdate" onclick="return validateservice();" />
-
                             }
                             else
                             {
-
-                                <input type="submit" value="Save " class="btn btn-success" name="btnSave" onclick="return validateservice();" />
-                                <a href="/Lead/LeadMaster" class="btn btn-dark">Reset</a>
+                                 <input type="submit" value="Save " class="btn btn-success" name="btnSave" onclick="return validateservice();" />
+                               
                             }
-                           
-                            @*<input type="submit" name="Save" text="Save" class="btn btn-primary" value="Save" />
-                            <a href="/Master/CategoryMaster" class="btn btn-dark">Reset</a>*@
+                            <a href="/EmployeeDWR/EmployeeDWR" class="btn btn-dark">Reset</a>
 
                         </div>
                      </div>
                       
-                       
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <h5 class="mb-0">DWR Master Details</h5>
+                            @*<form class="ms-auto position-relative">
+                    <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-search"></i></div>
+                    <input class="form-control ps-5" type="text" placeholder="search">
+                </form>*@
+                        </div>
+                        <div class="table-responsive mt-3">
+                            <table class="table table-bordered" id="example2">
+                                <thead class="table-secondary">
+                                    <tr>
+                                        <th>Sr.No</th>
+                                        <th>Prospect Name</th>
+                                        <th>Lead </th>
+                                        <th>Next Followup Date</th>
+                                        <th>Remark</th>
+                                        <th>Business Chance</th>
+                                        <th>Mode Of Interaction</th>
+                                        <th>Executive Name</th>
+                                        <th>Meeting Date And Time </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="plccharge"></tbody>
+
+                            </table>
+                        </div>
+                    </div>
                     </div>
                 </div>
         </div>
@@ -349,4 +394,9 @@
 </script>
 
 
-
+<style>
+    .errortext {
+        border: 1px solid #dc3545;
+        border-color: #f7a5a5;
+    }
+</style>
