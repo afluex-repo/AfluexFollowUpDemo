@@ -95,14 +95,14 @@
                                                 <label for="inputEmailAddress" class="form-label">Login ID</label>
                                                 <div class="ms-auto position-relative">
                                                     <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-envelope-fill"></i></div>
-                                                    <input type="text" class="form-control radius-30 ps-5" name="LoginId"   placeholder="Login Id">
+                                                    <input type="text" class="form-control radius-30 ps-5" name="LoginId" id="LoginId"   placeholder="Login Id">
                                                 </div>
                                               </div>
                                             <div class="col-12">
                                                 <label for="inputChoosePassword" class="form-label">Your Password</label>
                                                 <div class="ms-auto position-relative">
                                                     <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-lock-fill"></i></div>
-                                                    <input type="password" class="form-control radius-30 ps-5" name="password" placeholder="Password">
+                                                    <input type="password" class="form-control radius-30 ps-5" name="password" id="password" placeholder="Password">
                                                 </div>
                                             </div>
                                          
@@ -111,7 +111,7 @@
                                             </div>
                                             <div class="col-12">
                                                 <div class="d-grid">
-                                                    <input type="submit" name="submit" value="Login" class="btn btn-primary radius-30" />
+                                                    <input type="submit" name="submit" value="Login" class="btn btn-primary radius-30" onclick="return validateservice();"/>
                                                  
                                                 </div>
                                             </div>
@@ -149,9 +149,21 @@
     <script src="~/assets/js/pace.min.js"></script>
 
 
-    <strip>
-
-    </strip>
+    <script>
+        function validateservice() {
+        $(".errortext").removeClass("errortext");
+        if ($('#LoginId').val() == '') {
+            $("#LoginId").addClass('errortext');
+            $('#LoginId').focus();
+        return false;
+        }
+        if ($('#password').val() == '') {
+            $("#password").addClass('errortext');
+            $('#password').focus();
+        return false;
+        }
+        }
+    </script>
 
 </body>
 

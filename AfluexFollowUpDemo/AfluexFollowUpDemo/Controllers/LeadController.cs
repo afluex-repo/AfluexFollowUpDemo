@@ -337,8 +337,10 @@ namespace AfluexFollowUpDemo.Controllers
         public ActionResult UpdateLead(Lead obj, string Pk_LeadeId)
         {
             try
-            { 
-            obj.UpdatedBy = Session["UserID"].ToString();
+            {
+                obj.FirstInstructionDate = Common.ConvertToSystemDate(obj.FirstInstructionDate, "dd/MM/yyyy");
+                obj.FollowupDate = Common.ConvertToSystemDate(obj.FollowupDate, "dd/MM/yyyy");
+                obj.UpdatedBy = Session["UserID"].ToString();
             obj.Pk_LeadeId = obj.Pk_LeadeId;
             DataSet ds = new DataSet();
             ds = obj.UpdateLead();

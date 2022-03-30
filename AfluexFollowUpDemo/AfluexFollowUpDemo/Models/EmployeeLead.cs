@@ -42,9 +42,31 @@ namespace AfluexFollowUpDemo.Models
         public string DeletedBy { get; set; }
         public string AddedBy { get; set; }
         public string Result { get; set; }
+        public string UpdatedBy { get; set; }
+        public string spContactEmailID { get; set; }
+        public string spContactNo { get; set; }
+        public string spCompanyName { get; set; }
+        public string spAddress { get; set; }
+        public string spCompanyContactNo { get; set; }
 
 
-
+        public DataSet UpdateLead()
+        {
+            SqlParameter[] param = { new SqlParameter("@Fk_ProcpectId",Fk_ProcpectId),
+                                   new SqlParameter  ("@Fk_ExpectedProductCategoryId",Fk_ExpectedProductCategoryId),
+                                   new SqlParameter("@Fk_SourceId",Fk_SourceId),
+                                   new SqlParameter("@Fk_ExecutiveId",Fk_ExecutiveId),
+                                   new SqlParameter("@Fk_ModeInterActionId",Fk_ModeInterActionId),
+                                   new SqlParameter("@Description",Description),
+                                   new SqlParameter("@FollowupDate",FollowupDate),
+                                   new SqlParameter("@FirstInstructionDate",FirstInstructionDate),
+                                   new SqlParameter("@UpdatedBy",UpdatedBy),
+                                   new SqlParameter("@Pk_LeadeId",Pk_LeadeId)
+            };
+            
+            DataSet ds = DBHelper.ExecuteQuery("UpdateLead", param);
+            return ds;
+        }
 
         public DataSet GetProspectList()
         {
