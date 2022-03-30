@@ -4,7 +4,21 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h6 class="mb-0 text-uppercase">Lead List Followup</h6>
+@*<h6 class="mb-0 text-uppercase">Lead List Followup</h6>*@
+
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="breadcrumb-title pe-3">Lead</div>
+    <div class="ps-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 p-0">
+                <li class="breadcrumb-item">
+                    <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Lead Registration List</li>
+            </ol>
+        </nav>
+    </div>
+</div>
 <hr />
 @using (Html.BeginForm("ListLead", "Lead", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
 {
@@ -71,11 +85,11 @@
                                     <tr>
                                         <th>Sr.No</th>
                                         <th>Contact Person</th>
-                                        <th>FirstDateOfInteeraction</th>
+                                        <th>First Date Of Inter Action</th>
                                         <th>Expected Product Category</th>
                                         <th>Data Source</th>
                                         <th>Executive Name</th>
-                                        <th>Mode Of Interaction</th>
+                                        <th>Mode Of Inter Action</th>
                                         <th>Followup Date</th>
                                         <th>Description </th>
                                         <th>Action</th>

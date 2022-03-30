@@ -3,6 +3,22 @@
     ViewBag.Title = "LeadMaster";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="breadcrumb-title pe-3">Lead</div>
+    <div class="ps-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 p-0">
+                <li class="breadcrumb-item">
+                    <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Registration</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<hr/>
+
 @using (Html.BeginForm("LeadMaster", "Lead", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
 {
 <div class="row">
@@ -49,24 +65,24 @@
                             <label class="form-label">Contact Email ID<span style="color: red">*</span></label>
                             
                             @Html.DisplayFor(q => q.ContactEmailId)
-                            <label class="form-control" id="spContactEmailID" >@ViewBag.spContactEmailID</label>
+                            <label class="form-control" id="spContactEmailID" >&nbsp; @ViewBag.spContactEmailID</label>
                         </div>
                         <div class="col-md-4  mt-2">
                             <label class="form-label">Contact Number<span style="color: red">*</span></label>
                             @Html.DisplayFor(q => q.ContactNo)
-                            <label class="form-control" id="spContactNo" >@ViewBag.spContactNo</label>
+                            <label class="form-control" id="spContactNo" >&nbsp; @ViewBag.spContactNo</label>
                         </div>
                     
                         <div class="col-md-4  mt-2">
                             <label class="form-label">Company Name <span style="color: red">*</span></label>
                             @Html.DisplayFor(q => q.CompanyName)
-                            <label class="form-control" id="spCompanyName" >@ViewBag.spCompanyName</label>
+                            <label class="form-control" id="spCompanyName" >&nbsp; @ViewBag.spCompanyName</label>
                         </div>
                         <div class="col-md-4  mt-2">
                             <label class="form-label"> Company Address<span style="color: red">*</span></label>
                            
                             @Html.DisplayFor(q => q.Address)
-                            <label class="form-control" id="spAddress">@ViewBag.spAddress</label>
+                            <label class="form-control" id="spAddress">&nbsp; @ViewBag.spAddress</label>
                         </div>
                         <div class="col-md-4  mt-2">
                             <label for="formFile" class="form-label">Company Contact No<span style="color: red">*</span>
