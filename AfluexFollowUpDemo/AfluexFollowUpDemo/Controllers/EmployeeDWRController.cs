@@ -166,9 +166,8 @@ namespace AfluexFollowUpDemo.Controllers
         [HttpPost]
         [ActionName("EmployeeDWR")]
         [OnAction(ButtonName = "btnSave")]
-        public ActionResult DWRMaster(EmployeeDWR model)
+        public ActionResult SaveEmployeeDWR(EmployeeDWR model)
         {
-
             try
             {
                 model.MeetingDate = Common.ConvertToSystemDate(model.MeetingDate, "dd/MM/yyyy");
@@ -243,7 +242,6 @@ namespace AfluexFollowUpDemo.Controllers
                     model.FirstInstructionDate = ds.Tables[0].Rows[0]["FirstInstructionDate"].ToString();
                     model.FollowupDate = ds.Tables[0].Rows[0]["FollowupDate"].ToString();
                     model.Fk_ModeInterActionId = ds.Tables[0].Rows[0]["InterActionName"].ToString();
-
                     model.Result = "Yes";
                 }
 
@@ -254,8 +252,6 @@ namespace AfluexFollowUpDemo.Controllers
             }
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-
-
         public ActionResult GetEmployeeDWRList(string Pk_DwrId)
         {
             EmployeeDWR model = new EmployeeDWR();

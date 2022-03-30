@@ -6,6 +6,9 @@ using AfluexFollowUpDemo.Filter;
 using System.Web.Mvc;
 using AfluexFollowUpDemo.Models;
 using System.Data;
+using System.IO;
+using System.Net.Mail;
+using static AfluexFollowUpDemo.Models.APIModel;
 
 namespace AfluexFollowUpDemo.Controllers
 {
@@ -438,14 +441,7 @@ namespace AfluexFollowUpDemo.Controllers
         }
 
       
-        public ActionResult SendEmail()
-        {
-            return View();
-        }
-        public ActionResult AddEmailTemplate()
-        {
-            return View();
-        }
+      
         public ActionResult CategoryMaster(string Pk_CategoryId)
         {
             Master model = new Master();
@@ -933,5 +929,279 @@ namespace AfluexFollowUpDemo.Controllers
             return RedirectToAction("ProductCategoryList", "Master");
         }
         #endregion
+
+        public ActionResult SendEmail()
+        {
+            Master model = new Master();
+            try
+            {
+                model.SenderEmailDisplay = "developer5.afluex@gmail.com";
+                //model.SenderEmail = "prakher.afluex@gmail.com";
+                //model.SenderPassword = "Baby8542816119";
+
+                List<Master> lst = new List<Master>();
+                DataSet ds = model.GetEmailData();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        Master obj = new Master();
+                        obj.Name = dr["Name"].ToString();
+                        obj.Email = dr["Email"].ToString();
+                        obj.Description = dr["Description"].ToString();
+
+                        lst.Add(obj);
+                    }
+                    model.lstVendor = lst;
+                }
+
+                int count4 = 0;
+                List<SelectListItem> ddlTemplates = new List<SelectListItem>();
+                DataSet dsTemplate = model.GetAllTemplates();
+                if (dsTemplate != null && dsTemplate.Tables.Count > 0 && dsTemplate.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow r in dsTemplate.Tables[0].Rows)
+                    {
+                        if (count4 == 0)
+                        {
+                            ddlTemplates.Add(new SelectListItem { Text = "Select Template", Value = "0" });
+                        }
+                        ddlTemplates.Add(new SelectListItem { Text = r["TemplateSubject"].ToString(), Value = r["PK_TemplateID"].ToString() });
+                        count4 = count4 + 1;
+                    }
+                }
+                ViewBag.ddlTemplates = ddlTemplates;
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(model);
+            return View();
+        }
+        [HttpPost]
+        [ActionName("SendEmail")]
+        [OnAction(ButtonName = "btnSendEmail")]
+        public ActionResult SendEmailAction(Master model)
+        {
+
+            SmtpClient smtpClient = new SmtpClient();
+            MailMessage message = new MailMessage();
+            try
+            {
+                int ctrCheck = 0;
+                string ctrRowCount = Request["hdRows"].ToString();
+                string recipientEmail = "";
+                string chk = "";
+
+                string signature = "<br/><br/><br/><br/><br/><table><tr><td><img src='https://www.bazarprofit.com/js/afluex-logo.png' /></td><td><b>A.K. Chauhan | 7310000414 / 413 / 412</b><br>Afluex Multiservices LLP<br>supportow@afluex.com<br>www.afluex.com<br>D-54, 2<sup>nd</sup>Floor, Vibhuti Khand, Near OLA Office, Lucknow, UP - 226010<br>We also provide IT Development Services</td></tr></table><br/><u>Terms & Conditions:</u>Read Before Reply</br><ul><li>All Proposed Sites are Subject to availability at the time of final confirmation.</li><li>If the site is booked for less than one month, extension for the same will depend upon availability of the site.</li><li>Tax will be charged extra as per gst applicable.</li><li>Send scanned P.O before start campaign along with signed & stamped on your letterhead.</li><li>Payment 50% Advance before campaign and rest 50% after 15 days or mid of the campaign.</li><li>Project/ Campaign will execute after advance Payment.</li><li>In case of any damage or theft of the flex/media the client shall bear the cost of the flex/media or provide the new flex/media.</li><li>Approval of the proposal or design along with the attachment otherwise the company will not accept the approval.</li><li>Please check everything before approval because once any project have approved other company will not responsible for any loss or mistake.</li><li>All disputes are Subject to Lucknow jurisdiction</li></ul>";
+
+                for (int i = 0; i < int.Parse(ctrRowCount); i++)
+                {
+                    chk = Request["chkEmail_" + i];
+                    if (chk == "on")
+                    {
+                        recipientEmail += Request["txtEmail_" + i].ToString() + ";";
+                    }
+                }
+
+
+                SmtpClient mailServer = new SmtpClient("smtp.gmail.com", 587);
+                mailServer.EnableSsl = true;
+                // mailServer.Credentials = new System.Net.NetworkCredential("afluex.outdoor@gmail.com", "krishna@9919");
+                mailServer.Credentials = new System.Net.NetworkCredential("developer5.afluex@gmail.com", "Afluex@123");
+                MailMessage myMail = new MailMessage();
+                myMail.Subject = model.Subject;
+                myMail.Body = model.EmailBodyHTML + signature;
+                myMail.From = new MailAddress("developer5.afluex@gmail.com", "Afluex Multiservices LLP");
+                myMail.To.Add("developer5.afluex@gmail.com");
+
+                myMail.IsBodyHtml = true;
+                foreach (var emailid in recipientEmail.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    myMail.Bcc.Add(emailid);
+                }
+                HttpPostedFileBase file = Request.Files["postedfile"];
+                if (file != null && file.ContentLength > 0)
+                {
+                    if (file.ContentLength < 12288000)
+                    {
+                        myMail.Body = "<html><body>" + model.EmailBodyHTML + signature + "</html></body>";
+                        string filename = Path.GetFileName(file.FileName);
+                        var attachment = new Attachment(file.InputStream, filename);
+                        myMail.Attachments.Add(attachment);
+                    }
+                    else
+                    {
+                        string uploadFilename = Guid.NewGuid() + Path.GetExtension(file.FileName);
+                        model.SelectedFilePath = "../EmailAttachments/" + uploadFilename;
+                        file.SaveAs(Path.Combine(Server.MapPath(model.SelectedFilePath)));
+                        myMail.Body = "<html><body>" + model.EmailBodyHTML;
+                        myMail.Body += "<br/> Attachment Link : http://followup.afluex.com/EmailAttachments/" + uploadFilename;
+                        myMail.Body += signature + "</html></body>";
+                    }
+                }
+
+                mailServer.Send(myMail);
+                ctrCheck++;
+                TempData["Class"] = "alert alert-success";
+                TempData["Success"] = "Email sent successfully";
+            }
+            catch (Exception ex)
+            {
+                TempData["Class"] = "alert alert-danger";
+                TempData["ERROR"] = "ERROR : " + ex.Message;
+            }
+            return RedirectToAction("SendEmail");
+        }
+
+
+
+        public ActionResult AddEmailTemplate()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ActionName("AddEmailTemplate")]
+        [OnAction(ButtonName = "btnSaveTemplate")]
+        public ActionResult SaveEmailTemplate(Master model, HttpPostedFileBase postedfile)
+        {
+            try
+            {
+                if (postedfile != null)
+                {
+                    model.SelectedFilePath = "../SoftwareImages/" + Guid.NewGuid() + Path.GetExtension(postedfile.FileName);
+                    postedfile.SaveAs(Path.Combine(Server.MapPath(model.SelectedFilePath)));
+                }
+                model.AddedBy = Session["UserID"].ToString();
+
+                DataSet ds = model.SaveEmailTemplate();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                    {
+                        TempData["Class"] = "alert alert-success";
+                        TempData["Success"] = "Template saved successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0]["MSG"].ToString() == "0")
+                    {
+                        TempData["Class"] = "alert alert-danger";
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
+            return RedirectToAction("AddEmailTemplate");
+        }
+        public ActionResult TemplateChange(string tid)
+        {
+            Master model = new Master();
+            try
+            {
+                model.PK_TemplateID = tid;
+                DataSet ds = model.GetAllTemplates();
+
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.Result = "1";
+                    model.SelectedFilePath = ds.Tables[0].Rows[0]["FilePath"].ToString();
+                    model.Subject = ds.Tables[0].Rows[0]["TemplateSubject"].ToString();
+                    model.Body = ds.Tables[0].Rows[0]["TemplateBody"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                model.Result = ex.Message;
+            }
+            return Json(model, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult DeleteEmail(string id)
+        {
+            Master model = new Master();
+            try
+            {
+                model.PK_EmailID = Crypto.Decrypt(id);
+                model.AddedBy = Session["UserID"].ToString();
+
+                DataSet ds = model.DeletEmail();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["MSG"].ToString() == "1")
+                    {
+                        TempData["Success"] = "Email deleted successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0]["MSG"].ToString() == "0")
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
+            return RedirectToAction("EmailMaster");
+        }
+        public ActionResult EmailMaster()
+        {
+            Master model = new Master();
+            try
+            {
+                List<Master> lst = new List<Master>();
+                DataSet ds = model.GetEmailData();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        Master obj = new Master();
+                        obj.EncryptKey = Crypto.Encrypt(dr["PK_EmailID"].ToString());
+                        obj.PK_EmailID = dr["PK_EmailID"].ToString();
+                        obj.Name = dr["Name"].ToString();
+                        obj.Email = dr["Email"].ToString();
+                        obj.Description = dr["Description"].ToString();
+
+                        lst.Add(obj);
+                    }
+                    model.lstVendor = lst;
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return View(model);
+        }
+        [HttpPost]
+        [ActionName("EmailMaster")]
+        [OnAction(ButtonName = "btnSaveEmail")]
+        public ActionResult SaveEmails(Master model)
+        {
+            try
+            {
+                model.AddedBy = Session["UserID"].ToString();
+                DataSet ds = model.SaveEmails();
+                if (ds != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Success"] = "Email data saved successfully";
+                    }
+                    else if (ds.Tables[0].Rows[0][0].ToString() == "0")
+                    {
+                        TempData["ERROR"] = "ERROR : " + ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        return View(model);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return RedirectToAction("EmailMaster");
+        }
+
     }
 }

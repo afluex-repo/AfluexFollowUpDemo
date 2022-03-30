@@ -178,19 +178,19 @@ namespace AfluexFollowUpDemo.Controllers
                 {
                     if (ds != null && ds.Tables[0].Rows[0][0].ToString() == "1")
                     {
-                        TempData["ProcpectError"] = "Prospect Save  Successfully";
+                        TempData["Success"] = "Prospect Save  Successfully";
 
                     }
                     else
                     {
-                        TempData["ProcpectError"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
 
                     }
                 }
             }
             catch (Exception ex)
             {
-                TempData["ProcpectError"] = ex.Message;
+                TempData["Error"] = ex.Message;
             }
             return RedirectToAction("Procpect");
         }

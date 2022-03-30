@@ -843,6 +843,7 @@
     <Compile Include="Models\DBHelper.cs" />
     <Compile Include="Models\DWR.cs" />
     <Compile Include="Models\EmployeeDWR.cs" />
+    <Compile Include="Models\EmployeeLead.cs" />
     <Compile Include="Models\EmployeeProspect.cs" />
     <Compile Include="Models\EmployeeRegistration.cs" />
     <Compile Include="Models\ForgotPassword.cs" />
@@ -859,7 +860,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Admin\DashBoard.cshtml" />
-    <Content Include="Views\EmployeeDWR\DWRMaster.cshtml" />
     <Content Include="Views\EmployeeLead\AddLead.cshtml" />
     <Content Include="Views\EmployeeLead\ListLead.cshtml" />
     <Content Include="Views\EmployeeProcpect\GetProspecctList.cshtml" />
@@ -906,6 +906,7 @@
     <Content Include="Views\EmployeeDWR\EmployeeDWR.cshtml" />
     <Content Include="Views\Employee\EmployeeDashBoard.cshtml" />
     <Content Include="Views\EmployeeProcpect\EmployeeProspect.cshtml" />
+    <Content Include="Views\Master\EmailMaster.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

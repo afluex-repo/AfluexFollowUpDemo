@@ -10,30 +10,58 @@
 {
 
     <div class="card-body">
+        @if (@TempData["Error"] != null)
+        {
+            <div class="alert border-0 bg-danger alert-dismissible fade show py-2">
+                <div class="d-flex align-items-center">
+                    <div class="fs-3 text-white">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                    <div class="ms-3">
+                        <div class="text-white">@TempData["Error"]!</div>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
+        @if (@TempData["Success"] != null)
+        {
+            <div class="alert border-0 bg-success alert-dismissible fade show py-2">
+                <div class="d-flex align-items-center">
+                    <div class="fs-3 text-white">
+                        <i class="bi bi-check-circle-fill"></i>
+                    </div>
+                    <div class="ms-3">
+                        <div class="text-white">@TempData["Success"]!</div>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        }
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 mt-2">
                 <label class="form-label">User Type Name @*<span style="color: red">*</span>*@</label>
                 @Html.DropDownListFor(m => m.Fk_UserTypeId, new SelectList(ViewBag.ddlUserName, "Value", "Text"), new { @class = "form-select", })
                   @*@Html.TextBoxFor(m => m.Fk_UserTypeId, new { @class = "form-control", @Placeholder = "User Type" })*@
                 
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mt-2">
                 <label class="form-label">Employee Name</label>
                 @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Employee Name" })
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mt-2">
                 <label class="form-label">Contact Number</label>
                 @Html.TextBoxFor(m => m.ContactNo, new { @class = "form-control ", @Placeholder = "Contact Number" })
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mt-2">
                 <label class="form-label">From Date</label>
-                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "readonly", @required = "required" })
+                @Html.TextBoxFor(m => m.FromDate, new { @class = "form-control", @readonly = "readonly",  @Placeholder = "From Date" })
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mt-2">
                 <label class="form-label">To Date</label>
-                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "readonly", @required = "required" })
+                @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @readonly = "readonly", @Placeholder = "To Date" })
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3 mt-2">
                 <label class="form-label" style="margin-top: 37px;" >&nbsp;</label>
                 <input class="btn btn-info" type="submit" value="Get Details" name="GetDetails" >
             </div>
@@ -61,7 +89,6 @@
                                 foreach (var item in Model.lstemployee)
                                 {
                                     <tr>
-                                        
                                         <td>@item.Fk_UserTypeId</td>
                                         <td>@item.Name</td>
                                         <td>@item.ContactNo</td>
@@ -79,7 +106,6 @@
                         }
 
                     </tbody>
-
                 </table>
             </div>
         </div>

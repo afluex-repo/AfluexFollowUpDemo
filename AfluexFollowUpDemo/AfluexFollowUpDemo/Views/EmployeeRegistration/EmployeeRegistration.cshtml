@@ -30,7 +30,7 @@
                 <div class="card-body">
                     
                     <div class="border p-4 rounded">
-                        @if (@TempData["ServiceError"] != null)
+                        @if (@TempData["Success"] != null)
                         {
                             <div class="alert border-0 bg-success alert-dismissible fade show py-2">
                                 <div class="d-flex align-items-center">
@@ -38,7 +38,7 @@
                                         <i class="bi bi-check-circle-fill"></i>
                                     </div>
                                     <div class="ms-3">
-                                        <div class="text-white">@TempData["ServiceError"]!</div>
+                                        <div class="text-white">@TempData["Success"]!</div>
                                     </div>
                                 </div>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -52,7 +52,7 @@
                                         <i class="bi bi-check-circle-fill"></i>
                                     </div>
                                     <div class="ms-3">
-                                        <div class="text-white">@TempData["ServiceError"]!</div>
+                                        <div class="text-white">@TempData["Error"]!</div>
                                     </div>
                                 </div>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -156,12 +156,6 @@
 <style>
     .errortext {
         border: 1px solid #dc3545;
-       // background-color: #ff0000 !important;
-   //    border-color: #e72e2e;
-    outline: 0;
-   // box-shadow: 0 0 0 0.25rem #dc3545cc;
-}
-
-
+        border-color: #f7a5a5;
     }
 </style>

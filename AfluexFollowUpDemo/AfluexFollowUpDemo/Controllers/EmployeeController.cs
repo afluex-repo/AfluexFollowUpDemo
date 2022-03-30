@@ -13,7 +13,6 @@ namespace AfluexFollowUpDemo.Controllers
         // GET: Employee
         public ActionResult EmployeeDashBoard()
         {
-
             Lead obj = new Lead();
             List<Lead> lst1 = new List<Lead>();
             List<Lead> lstnext = new List<Lead>();
@@ -47,14 +46,9 @@ namespace AfluexFollowUpDemo.Controllers
                 #region NextFollowup
                 if (ds.Tables[1].Rows.Count > 0)
                 {
-
-
                     foreach (DataRow r in ds.Tables[1].Rows)
-
                     {
-
                         Lead obj1 = new Lead();
-
                         obj1.Fk_ProcpectId = r["ContactPerson"].ToString();
                         obj1.FirstInstructionDate = r["FirstInstructionDate"].ToString();
                         obj1.Fk_ExpectedProductCategoryId = r["ProductCategoryName"].ToString();
@@ -63,7 +57,6 @@ namespace AfluexFollowUpDemo.Controllers
                         obj1.Fk_ModeInterActionId = r["InterActionName"].ToString();
                         obj1.FollowupDate = r["FollowupDate"].ToString();
                         obj1.Description = r["Description"].ToString();
-
                         lstnext.Add(obj1);
                     }
                     #endregion NextFollowup

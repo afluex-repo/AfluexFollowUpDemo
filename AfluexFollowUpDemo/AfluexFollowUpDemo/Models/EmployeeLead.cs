@@ -7,9 +7,9 @@ using System.Web;
 
 namespace AfluexFollowUpDemo.Models
 {
-    public class Lead: Common
+    public class EmployeeLead
     {
-        public List<Lead> lstnextLead { get; set; }
+        public List<EmployeeLead> lstnextLead { get; set; }
 
         public string Pk_Id { get; set; }
         public string Fk_ExecutiveId { get; set; }
@@ -25,7 +25,6 @@ namespace AfluexFollowUpDemo.Models
         public string Address { get; set; }
         public string CompanyName { get; set; }
         public string FollowupDate { get; set; }
-        public string PrevioussDate { get; set; }
         public string Description { get; set; }
         public string ContactNo { get; set; }
         public string ContactEmailId { get; set; }
@@ -33,36 +32,29 @@ namespace AfluexFollowUpDemo.Models
         public string Prospect { get; set; }
         public string Pk_ProcpectId { get; set; }
         public string Fk_ProcpectId { get; set; }
-
-        public string Result { get; set; }
+        public List<EmployeeLead> ddlProspect { get; set; }
+        public List<EmployeeLead> ddlProductCategory { get; set; }
+        public List<EmployeeLead> ddlDataSource { get; set; }
+        public List<EmployeeLead> ddlName { get; set; }
+        public List<EmployeeLead> ddlInterAction { get; set; }
+        public List<EmployeeLead> lstLead { get; set; }
+        public string Fk_UserID { get; set; }
         public string DeletedBy { get; set; }
         public string AddedBy { get; set; }
-        //public List<Lead> ddlName { get; set; }
-        //public List<Lead> ddlInterAction { get; set; }
-        public List<Lead> lstLead { get; set; }
-        public List<Lead> lstpending { get; set; }
-        public string EmployeeId { get; set; }
-        public string FromDate { get; set; }
-        public string ToDate { get; set; }
-        public DataSet GetDashBoardDetails()
-        {
-            SqlParameter[] para ={
-                                   new SqlParameter ("@FromDate",FromDate),
-                                   new SqlParameter ("@ToDate",ToDate),
-                                   new SqlParameter ("@EmployeeId",EmployeeId)
-            };
-            DataSet ds = DBHelper.ExecuteQuery("NewGetDashBoardDetails", para);
-           // DataSet ds = DBHelper.ExecuteQuery("GetDashBoardDetails", para);
-            return ds;
-        }
+        public string Result { get; set; }
+
+
+
 
         public DataSet GetProspectList()
         {
-            SqlParameter[] param = { new SqlParameter("@Pk_ProcpectId",Pk_ProcpectId )
+            SqlParameter[] param = { new SqlParameter("@Pk_ProcpectId",Pk_ProcpectId ),
+                new SqlParameter("@EmployeeId",Fk_UserID )
                                    };
             DataSet ds = DBHelper.ExecuteQuery("GetProspectList", param);
             return ds;
         }
+
         public DataSet ListProductCategory()
         {
             SqlParameter[] param = { new SqlParameter("@Pk_ProductCategoryId", Pk_ProductCategoryId) };
@@ -89,23 +81,6 @@ namespace AfluexFollowUpDemo.Models
             DataSet ds = DBHelper.ExecuteQuery("GetExecutiveName");
             return ds;
         }
-        public DataSet DeleteLead()
-        {
-            SqlParameter[] param = { new SqlParameter("@Pk_LeadeId", Pk_LeadeId),
-                                   new SqlParameter("@DeletedBy",DeletedBy)};
-            DataSet ds = DBHelper.ExecuteQuery("DeleteLead", param);
-            return ds;
-        }
-        public DataSet LeadList()
-        {
-            SqlParameter[] param = { new SqlParameter("@Pk_LeadeId", Pk_LeadeId),
-                                     new SqlParameter("@name",ContactPerson),
-                                    new SqlParameter("@AddedBy", AddedBy),
-                                    new SqlParameter("@FromDate", FromDate),
-                                    new SqlParameter("@ToDate", ToDate)};
-            DataSet ds = DBHelper.ExecuteQuery("LeadList", param);
-            return ds;
-        }
 
         public DataSet InsertLead()
         {
@@ -119,6 +94,42 @@ namespace AfluexFollowUpDemo.Models
                                    new SqlParameter("@FirstInstructionDate",FirstInstructionDate),
                                    new SqlParameter("@AddedBy",AddedBy)};
             DataSet ds = DBHelper.ExecuteQuery("InsertLead", param);
+            return ds;
+        }
+
+
+        public DataSet LeadList()
+        {
+            SqlParameter[] param = {new SqlParameter("@Pk_LeadeId", Pk_LeadeId),
+                                     new SqlParameter("@name",ContactPerson),
+                                    new SqlParameter("@AddedBy", AddedBy),
+                                    new SqlParameter("@FromDate", FromDate),
+                                    new SqlParameter("@ToDate", ToDate)
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("LeadList", param);
+            return ds;
+        }
+
+        public DataSet DeleteLead()
+        {
+            SqlParameter[] param = { new SqlParameter("@Pk_LeadeId", Pk_LeadeId),
+                                   new SqlParameter("@DeletedBy",DeletedBy)};
+            DataSet ds = DBHelper.ExecuteQuery("DeleteLead", param);
+            return ds;
+        }
+        public string FromDate { get; set; }
+        public string ToDate { get; set; }
+
+        public DataSet GetDashBoardDetails()
+        {
+            SqlParameter[] para ={
+                                      new SqlParameter ("@FromDate",FromDate),
+                                   new SqlParameter ("@ToDate",ToDate),
+
+
+                                 };
+            DataSet ds = DBHelper.ExecuteQuery("GetDashBoardDetails", para);
             return ds;
         }
 
