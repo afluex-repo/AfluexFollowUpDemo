@@ -53,7 +53,7 @@ namespace AfluexFollowUpDemo.Models
         public DataSet UpdateLead()
         {
             SqlParameter[] param = { new SqlParameter("@Fk_ProcpectId",Fk_ProcpectId),
-                                   new SqlParameter  ("@Fk_ExpectedProductCategoryId",Fk_ExpectedProductCategoryId),
+                                   new SqlParameter    ("@Fk_ExpectedProductCategoryId",Fk_ExpectedProductCategoryId),
                                    new SqlParameter("@Fk_SourceId",Fk_SourceId),
                                    new SqlParameter("@Fk_ExecutiveId",Fk_ExecutiveId),
                                    new SqlParameter("@Fk_ModeInterActionId",Fk_ModeInterActionId),
