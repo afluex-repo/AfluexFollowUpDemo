@@ -52,6 +52,7 @@ namespace AfluexFollowUpDemo.Controllers
                         obj.ContactNo = ds1.Tables[0].Rows[0]["ContactNo"].ToString();
                         obj.EmailId = ds1.Tables[0].Rows[0]["EmailId"].ToString();
                         obj.Address = ds1.Tables[0].Rows[0]["Address"].ToString();
+                        obj.postedFile = ds1.Tables[0].Rows[0]["UserImage"].ToString();
                     }
                 }
                 catch (Exception ex)
@@ -155,10 +156,37 @@ namespace AfluexFollowUpDemo.Controllers
             return RedirectToAction(FormName, Controller);
         }
 
-
+        //[HttpPost]
+        //[ActionName("GetEmpolyeeRegistrationList")]
+        //[OnAction(ButtonName = "GetDetails")]
         public ActionResult GetEmpolyeeRegistrationList()
         {
             EmployeeRegistration model = new EmployeeRegistration();
+            //List<Lead> lst1 = new List<Lead>();
+            //model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            //model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            //model.AddedBy = Session["UserID"].ToString();
+            //DataSet ds = model.GetEmployeeList();
+            //if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            //{
+            //    foreach (DataRow r in ds.Tables[0].Rows)
+            //    {
+            //        Lead obj = new Lead();
+            //        obj.Pk_LeadeId = r["Pk_LeadId"].ToString();
+            //        obj.Fk_ProcpectId = r["ContactPerson"].ToString();
+            //        obj.FirstInstructionDate = r["FirstInstructionDate"].ToString();
+            //        obj.Fk_ExpectedProductCategoryId = r["ProductCategoryName"].ToString();
+            //        obj.Fk_SourceId = r["SourceName"].ToString();
+            //        obj.Fk_ExecutiveId = r["Name"].ToString();
+            //        obj.Fk_ModeInterActionId = r["InterActionName"].ToString();
+            //        obj.FollowupDate = r["FollowupDate"].ToString();
+            //        obj.Description = r["Description"].ToString();
+
+            //        lst1.Add(obj);
+            //    }
+            //    model.lstlstemployee = lst1;
+            //}
+
             #region BindUsertype
             int count = 0;
             List<SelectListItem> ddlUserName = new List<SelectListItem>();
