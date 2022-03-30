@@ -52,6 +52,7 @@ namespace AfluexFollowUpDemo.Controllers
                         obj.ContactNo = ds1.Tables[0].Rows[0]["ContactNo"].ToString();
                         obj.EmailId = ds1.Tables[0].Rows[0]["EmailId"].ToString();
                         obj.Address = ds1.Tables[0].Rows[0]["Address"].ToString();
+                        obj.postedFile = ds1.Tables[0].Rows[0]["UserImage"].ToString();
                     }
                 }
                 catch (Exception ex)

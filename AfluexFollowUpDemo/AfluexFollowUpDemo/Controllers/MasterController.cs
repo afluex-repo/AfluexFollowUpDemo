@@ -989,6 +989,7 @@ namespace AfluexFollowUpDemo.Controllers
             MailMessage message = new MailMessage();
             try
             {
+               
                 int ctrCheck = 0;
                 string ctrRowCount = Request["hdRows"].ToString();
                 string recipientEmail = "";
