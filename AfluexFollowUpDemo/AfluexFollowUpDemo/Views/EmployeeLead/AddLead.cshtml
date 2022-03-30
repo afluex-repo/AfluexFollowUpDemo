@@ -48,18 +48,18 @@
                         </div>
                         <div class="col-md-4 mt-2">
                             <label class="form-label">Contact Email ID<span style="color: red">*</span></label>
-                            <label class="form-control" id="spContactEmailID">&nbsp;</label>
+                            <label class="form-control" id="spContactEmailID">&nbsp; @ViewBag.spContactEmailID</label>
                             @Html.DisplayFor(q => q.ContactEmailId)
                         </div>
                         <div class="col-md-4 mt-2">
                             <label class="form-label">Contact Number<span style="color: red">*</span></label>
-                            <label class="form-control" id="spContactNo">&nbsp;</label>
+                            <label class="form-control" id="spContactNo">&nbsp;@ViewBag.spContactNo</label>
                             @Html.DisplayFor(q => q.ContactNo)
                         </div>
                    
                         <div class="col-md-4 mt-2">
                             <label class="form-label">Company Name <span style="color: red">*</span></label>
-                            <label class="form-control" id="spCompanyName">&nbsp;</label>
+                            <label class="form-control" id="spCompanyName">&nbsp;@ViewBag.spCompanyName</label>
 
                             @Html.DisplayFor(q => q.CompanyName)
                         </div>
@@ -67,14 +67,14 @@
                             <label class="form-label">
                                 Company Address<span style="color: red">*</span>
                             </label>
-                            <label class="form-control" id="spAddress">&nbsp;</label>
+                            <label class="form-control" id="spAddress">&nbsp;@ViewBag.spAddress</label>
                             @Html.DisplayFor(q => q.Address)
                         </div>
                         <div class="col-md-4 mt-2">
                             <label for="formFile" class="form-label">
                                 Company Contact No<span style="color: red">*</span>
                             </label>
-                            <label class="form-control" id="spCompanyContactNo">&nbsp;</label>
+                            <label class="form-control" id="spCompanyContactNo">&nbsp;@ViewBag.spCompanyContactNo</label>
                             @Html.DisplayFor(q => q.CompanyContactNo)
                         </div>
                    
@@ -115,7 +115,7 @@
                     <br />
                     <div class="row">
                         <div class="col-md-9">
-                            @if (Model != null)
+                            @if (Model.Pk_LeadeId != null)
                             {
                                 <input type="submit" value="Update " class="btn btn-success" name="btnUpdate" onclick="return validateservice();" />
                             }
