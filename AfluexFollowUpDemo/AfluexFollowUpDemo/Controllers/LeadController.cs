@@ -12,8 +12,10 @@ namespace AfluexFollowUpDemo.Controllers
     public class LeadController : AdminBaseController
     {
         // GET: Lead
-        public ActionResult LeadMaster()
+        public ActionResult LeadMaster(string Pk_LeadeId)
         {
+            Lead model = new Lead();
+
             #region ddlProspect
             try
             {
@@ -158,7 +160,33 @@ namespace AfluexFollowUpDemo.Controllers
             }
 
             #endregion
-            return View();
+
+            if (Pk_LeadeId != null)
+            {
+                model.AddedBy = Session["UserID"].ToString();
+                model.Pk_LeadeId = Pk_LeadeId;
+                DataSet ds = model.LeadList();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    model.Fk_ProcpectId = ds.Tables[0].Rows[0]["Fk_ProcpectId"].ToString();
+                    ViewBag.spContactEmailID = ds.Tables[0].Rows[0]["ContactEmailId"].ToString();
+                    ViewBag.spContactNo = ds.Tables[0].Rows[0]["ContactNo"].ToString();
+                    ViewBag.spCompanyName = ds.Tables[0].Rows[0]["CompanyName"].ToString();
+                    ViewBag.spAddress = ds.Tables[0].Rows[0]["Address"].ToString();
+                    ViewBag.spCompanyContactNo = ds.Tables[0].Rows[0]["CompanyContactNo"].ToString();
+                    model.FirstInstructionDate= ds.Tables[0].Rows[0]["FirstInstructionDate"].ToString();
+                    model.Fk_ExpectedProductCategoryId = ds.Tables[0].Rows[0]["Fk_ExpectedProductCategoryId"].ToString();
+                    model.Fk_SourceId = ds.Tables[0].Rows[0]["Fk_SourceId"].ToString();
+                    model.Fk_ExecutiveId = ds.Tables[0].Rows[0]["Fk_ExecutiveId"].ToString();
+                    model.Fk_ModeInterActionId = ds.Tables[0].Rows[0]["Fk_ModeInterActionId"].ToString();
+                    model.FollowupDate = ds.Tables[0].Rows[0]["FollowupDate"].ToString();
+                    model.Description = ds.Tables[0].Rows[0]["Description"].ToString();
+                }
+
+
+            }
+            return View(model);
         }
         public ActionResult GetProspectDetailsByID(string Pk_ProcpectId)
         {
@@ -302,6 +330,36 @@ namespace AfluexFollowUpDemo.Controllers
                 model.lstLead = lst1;
             }
             return View(model);
+        }
+        [HttpPost]
+        [ActionName("LeadMaster")]
+        [OnAction(ButtonName = "btnUpdate")]
+        public ActionResult UpdateLead(Lead obj, string Pk_LeadeId)
+        {
+            try
+            { 
+            obj.UpdatedBy = Session["UserID"].ToString();
+            obj.Pk_LeadeId = obj.Pk_LeadeId;
+            DataSet ds = new DataSet();
+            ds = obj.UpdateLead();
+            if (ds != null && ds.Tables.Count > 0)
+            {
+                if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                {
+                    Session["dt"] = null;
+                    TempData["Success"] = "Lead Updated Successfully";
+                }
+                else
+                {
+                    TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                }
+            }
+        }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
+            return RedirectToAction("ListLead");
         }
     }
 }

@@ -42,34 +42,35 @@
                         <div class="col-md-4  mt-2">
                             <label class="form-label">Prospect Name  <span style="color: red">*</span></label>
                             @Html.DropDownListFor(q => q.Fk_ProcpectId, new SelectList(ViewBag.ddlProspect, "Value", "Text"), new { @class = "form-select", @OnChange = "return GetProspectDetailsByID();" })
+                            @Html.HiddenFor(m => m.Pk_LeadeId)
                         </div>
                         <div class="col-md-4  mt-2">
                             <label class="form-label">Contact Email ID<span style="color: red">*</span></label>
                             
                             @Html.DisplayFor(q => q.ContactEmailId)
-                            <label class="form-control" id="spContactEmailID"  >&nbsp;</label>
+                            <label class="form-control" id="spContactEmailID" >@ViewBag.spContactEmailID</label>
                         </div>
                         <div class="col-md-4  mt-2">
                             <label class="form-label">Contact Number<span style="color: red">*</span></label>
                             @Html.DisplayFor(q => q.ContactNo)
-                            <label class="form-control" id="spContactNo" >&nbsp;</label>
+                            <label class="form-control" id="spContactNo" >@ViewBag.spContactNo</label>
                         </div>
                     
                         <div class="col-md-4  mt-2">
                             <label class="form-label">Company Name <span style="color: red">*</span></label>
                             @Html.DisplayFor(q => q.CompanyName)
-                            <label class="form-control" id="spCompanyName" >&nbsp;</label>
+                            <label class="form-control" id="spCompanyName" >@ViewBag.spCompanyName</label>
                         </div>
                         <div class="col-md-4  mt-2">
                             <label class="form-label"> Company Address<span style="color: red">*</span></label>
                            
                             @Html.DisplayFor(q => q.Address)
-                            <label class="form-control" id="spAddress">&nbsp;</label>
+                            <label class="form-control" id="spAddress">@ViewBag.spAddress</label>
                         </div>
                         <div class="col-md-4  mt-2">
                             <label for="formFile" class="form-label">Company Contact No<span style="color: red">*</span>
                             </label>
-                            <label class="form-control" id="spCompanyContactNo">&nbsp;</label>
+                            <label class="form-control" id="spCompanyContactNo">&nbsp;@ViewBag.spCompanyContactNo</label>
                             @Html.DisplayFor(q => q.CompanyContactNo)
                         </div>
                     
@@ -96,7 +97,7 @@
                         </div>
                         <div class="col-md-4  mt-2">
                             <label class="form-label">Mode Of InterAction* <span style="color: red">*</span></label>
-                            @Html.HiddenFor(m => m.Pk_LeadeId)
+                        
                             @Html.DropDownListFor(q => q.Fk_ModeInterActionId, new SelectList(ViewBag.ddlInterAction, "Value", "Text"), new { @class = "form-select" })
                         </div>
                         <div class="col-md-4  mt-2">
@@ -111,7 +112,7 @@
                      <br />
                         <div class="row">
                             <div class="col-md-9">
-                                @if (Model != null)
+                                @if (Model.Pk_LeadeId != null)
                                 {
                                     <input type="submit" value="Update " class="btn btn-success" name="btnUpdate" onclick="return validateservice();" />
                                 }

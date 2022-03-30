@@ -37,13 +37,22 @@ namespace AfluexFollowUpDemo.Models
         public string Result { get; set; }
         public string DeletedBy { get; set; }
         public string AddedBy { get; set; }
-        //public List<Lead> ddlName { get; set; }
+      public string UpdatedBy { get; set; }
         //public List<Lead> ddlInterAction { get; set; }
         public List<Lead> lstLead { get; set; }
         public List<Lead> lstpending { get; set; }
         public string EmployeeId { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
+
+        public string spContactEmailID { get; set; }
+        public string spContactNo { get; set; }
+        public string spCompanyName { get; set; }
+          public string spAddress { get; set; }
+        public string spCompanyContactNo { get; set; }
+        
+
+
         public DataSet GetDashBoardDetails()
         {
             SqlParameter[] para ={
@@ -103,7 +112,7 @@ namespace AfluexFollowUpDemo.Models
                                     new SqlParameter("@AddedBy", AddedBy),
                                     new SqlParameter("@FromDate", FromDate),
                                     new SqlParameter("@ToDate", ToDate)};
-            DataSet ds = DBHelper.ExecuteQuery("LeadList", param);
+                 DataSet ds = DBHelper.ExecuteQuery("LeadList", param);
             return ds;
         }
 
@@ -121,6 +130,20 @@ namespace AfluexFollowUpDemo.Models
             DataSet ds = DBHelper.ExecuteQuery("InsertLead", param);
             return ds;
         }
-
+        public DataSet UpdateLead()
+        {
+            SqlParameter[] param = { new SqlParameter("@Fk_ProcpectId",Fk_ProcpectId),
+                                   new SqlParameter  ("@Fk_ExpectedProductCategoryId",Fk_ExpectedProductCategoryId),
+                                   new SqlParameter("@Fk_SourceId",Fk_SourceId),
+                                   new SqlParameter("@Fk_ExecutiveId",Fk_ExecutiveId),
+                                   new SqlParameter("@Fk_ModeInterActionId",Fk_ModeInterActionId),
+                                   new SqlParameter("@Description",Description),
+                                   new SqlParameter("@FollowupDate",FollowupDate),
+                                   new SqlParameter("@FirstInstructionDate",FirstInstructionDate),
+                                   new SqlParameter("@UpdatedBy",UpdatedBy)};
+                                     new SqlParameter("@Pk_LeadeId", Pk_LeadeId);
+            DataSet ds = DBHelper.ExecuteQuery("InsertLead", param);
+            return ds;
+        }
     }
 }
