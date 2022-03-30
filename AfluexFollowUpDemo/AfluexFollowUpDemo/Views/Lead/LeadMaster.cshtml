@@ -8,36 +8,37 @@
 <div class="row">
     <div class="col-xl-12 mx-auto">
          <div class="card">
+             @if (@TempData["Success"] != null)
+             {
+                 <div class="alert border-0 bg-success alert-dismissible fade show py-2">
+                     <div class="d-flex align-items-center">
+                         <div class="fs-3 text-white">
+                             <i class="bi bi-check-circle-fill"></i>
+                         </div>
+                         <div class="ms-3">
+                             <div class="text-white">@TempData["Success"]!</div>
+                         </div>
+                     </div>
+                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                 </div>
+             }
+             @if (@TempData["Error"] != null)
+             {
+                 <div class="alert border-0 bg-danger alert-dismissible fade show py-2">
+                     <div class="d-flex align-items-center">
+                         <div class="fs-3 text-white">
+                             <i class="bi bi-check-circle-fill"></i>
+                         </div>
+                         <div class="ms-3">
+                             <div class="text-white">@TempData["Error"]!</div>
+                         </div>
+                     </div>
+                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                 </div>
+             }
             <div class="card-body">
                 <div class="border p-4 rounded">
-                    @if (@TempData["Success"] != null)
-                    {
-                        <div class="alert border-0 bg-success alert-dismissible fade show py-2">
-                            <div class="d-flex align-items-center">
-                                <div class="fs-3 text-white">
-                                    <i class="bi bi-check-circle-fill"></i>
-                                </div>
-                                <div class="ms-3">
-                                    <div class="text-white">@TempData["Success"]!</div>
-                                </div>
-                            </div>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    }
-                    @if (@TempData["Error"] != null)
-                    {
-                        <div class="alert border-0 bg-danger alert-dismissible fade show py-2">
-                            <div class="d-flex align-items-center">
-                                <div class="fs-3 text-white">
-                                    <i class="bi bi-check-circle-fill"></i>
-                                </div>
-                                <div class="ms-3">
-                                    <div class="text-white">@TempData["Error"]!</div>
-                                </div>
-                            </div>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    }
+                    
                     <div class="row">
                         <div class="col-md-4  mt-2">
                             <label class="form-label">Prospect Name  <span style="color: red">*</span></label>

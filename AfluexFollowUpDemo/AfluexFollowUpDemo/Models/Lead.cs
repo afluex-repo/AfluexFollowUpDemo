@@ -140,9 +140,11 @@ namespace AfluexFollowUpDemo.Models
                                    new SqlParameter("@Description",Description),
                                    new SqlParameter("@FollowupDate",FollowupDate),
                                    new SqlParameter("@FirstInstructionDate",FirstInstructionDate),
-                                   new SqlParameter("@UpdatedBy",UpdatedBy)};
-                                     new SqlParameter("@Pk_LeadeId", Pk_LeadeId);
-            DataSet ds = DBHelper.ExecuteQuery("InsertLead", param);
+                                   new SqlParameter("@UpdatedBy",UpdatedBy),
+                                   new SqlParameter("@Pk_LeadeId",Pk_LeadeId)
+            };
+                                     ;
+            DataSet ds = DBHelper.ExecuteQuery("UpdateLead", param);
             return ds;
         }
     }
