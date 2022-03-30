@@ -12,9 +12,10 @@
             <div class="compose-mail-title">Email Master </div>
             @*<div class="compose-mail-close ms-auto">x</div>*@
             <a href="/Master/AddEmailTemplate" class="compose-mail-close ms-auto btn btn-dark">
+               Add Tamplate</a>
+                <a href="/Master/SentEmail" class="compose-mail-close ms-auto btn btn-dark">
                Sent Email
-
-            </a>
+                </a>
 
         </div>
     </div>
@@ -142,6 +143,12 @@
             $('#Email').focus();
             return false;
         }
+        if ($('#Description').val() == '') {
+            $("#Description").addClass('errortext');
+            $('#Description').focus();
+            return false;
+        }
+        
     }
 
 </script>
