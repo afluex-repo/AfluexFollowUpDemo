@@ -122,8 +122,8 @@
             <table id="t1" class="table table-striped table-bordered display">
                 <thead>
                     <tr>
-                        <th><input type="checkbox" onchange="checkAll(this)" name="chk[]" id="check1" /> Select All
-                            <p id="text" style="display:none">select all or any one!</p>
+                        <th><INPUT type="checkbox" onchange="checkAll(this)" name="chk[]" id="check1" /> Select All
+                           
                         </th>
                         <th>Name</th>
                         <th>Email</th>
@@ -245,18 +245,44 @@
                 return false;
             }
             debugger;
-              if (l1.checked == false) {
-                  alert('Please select Email ID all or any one!');
+            if ($('input[type=checkbox]:checked').length == 0) {
+                alert("ERROR! Please select Email ID select all or  one checkbox");
                 return false;
-              }
-              else{
-                 //lert('select all or any one!');
-                  return true
-              }
+            }
+              //if (l1.checked == false) {
+              //    alert('Please select Email ID all or any one!');
+              //  return false;
+              //}
+              //else{
+              //   //lert('select all or any one!');
+              //    return true
+              //}
             $("#divload").css({ 'display': '' });
         }
          
+        function validateForm() {
+            if ($('input[type=checkbox]:checked').length == 0) {
+                alert("ERROR! Please select at least one checkbox");
+                return false;
+            }
+            $(".errortext").removeClass("errortext");
+            if ($('#PK_TemplateID').val() == '0') {
+                $("#PK_TemplateID").addClass('errortext');
+                $('#PK_TemplateID').focus();
+                return false;
+            }
+            if ($('#Subject').val() == '') {
+                $("#Subject").addClass('errortext');
+                $('#Subject').focus();
+                return false;
+            }
 
+            if ($('#Body').val() == '') {
+                $("#Body").addClass('errortext');
+                $('#Body').focus();
+                return false;
+            }
+        }
         function checkAll(ele) {
             debugger
             var checkboxes = document.getElementsByTagName('input');
