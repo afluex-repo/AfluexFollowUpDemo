@@ -46,7 +46,7 @@ namespace AfluexFollowUpDemo.Controllers
                 {
                     if (count1 == 0)
                     {
-                        ddlInteraction.Add(new SelectListItem { Text = "Select InterAction Type", Value = "0" });
+                        ddlInteraction.Add(new SelectListItem { Text = "Select Inter Action Type", Value = "0" });
                     }
                     ddlInteraction.Add(new SelectListItem { Text = r["InterActionName"].ToString(), Value = r["PK_InterActionId"].ToString() });
                     count1 = count1 + 1;
