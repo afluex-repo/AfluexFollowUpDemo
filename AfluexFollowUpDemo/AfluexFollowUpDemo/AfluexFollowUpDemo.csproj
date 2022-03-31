@@ -866,7 +866,7 @@
     <Content Include="Views\EmployeeProcpect\Procpect.cshtml" />
     <Content Include="Views\EmployeeRegistration\DashBoard.cshtml" />
     <Content Include="Views\EmployeeRegistration\EmployeeRegistration.cshtml" />
-    <Content Include="Views\EmployeeRegistration\GetEmpolyeeRegistrationList.cshtml" />
+    <Content Include="Views\EmployeeRegistration\EmpolyeeRegistrationList.cshtml" />
     <Content Include="Views\Home\DashBoard.cshtml" />
     <Content Include="Views\Home\ForgetPassword.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />

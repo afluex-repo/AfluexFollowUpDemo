@@ -10,8 +10,10 @@ namespace AfluexFollowUpDemo.Models
 {
     public class Master
     {
+        public string SenderEmail { get; set; }
+        public string SenderPassword { get; set; }
         public string PK_TemplateID { get; set; }
-        
+       
         public string Side { get; set; }
         public string SiteImage { get; set; }
         public string SiteOwner { get; set; }

@@ -60,7 +60,7 @@
                         </div>
                         <div class="col-md-4 mt-2">
                             <label class="form-label">Contact Email ID<span style="color: red">*</span></label>
-                            @Html.TextBoxFor(m => m.ContactEmailId, new { @class = "form-control", @Placeholder = "Contact EmailId" })
+                            @Html.TextBoxFor(m => m.ContactEmailId, new { @class = "form-control", @Placeholder = "Contact Email Id" })
                         </div>
                         <div class="col-md-4 mt-2">
                             <label class="form-label">Contact Number<span style="color: red">*</span></label>
@@ -68,7 +68,7 @@
                         </div>
                     
                         <div class="col-md-4 mt-2">
-                            <label class="form-label">Industry CategoryId <span style="color: red">*</span></label>
+                            <label class="form-label">Industry Category Id <span style="color: red">*</span></label>
                             @Html.DropDownListFor(m => m.Fk_IndustryCategoryId, new SelectList(ViewBag.ddlcategory, "value", "text"), new { @class = "form-select" })
                           
                         </div>
@@ -116,54 +116,54 @@
 
                     
                         <div class="col-md-4 mt-2">
-                            <label class="form-label">SkypeId</label>
-                            @Html.TextBoxFor(m => m.SkypeId, new { @class = "form-control", @Placeholder = "SkypeId", })
+                            <label class="form-label">Skype Id</label>
+                            @Html.TextBoxFor(m => m.SkypeId, new { @class = "form-control", @Placeholder = "Skype Id", })
                         </div>
                         <div class="col-md-4 mt-2">
-                            <label class="form-label">FacebookId</label>
-                            @Html.TextBoxFor(m => m.FacebookId, new { @class = "form-control", @Placeholder = "FacebookId" })
+                            <label class="form-label">Facebook Id</label>
+                            @Html.TextBoxFor(m => m.FacebookId, new { @class = "form-control", @Placeholder = "Facebook Id" })
                         </div>
                         <div class="col-md-4 mt-2">
-                            <label class="form-label">TwitterId </label>
-                            @Html.TextBoxFor(m => m.TwitterId, new { @class = "form-control", @Placeholder = "TwitterId" })
+                            <label class="form-label">Twitter Id </label>
+                            @Html.TextBoxFor(m => m.TwitterId, new { @class = "form-control", @Placeholder = "Twitter Id" })
                         </div>
 
                     
                         <div class="col-md-4 mt-2">
-                            <label class="form-label">LinkedInId </label>
-                            @Html.TextBoxFor(m => m.LinkedInId, new { @class = "form-control", @Placeholder = "LinkedInId", })
+                            <label class="form-label">LinkedIn Id </label>
+                            @Html.TextBoxFor(m => m.LinkedInId, new { @class = "form-control", @Placeholder = "LinkedIn Id", })
                         </div>
                         <div class="col-md-4 mt-2">
-                            <label class="form-label">ApproximateEmployee <span style="color: red">*</span></label>
+                            <label class="form-label">Approximate Employee <span style="color: red">*</span></label>
                             @Html.TextBoxFor(m => m.ApproximateEmployee, new { @class = "form-control", @Placeholder = "Approximate Employee" })
                         </div>
                         <div class="col-md-4 mt-2">
-                            <label class="form-label">Approximate Company TurnOver <span style="color: red">*</span></label>
-                            @Html.TextBoxFor(m => m.ApproximateCompanyTurnOver, new { @class = "form-control", @Placeholder = "Approximate Company TurnOver", @onkeypress = "return isNumber(event)" })
+                            <label class="form-label">Approximate Company Turn Over <span style="color: red">*</span></label>
+                            @Html.TextBoxFor(m => m.ApproximateCompanyTurnOver, new { @class = "form-control", @Placeholder = "Approximate Company Turn Over", @onkeypress = "return isNumber(event)" })
                         </div>
 
                    
                         <div class="col-md-4 mt-2">
-                            <label class="form-label">FirstInstruction Date <span style="color: red">*</span></label>
-                            @Html.TextBoxFor(m => m.FirstInstructionDate, new { @class = "form-control", @readonly="true" , @Placeholder = "FirstInstruction Date" })
+                            <label class="form-label">First Instruction Date <span style="color: red">*</span></label>
+                            @Html.TextBoxFor(m => m.FirstInstructionDate, new { @class = "form-control", @readonly="true" , @Placeholder = "First Instruction Date" })
                         </div>
                         <div class="col-md-4 mt-2">
                             <label class="form-label">Expected Product Category <span style="color: red">*</span></label>
-                            @Html.DropDownListFor(m => m.Fk_ExpectedProductCategoryId, new SelectList(ViewBag.ddlExpected, "Value", "text"), new { @class = "form-select", @Placeholder = "Expected Product CategoryId" })
+                            @Html.DropDownListFor(m => m.Fk_ExpectedProductCategoryId, new SelectList(ViewBag.ddlExpected, "Value", "text"), new { @class = "form-select", @Placeholder = "Expected Product Category Id" })
                            
                         </div>
                         <div class="col-md-4 mt-2">
                             <label class="form-label">Source <span style="color: red">*</span></label>
-                            @Html.DropDownListFor(m => m.Fk_SourceId, new SelectList(ViewBag.ddlSource, "Value", "text"), new { @class = "form-select", @Placeholder = "SourceId", })
+                            @Html.DropDownListFor(m => m.Fk_SourceId, new SelectList(ViewBag.ddlSource, "Value", "text"), new { @class = "form-select", @Placeholder = "Source Id", })
                         </div>
 
                   
                         <div class="col-md-4 mt-2">
                             <label class="form-label">Executive Name <span style="color: red">*</span></label>
-                            @Html.DropDownListFor(m => m.Fk_ExecutiveId, new SelectList(ViewBag.ddlExecutive, "Value", "text"), new { @class = "form-select", @Placeholder = "ExecutiveId" })
+                            @Html.DropDownListFor(m => m.Fk_ExecutiveId, new SelectList(ViewBag.ddlExecutive, "Value", "text"), new { @class = "form-select", @Placeholder = "Executive Id" })
                         </div>
                         <div class="col-md-4 mt-2">
-                            <label class="form-label">Mode of InterAction <span style="color: red">*</span></label>
+                            <label class="form-label">Mode of Inter Action <span style="color: red">*</span></label>
                             @Html.DropDownListFor(m => m.Fk_ModeInterActionId, new SelectList(ViewBag.ddlInteraction, "Value", "text"), new { @class = "form-select" })
                             @Html.HiddenFor(m => m.PK_InterActionId)
                         </div>
@@ -179,9 +179,8 @@
                             </Div>
                         </div>
 
-                            <br />
                             <div class="row">
-                                <div class="col-md-9">
+                                <div class="col-md-9 mt-3">
                                     @if (Model.Pk_ProcpectId != null)
                                     {
                                         <input type="submit" value="Update " class="btn btn-success" name="btnUpdate" id="btnUpdate" onclick="return validateupdate();" />

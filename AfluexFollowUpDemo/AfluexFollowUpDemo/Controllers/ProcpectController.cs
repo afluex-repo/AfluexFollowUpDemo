@@ -326,7 +326,7 @@ namespace AfluexFollowUpDemo.Controllers
 
             }
             ViewBag.saverrormsg = "";
-            return RedirectToAction("GetProspecctList");
+            return RedirectToAction("ProspecctList");
         }
         [HttpPost]
         [ActionName("Procpect")]

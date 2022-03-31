@@ -116,7 +116,7 @@ namespace AfluexFollowUpDemo.Controllers
                     {
                         if (count == 0)
                         {
-                            ddlDataSource.Add(new SelectListItem { Text = "SelectData Source", Value = "0" });
+                            ddlDataSource.Add(new SelectListItem { Text = "Select Data Source", Value = "0" });
                         }
                         ddlDataSource.Add(new SelectListItem { Text = r["SourceName"].ToString(), Value = r["Pk_SourceId"].ToString() });
                         count = count + 1;
