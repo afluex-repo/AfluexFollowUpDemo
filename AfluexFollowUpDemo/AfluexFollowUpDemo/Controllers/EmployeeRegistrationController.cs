@@ -162,30 +162,29 @@ namespace AfluexFollowUpDemo.Controllers
         public ActionResult GetEmpolyeeRegistrationList()
         {
             EmployeeRegistration model = new EmployeeRegistration();
-            //List<Lead> lst1 = new List<Lead>();
-            //model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
-            //model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
-            //model.AddedBy = Session["UserID"].ToString();
-            //DataSet ds = model.GetEmployeeList();
-            //if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-            //{
-            //    foreach (DataRow r in ds.Tables[0].Rows)
-            //    {
-            //        Lead obj = new Lead();
-            //        obj.Pk_LeadeId = r["Pk_LeadId"].ToString();
-            //        obj.Fk_ProcpectId = r["ContactPerson"].ToString();
-            //        obj.FirstInstructionDate = r["FirstInstructionDate"].ToString();
-            //        obj.Fk_ExpectedProductCategoryId = r["ProductCategoryName"].ToString();
-            //        obj.Fk_SourceId = r["SourceName"].ToString();
-            //        obj.Fk_ExecutiveId = r["Name"].ToString();
-            //        obj.Fk_ModeInterActionId = r["InterActionName"].ToString();
-            //        obj.FollowupDate = r["FollowupDate"].ToString();
-            //        obj.Description = r["Description"].ToString();
+            List<EmployeeRegistration> lst = new List<EmployeeRegistration>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.Pk_Id = Session["UserID"].ToString();
+            model.Fk_UserTypeId = model.Fk_UserTypeId == "0" ? null : model.Fk_UserTypeId;
+            DataSet ds1 = model.FilterEmployee();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
 
-            //        lst1.Add(obj);
-            //    }
-            //    model.lstlstemployee = lst1;
-            //}
+                    EmployeeRegistration obj = new EmployeeRegistration();
+                    obj.Pk_Id = r["Pk_Id"].ToString();
+                    obj.Fk_UserTypeId = r["UserName"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.ContactNo = r["ContactNo"].ToString();
+                    obj.EmailId = r["EmailId"].ToString();
+                    obj.Address = r["Address"].ToString();
+                    obj.UserImage = string.IsNullOrEmpty(r["UserImage"].ToString()) ? " ../SoftwareImages/d2.jpg" : r["UserImage"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstemployee = lst;
+            }
 
             #region BindUsertype
             int count = 0;
@@ -207,7 +206,7 @@ namespace AfluexFollowUpDemo.Controllers
             ViewBag.ddlUserName = ddlUserName;
 
             #endregion BindUsertype
-            return View();
+            return View(model);
         }
         public ActionResult DeleteEmployeeRegistration(string Pk_Id)
         {

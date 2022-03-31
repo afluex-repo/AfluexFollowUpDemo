@@ -9,7 +9,7 @@ namespace AfluexFollowUpDemo.Models
 {
     public class EmployeeRegistration
     {
-
+        public string AddedBy { get; set; }
         public string Pk_Id { get; set; }
         public string UserName { get; set; }
         public string Name { get; set; }
