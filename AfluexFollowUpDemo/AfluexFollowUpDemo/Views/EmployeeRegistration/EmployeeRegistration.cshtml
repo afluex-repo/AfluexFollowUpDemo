@@ -84,7 +84,9 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="formFile" class="form-label">File Upload</label>
-                                <input class="form-control" type="file" id="formFile" name="postedFile">
+                                <input class="form-control" type="file" id="formFile" name="postedFile" onchange="loadFile_adhar(event)">
+                                <br />
+                                <img src="@Model.postedFile" height="100" width="100" id="postedFile" />
                             </div>
                         </div>
 
@@ -125,6 +127,11 @@
 
         return true;
     }
+    var loadFile_adhar = function (event) {
+        var image = document.getElementById('postedFile');
+        image.src = URL.createObjectURL(event.target.files[0]);
+        $("#img").val(1);
+    };
 
 
     function validateservice() {
