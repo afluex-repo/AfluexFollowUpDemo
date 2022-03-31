@@ -9,7 +9,7 @@ namespace AfluexFollowUpDemo.Models
 {
     public class EmployeeRegistration
     {
-
+        public string AddedBy { get; set; }
         public string Pk_Id { get; set; }
         public string UserName { get; set; }
         public string Name { get; set; }
@@ -23,7 +23,7 @@ namespace AfluexFollowUpDemo.Models
         public string DeletedBy { get; set; }
         public List<EmployeeRegistration> lstemployee { get; set; }
         public string postedFile { get; set; }
-        public  string UpdatedBy { get; set; }
+        public string UpdatedBy { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
 
@@ -33,15 +33,19 @@ namespace AfluexFollowUpDemo.Models
             DataSet ds = DBHelper.ExecuteQuery("GetUserTypeName");
             return ds;
         }
+
         public DataSet GetEmployeeList()
         {
             SqlParameter[] para = { new SqlParameter("@Pk_Id", Pk_Id) };
-            DataSet ds = DBHelper.ExecuteQuery("GetEmployeeRegistration", para);
+                                    //new SqlParameter("@Name", User_Type_Name)
+        DataSet ds = DBHelper.ExecuteQuery("GetEmployeeRegistration", para);
             return ds;
         }
-        public DataSet UpdateEmployeeRegistration()
-        {
-            SqlParameter[] para = {
+
+
+    public DataSet UpdateEmployeeRegistration()
+    {
+        SqlParameter[] para = {
                                       new SqlParameter("@Pk_Id",Pk_Id),
                                       new SqlParameter("@Fk_UserTypeId",Fk_UserTypeId),
                                       new SqlParameter("@Name",Name),
@@ -51,20 +55,20 @@ namespace AfluexFollowUpDemo.Models
                                       new SqlParameter("@UserImage",UserImage),
                                       new SqlParameter("@UpdatedBy",UpdatedBy)
                                   };
-            DataSet ds = DBHelper.ExecuteQuery("UpdateEmployeeRegistration", para);
-            return ds;
-        }
-        public DataSet DeleteEmployee()
-        {
-            SqlParameter[] para = { new SqlParameter("@Pk_Id", Pk_Id), new SqlParameter("@DeletedBy", DeletedBy) };
-            DataSet ds = DBHelper.ExecuteQuery("DeleteEmployeeRegistration", para);
-            return ds;
+        DataSet ds = DBHelper.ExecuteQuery("UpdateEmployeeRegistration", para);
+        return ds;
+    }
+    public DataSet DeleteEmployee()
+    {
+        SqlParameter[] para = { new SqlParameter("@Pk_Id", Pk_Id), new SqlParameter("@DeletedBy", DeletedBy) };
+        DataSet ds = DBHelper.ExecuteQuery("DeleteEmployeeRegistration", para);
+        return ds;
 
-        }
+    }
 
-        public DataSet SaveEmployeeRegistration()
-        {
-            SqlParameter[] para = {
+    public DataSet SaveEmployeeRegistration()
+    {
+        SqlParameter[] para = {
                                       new SqlParameter("@Fk_UserTypeId",Fk_UserTypeId),
                                       new SqlParameter("@Name",Name),
                                       new SqlParameter("@ContactNo",ContactNo),
@@ -73,20 +77,20 @@ namespace AfluexFollowUpDemo.Models
                                       new SqlParameter("@UserImage",UserImage),
                                       new SqlParameter("@CreatedBy",CreatedBy)
                                   };
-            DataSet ds = DBHelper.ExecuteQuery("EmployeeRegistration", para);
-            return ds;
-        }
+        DataSet ds = DBHelper.ExecuteQuery("EmployeeRegistration", para);
+        return ds;
+    }
 
-        public DataSet FilterEmployee()
-        {
-            SqlParameter[] para = {
+    public DataSet FilterEmployee()
+    {
+        SqlParameter[] para = {
                                       //new SqlParameter("@Pk_Id",Pk_Id),
                                       new SqlParameter("@Fk_UserTypeId",Fk_UserTypeId),
                                       new SqlParameter("@Name",Name),
                                       new SqlParameter("@ContactNo",ContactNo)
                                   };
-            DataSet ds = DBHelper.ExecuteQuery("GetEmployeeRegistration", para);
-            return ds;
-        }
+        DataSet ds = DBHelper.ExecuteQuery("GetEmployeeRegistration", para);
+        return ds;
     }
+}
 }

@@ -939,7 +939,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64705</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64705/</IISUrl>
+          <IISUrl>http://localhost:64706/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
