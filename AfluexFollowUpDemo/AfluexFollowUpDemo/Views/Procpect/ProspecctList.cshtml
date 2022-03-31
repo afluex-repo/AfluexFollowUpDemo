@@ -1,7 +1,7 @@
 ﻿@model AfluexFollowUpDemo.Models.Procpect
 
 @{
-    ViewBag.Title = "GetProspecctList";
+    ViewBag.Title = "ProspecctList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -22,7 +22,7 @@
 </div>
 <hr />
 <div class="card">
-@using (Html.BeginForm("GetProspecctList", "Procpect", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("ProspecctList", "Procpect", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
 {
      <div class="card-body">
         <div class="row">

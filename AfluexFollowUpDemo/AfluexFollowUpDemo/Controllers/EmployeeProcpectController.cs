@@ -209,7 +209,7 @@ namespace AfluexFollowUpDemo.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GetProspecctList()
+        public ActionResult ProspecctList()
         {
             EmployeeProspect model= new EmployeeProspect ();
             List<EmployeeProspect> lst = new List<EmployeeProspect>();
@@ -248,7 +248,7 @@ namespace AfluexFollowUpDemo.Controllers
             return View(model);
         }
         [HttpPost]
-        [ActionName("GetProspecctList")]
+        [ActionName("ProspecctList")]
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult GetEmployeeProspectList(EmployeeProspect model)
         {

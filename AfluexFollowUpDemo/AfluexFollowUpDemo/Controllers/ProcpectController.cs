@@ -194,7 +194,7 @@ namespace AfluexFollowUpDemo.Controllers
             }
             return RedirectToAction("Procpect");
         }
-        public ActionResult GetProspecctList()
+        public ActionResult ProspecctList()
         {
             List<Procpect> lst = new List<Procpect>();
             Procpect model = new Procpect();
@@ -233,7 +233,7 @@ namespace AfluexFollowUpDemo.Controllers
             return View(model);
         }
         [HttpPost]
-        [ActionName("GetProspecctList")]
+        [ActionName("ProspecctList")]
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult ProspectList(Procpect model)
         {
