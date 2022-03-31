@@ -64,7 +64,7 @@ namespace AfluexFollowUpDemo.Models
                                    new SqlParameter("@Pk_LeadeId",Pk_LeadeId)
             };
             
-            DataSet ds = DBHelper.ExecuteQuery("UpdateLead", param);
+            DataSet ds = DBHelper.ExecuteQuery("UpdateLeadList", param);
             return ds;
         }
 
@@ -83,7 +83,6 @@ namespace AfluexFollowUpDemo.Models
             DataSet ds = DBHelper.ExecuteQuery("GetProductList", param);
             return ds;
         }
-
         public DataSet ListDataSource()
         {
             SqlParameter[] param = { new SqlParameter("@Pk_SourceId", Pk_SourceId) };

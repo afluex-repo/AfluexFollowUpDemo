@@ -159,7 +159,7 @@ namespace AfluexFollowUpDemo.Controllers
         //[HttpPost]
         //[ActionName("GetEmpolyeeRegistrationList")]
         //[OnAction(ButtonName = "GetDetails")]
-        public ActionResult GetEmpolyeeRegistrationList()
+        public ActionResult EmpolyeeRegistrationList()
         {
             EmployeeRegistration model = new EmployeeRegistration();
             List<EmployeeRegistration> lst = new List<EmployeeRegistration>();
@@ -235,7 +235,7 @@ namespace AfluexFollowUpDemo.Controllers
 
             }
             ViewBag.saverrormsg = "";
-            return RedirectToAction("GetEmpolyeeRegistrationList");
+            return RedirectToAction("EmpolyeeRegistrationList");
         }
         [HttpPost]
         [ActionName("EmployeeRegistration")]
@@ -275,7 +275,7 @@ namespace AfluexFollowUpDemo.Controllers
         }
 
         [HttpPost]
-        [ActionName("GetEmpolyeeRegistrationList")]
+        [ActionName("EmpolyeeRegistrationList")]
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult FilterEmployee(EmployeeRegistration model)
         {
