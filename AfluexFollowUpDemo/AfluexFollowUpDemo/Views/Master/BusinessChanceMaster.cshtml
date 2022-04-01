@@ -1,4 +1,4 @@
-﻿
+﻿@model AfluexFollowUpDemo.Models.Master
 @{
     ViewBag.Title = "BusinessChanceMaster";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -19,6 +19,8 @@
 
 </div>
 <!--end breadcrumb-->
+@using (Html.BeginForm("BusinessChanceMaster", "Master", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
+{
 
 <div class="row">
     <div class="col-xl-12 mx-auto">
@@ -26,18 +28,38 @@
         <div class="card">
             <div class="card-body">
                 <div class="border p-4 rounded">
-
+                    @if (@TempData["Error"] != null)
+                    {
+                        <div class="alert border-0 bg-success alert-dismissible fade show py-2">
+                            <div class="d-flex align-items-center">
+                                <div class="fs-3 text-white">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                </div>
+                                <div class="ms-3">
+                                    <div class="text-white">@TempData["Error"]!</div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    }
                     <div class="row mb-3">
-                        <label for="inputEnterYourName" class="col-sm-3 col-form-label">Chance Name <span style="color: red">*</span></label>
+                        @Html.HiddenFor(m => m.Pk_BusinessChanceId)
+                        <label for="inputEnterYourName" class="col-sm-3 col-form-label">Business Name <span style="color: red">*</span></label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="inputEnterYourName" placeholder="Enter  Business Chance Name">
+                            @Html.TextBoxFor(m => m.ChanceName, new { @class = "form-control", @Placeholder = " Chance Name " })
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label class="col-sm-3 col-form-label"></label>
                         <div class="col-sm-9">
-                            <input type="submit" name="Save" text="Save" class="btn btn-primary" value="Save" />
-                            <a href="/Master/CategoryMaster" class="btn btn-dark">Reset</a>
+                            @if (Model.Pk_BusinessChanceId != null)
+                            {
+                                <input type="submit" value="Update " class="btn btn-success" name="btnUpdate" onclick="return validateservice();" />
+                            }
+                            else {
+                            <input type="submit" name="btnSave" text="Save" class="btn btn-primary" value="Save"  onclick="return validateservice();"/>
+                            }
+                            <a href="/Master/BusinessChanceMaster" class="btn btn-dark">Reset</a>
                             <a href="/Master/BusinessChanceList" class="btn btn-info">Back To List</a>
 
                         </div>
@@ -47,3 +69,23 @@
         </div>
     </div>
 </div>
+}
+<style>
+    .errortext {
+        border: 3px solid #dc3545;
+        border-color: #f7a5a5;
+    }
+</style>
+<script>
+    function validateservice()
+    {
+        $(".errortext").removeClass("errortext");
+        if ($('#ChanceName').val() == '') {
+            $("#ChanceName").addClass('errortext');
+            $('#ChanceName').focus();
+            return false;
+        }
+
+        return true;
+    }
+</script>

@@ -710,6 +710,7 @@
     <Content Include="assets\flags\4x3\zw.svg" />
     <Content Include="assets\fonts\boxiconsd41d.svg" />
     <Content Include="assets\fonts\LineIcons.svg" />
+    <Content Include="assets\images\avatars\user.png" />
     <Content Include="assets\images\brand-logo-2.png" />
     <Content Include="assets\images\error\404-error.png" />
     <Content Include="assets\images\error\505-error.png" />
@@ -837,9 +838,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\APIModel.cs" />
+    <Compile Include="Models\BLSMS.cs" />
     <Compile Include="Models\Common.cs" />
     <Compile Include="Models\DBHelper.cs" />
+    <Compile Include="Models\DWR.cs" />
     <Compile Include="Models\EmployeeDWR.cs" />
+    <Compile Include="Models\EmployeeLead.cs" />
     <Compile Include="Models\EmployeeProspect.cs" />
     <Compile Include="Models\EmployeeRegistration.cs" />
     <Compile Include="Models\ForgotPassword.cs" />
@@ -856,18 +860,17 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\Admin\DashBoard.cshtml" />
-    <Content Include="Views\EmployeeDWR\DWRMaster.cshtml" />
     <Content Include="Views\EmployeeLead\AddLead.cshtml" />
     <Content Include="Views\EmployeeLead\ListLead.cshtml" />
-    <Content Include="Views\EmployeeProcpect\GetProspecctList.cshtml" />
+    <Content Include="Views\EmployeeProcpect\ProspecctList.cshtml" />
     <Content Include="Views\EmployeeProcpect\Procpect.cshtml" />
     <Content Include="Views\EmployeeRegistration\DashBoard.cshtml" />
     <Content Include="Views\EmployeeRegistration\EmployeeRegistration.cshtml" />
-    <Content Include="Views\EmployeeRegistration\GetEmpolyeeRegistrationList.cshtml" />
+    <Content Include="Views\EmployeeRegistration\EmpolyeeRegistrationList.cshtml" />
     <Content Include="Views\Home\DashBoard.cshtml" />
     <Content Include="Views\Home\ForgetPassword.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Lead\AddLead.cshtml" />
+    <Content Include="Views\Lead\LeadMaster.cshtml" />
     <Content Include="Views\Lead\ListLead.cshtml" />
     <Content Include="Views\Master\AddEmailTemplate.cshtml" />
     <Content Include="Views\Master\BusinessChanceList.cshtml" />
@@ -883,7 +886,7 @@
     <Content Include="Views\Master\ProspectActivityList.cshtml" />
     <Content Include="Views\Master\ProspectActivityMaster.cshtml" />
     <Content Include="Views\Master\SendEmail.cshtml" />
-    <Content Include="Views\Procpect\GetProspecctList.cshtml" />
+    <Content Include="Views\Procpect\ProspecctList.cshtml" />
     <Content Include="Views\Procpect\Procpect.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Shared\_UserLayout.cshtml" />
@@ -903,6 +906,7 @@
     <Content Include="Views\EmployeeDWR\EmployeeDWR.cshtml" />
     <Content Include="Views\Employee\EmployeeDashBoard.cshtml" />
     <Content Include="Views\EmployeeProcpect\EmployeeProspect.cshtml" />
+    <Content Include="Views\Master\EmailMaster.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -914,10 +918,10 @@
     <Folder Include="App_Data\" />
     <Folder Include="assets\extra-libs\taskboard\css\images\" />
     <Folder Include="assets\extra-libs\toastr\dist\build\" />
-    <Folder Include="assets\images\avatars\" />
     <Folder Include="assets\images\bg-themes\" />
     <Folder Include="assets\images\gallery\" />
     <Folder Include="assets\images\products\" />
+    <Folder Include="SoftwareImages\" />
     <Folder Include="Views\Customer\" />
   </ItemGroup>
   <PropertyGroup>
@@ -935,7 +939,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64705</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64705/</IISUrl>
+          <IISUrl>http://localhost:64706/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

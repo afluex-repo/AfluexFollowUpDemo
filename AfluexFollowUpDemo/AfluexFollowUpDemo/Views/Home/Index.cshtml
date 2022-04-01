@@ -33,6 +33,12 @@
     <link href="~/assets/css/light-theme.css" rel="stylesheet" />
     <link href="~/assets/css/semi-dark.css" rel="stylesheet" />
     <link href="~/assets/css/header-colors.css" rel="stylesheet" />
+    <style>
+        .errortext {
+            border: 3px solid #dc3545;
+            border-color: #f7a5a5;
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
@@ -40,7 +46,7 @@
         <header>
             <nav class="navbar">
                 <div class="container">
-                    <a class="navbar-brand" href="Login"><img src="~/assets/images/logo-black.png" width="140" alt="" /></a>
+                    <a class="navbar-brand" href="/Home/Index"><img src="~/assets/images/logo-black.png" width="140" alt="" /></a>
 
 
                 </div>
@@ -60,12 +66,8 @@
                                 <div class="alert alert-danger" style="display:@ViewBag.errormsg">
                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
                                     <h5 class="text-danger"><i class="fa fa-times-circle"></i> @TempData["Login"]</h5>
-
                                 </div>
                             }*@
-
-                       
-
                             <div class="col-12 col-xl-4 order-xl-2">
                                 <div class="card-body p-4 p-sm-5">
                                      @using (Html.BeginForm("LoginAction", "Home", FormMethod.Post, new { @id = "signupForm" }))
@@ -89,14 +91,14 @@
                                                 <label for="inputEmailAddress" class="form-label">Login ID</label>
                                                 <div class="ms-auto position-relative">
                                                     <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-envelope-fill"></i></div>
-                                                    <input type="text" class="form-control radius-30 ps-5" name="LoginId"   placeholder="Login Id">
+                                                    <input type="text" class="form-control radius-30 ps-5" name="LoginId" id="LoginId"   placeholder="Login Id">
                                                 </div>
                                               </div>
                                             <div class="col-12">
                                                 <label for="inputChoosePassword" class="form-label">Your Password</label>
                                                 <div class="ms-auto position-relative">
                                                     <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-lock-fill"></i></div>
-                                                    <input type="password" class="form-control radius-30 ps-5" name="password" placeholder="Password">
+                                                    <input type="password" class="form-control radius-30 ps-5" name="password" id="password" placeholder="Password">
                                                 </div>
                                             </div>
                                          
@@ -105,7 +107,7 @@
                                             </div>
                                             <div class="col-12">
                                                 <div class="d-grid">
-                                                    <input type="submit" name="submit" value="Login" class="btn btn-primary radius-30" />
+                                                    <input type="submit" name="submit" value="Login" class="btn btn-primary radius-30" onclick="return validateservice();"/>
                                                  
                                                 </div>
                                             </div>
@@ -143,14 +145,21 @@
     <script src="~/assets/js/pace.min.js"></script>
 
 
-
-
-
-
-
-    <strip>
-
-    </strip>
+    <script>
+        function validateservice() {
+        $(".errortext").removeClass("errortext");
+        if ($('#LoginId').val() == '') {
+            $("#LoginId").addClass('errortext');
+            $('#LoginId').focus();
+        return false;
+        }
+        if ($('#password').val() == '') {
+            $("#password").addClass('errortext');
+            $('#password').focus();
+        return false;
+        }
+        }
+    </script>
 
 </body>
 
