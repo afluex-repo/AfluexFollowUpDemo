@@ -43,16 +43,18 @@ namespace AfluexFollowUpDemo.Models
         public string EmployeeId { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
+       
         public DataSet GetDashBoardDetails()
         {
             SqlParameter[] para ={
                                       new SqlParameter ("@FromDate",FromDate),
                                    new SqlParameter ("@ToDate",ToDate),
                                     new SqlParameter ("@EmployeeId",EmployeeId),
+                        
 
 
                                  };
-            DataSet ds = DBHelper.ExecuteQuery("GetDashBoardDetails", para);
+            DataSet ds = DBHelper.ExecuteQuery("DashBoardDetails", para);
             return ds;
         }
     }
