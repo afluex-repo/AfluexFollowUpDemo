@@ -143,8 +143,8 @@ namespace AfluexFollowUpDemo.Models
                                    new SqlParameter("@UpdatedBy",UpdatedBy),
                                    new SqlParameter("@Pk_LeadeId",Pk_LeadeId)
             };
-                                     ;
-            DataSet ds = DBHelper.ExecuteQuery("UpdateLead", param);
+                                     
+            DataSet ds = DBHelper.ExecuteQuery("UpdateLeadList", param);
             return ds;
         }
     }
