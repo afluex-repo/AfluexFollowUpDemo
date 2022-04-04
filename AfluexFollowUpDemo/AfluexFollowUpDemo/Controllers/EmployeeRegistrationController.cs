@@ -52,6 +52,7 @@ namespace AfluexFollowUpDemo.Controllers
                         obj.ContactNo = ds1.Tables[0].Rows[0]["ContactNo"].ToString();
                         obj.EmailId = ds1.Tables[0].Rows[0]["EmailId"].ToString();
                         obj.Address = ds1.Tables[0].Rows[0]["Address"].ToString();
+                        obj.postedFile = ds1.Tables[0].Rows[0]["UserImage"].ToString();
                     }
                 }
                 catch (Exception ex)
@@ -155,10 +156,36 @@ namespace AfluexFollowUpDemo.Controllers
             return RedirectToAction(FormName, Controller);
         }
 
-
-        public ActionResult GetEmpolyeeRegistrationList()
+        //[HttpPost]
+        //[ActionName("GetEmpolyeeRegistrationList")]
+        //[OnAction(ButtonName = "GetDetails")]
+        public ActionResult EmpolyeeRegistrationList()
         {
             EmployeeRegistration model = new EmployeeRegistration();
+            List<EmployeeRegistration> lst = new List<EmployeeRegistration>();
+            model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+            model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+            model.Pk_Id = Session["UserID"].ToString();
+            model.Fk_UserTypeId = model.Fk_UserTypeId == "0" ? null : model.Fk_UserTypeId;
+            DataSet ds1 = model.FilterEmployee();
+            if (ds1 != null && ds1.Tables.Count > 0 && ds1.Tables.Count > 0)
+            {
+                foreach (DataRow r in ds1.Tables[0].Rows)
+                {
+
+                    EmployeeRegistration obj = new EmployeeRegistration();
+                    obj.Pk_Id = r["Pk_Id"].ToString();
+                    obj.Fk_UserTypeId = r["UserName"].ToString();
+                    obj.Name = r["Name"].ToString();
+                    obj.ContactNo = r["ContactNo"].ToString();
+                    obj.EmailId = r["EmailId"].ToString();
+                    obj.Address = r["Address"].ToString();
+                    obj.UserImage = string.IsNullOrEmpty(r["UserImage"].ToString()) ? " ../SoftwareImages/d2.jpg" : r["UserImage"].ToString();
+                    lst.Add(obj);
+                }
+                model.lstemployee = lst;
+            }
+
             #region BindUsertype
             int count = 0;
             List<SelectListItem> ddlUserName = new List<SelectListItem>();
@@ -179,7 +206,7 @@ namespace AfluexFollowUpDemo.Controllers
             ViewBag.ddlUserName = ddlUserName;
 
             #endregion BindUsertype
-            return View();
+            return View(model);
         }
         public ActionResult DeleteEmployeeRegistration(string Pk_Id)
         {
@@ -208,7 +235,7 @@ namespace AfluexFollowUpDemo.Controllers
 
             }
             ViewBag.saverrormsg = "";
-            return RedirectToAction("GetEmpolyeeRegistrationList");
+            return RedirectToAction("EmpolyeeRegistrationList");
         }
         [HttpPost]
         [ActionName("EmployeeRegistration")]
@@ -248,7 +275,7 @@ namespace AfluexFollowUpDemo.Controllers
         }
 
         [HttpPost]
-        [ActionName("GetEmpolyeeRegistrationList")]
+        [ActionName("EmpolyeeRegistrationList")]
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult FilterEmployee(EmployeeRegistration model)
         {

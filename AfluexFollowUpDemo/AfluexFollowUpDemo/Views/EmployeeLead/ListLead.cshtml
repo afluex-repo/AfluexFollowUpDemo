@@ -5,7 +5,21 @@
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<h6 class="mb-0 text-uppercase">Lead List Followup</h6>
+@*<h6 class="mb-0 text-uppercase">Lead List Followup</h6>
+<hr />*@
+<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
+    <div class="breadcrumb-title pe-3">Lead</div>
+    <div class="ps-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 p-0">
+                <li class="breadcrumb-item">
+                    <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Lead List</li>
+            </ol>
+        </nav>
+    </div>
+</div>
 <hr />
 @using (Html.BeginForm("ListLead", "EmployeeLead", FormMethod.Post, new { @id = "signupForm", enctype = "multipart/form-data" }))
 {
@@ -72,7 +86,7 @@
                                 <thead>
                                     <tr>
                                         <th>Contact Person</th>
-                                        <th>FirstDateOfInteeraction</th>
+                                        <th>First Date Of Inter Action</th>
                                         <th>Expected Product Category</th>
                                         <th>Data Source</th>
                                         <th>Executive Name</th>
@@ -84,7 +98,7 @@
                                 </thead>
                                 <tbody>
                                     @if (Model != null)
-                            {
+                                    {
                                 if (Model.lstLead != null)
                                 {
                                     foreach (var item in Model.lstLead)
@@ -105,7 +119,7 @@
 
                                             <a href="/EmployeeLead/AddLead?Pk_LeadeId=@item.Pk_LeadeId" class="text-warning" title="Edit"><i class="bi bi-pencil-fill"></i></a>
 
-                                            <a href="/EmployeeLead/DeleteLead?Pk_LeadeId=@item.Pk_LeadeId" class="label label-primary" onclick="return confirm('Are you want to delete?;')"><i class="bi bi-trash-fill"></i></a>
+                                            <a href="/EmployeeLead/DeleteLead?Pk_LeadeId=@item.Pk_LeadeId" class="label label-primary" onclick="return confirm('Do you want to delete?;')"><i class="bi bi-trash-fill"></i></a>
                                             &nbsp;
                                         </td>
                                     </tr>

@@ -862,11 +862,11 @@
     <Content Include="Views\Admin\DashBoard.cshtml" />
     <Content Include="Views\EmployeeLead\AddLead.cshtml" />
     <Content Include="Views\EmployeeLead\ListLead.cshtml" />
-    <Content Include="Views\EmployeeProcpect\GetProspecctList.cshtml" />
+    <Content Include="Views\EmployeeProcpect\ProspecctList.cshtml" />
     <Content Include="Views\EmployeeProcpect\Procpect.cshtml" />
     <Content Include="Views\EmployeeRegistration\DashBoard.cshtml" />
     <Content Include="Views\EmployeeRegistration\EmployeeRegistration.cshtml" />
-    <Content Include="Views\EmployeeRegistration\GetEmpolyeeRegistrationList.cshtml" />
+    <Content Include="Views\EmployeeRegistration\EmpolyeeRegistrationList.cshtml" />
     <Content Include="Views\Home\DashBoard.cshtml" />
     <Content Include="Views\Home\ForgetPassword.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -886,7 +886,7 @@
     <Content Include="Views\Master\ProspectActivityList.cshtml" />
     <Content Include="Views\Master\ProspectActivityMaster.cshtml" />
     <Content Include="Views\Master\SendEmail.cshtml" />
-    <Content Include="Views\Procpect\GetProspecctList.cshtml" />
+    <Content Include="Views\Procpect\ProspecctList.cshtml" />
     <Content Include="Views\Procpect\Procpect.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Shared\_UserLayout.cshtml" />
@@ -939,7 +939,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64705</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64705/</IISUrl>
+          <IISUrl>http://localhost:64706/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

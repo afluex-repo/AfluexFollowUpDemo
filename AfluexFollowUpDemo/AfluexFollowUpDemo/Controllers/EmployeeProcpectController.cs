@@ -46,7 +46,7 @@ namespace AfluexFollowUpDemo.Controllers
                 {
                     if (count1 == 0)
                     {
-                        ddlInteraction.Add(new SelectListItem { Text = "Select InterAction Type", Value = "0" });
+                        ddlInteraction.Add(new SelectListItem { Text = "Select Inter Action Type", Value = "0" });
                     }
                     ddlInteraction.Add(new SelectListItem { Text = r["InterActionName"].ToString(), Value = r["PK_InterActionId"].ToString() });
                     count1 = count1 + 1;
@@ -143,6 +143,8 @@ namespace AfluexFollowUpDemo.Controllers
                         obj.LinkedInId = ds6.Tables[0].Rows[0]["LinkedInId"].ToString();
                         obj.ApproximateEmployee = ds6.Tables[0].Rows[0]["ApproximateEmployee"].ToString();
                         obj.ApproximateCompanyTurnOver = ds6.Tables[0].Rows[0]["ApproximateCompanyTurnOver"].ToString();
+
+                        obj.CreateDate = ds6.Tables[0].Rows[0]["Date"].ToString();
                     }
 
                 }
@@ -207,12 +209,46 @@ namespace AfluexFollowUpDemo.Controllers
             }
             return Json(obj, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult GetProspecctList()
+        public ActionResult ProspecctList()
         {
-            return View();
+            EmployeeProspect model= new EmployeeProspect ();
+            List<EmployeeProspect> lst = new List<EmployeeProspect>();
+            try
+            {
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+                model.Todate = string.IsNullOrEmpty(model.Todate) ? null : Common.ConvertToSystemDate(model.Todate, "dd/MM/yyyy");
+                model.EmployeeId = Session["UserID"].ToString();
+                model.Pk_ProcpectId = model.Pk_ProcpectId;
+                DataSet ds = model.ProspectList();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        EmployeeProspect obj = new EmployeeProspect();
+                        obj.Pk_ProcpectId = r["Pk_ProcpectId"].ToString();
+                        obj.ContactPerson = r["ContactPerson"].ToString();
+                        obj.ContactEmailId = r["ContactEmailId"].ToString();
+                        obj.ContactNo = r["ContactNo"].ToString();
+                        obj.Fk_IndustryCategoryId = r["CategoryName"].ToString();
+                        obj.CompanyName = r["CompanyName"].ToString();
+                        obj.CompanyContactNo = r["CompanyContactNo"].ToString();
+                        obj.Address = r["Address"].ToString();
+                        obj.CreateDate = r["Date"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstProcpect = lst;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(model);
         }
         [HttpPost]
-        [ActionName("GetProspecctList")]
+        [ActionName("ProspecctList")]
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult GetEmployeeProspectList(EmployeeProspect model)
         {
@@ -237,6 +273,7 @@ namespace AfluexFollowUpDemo.Controllers
                         obj.CompanyName = r["CompanyName"].ToString();
                         obj.CompanyContactNo = r["CompanyContactNo"].ToString();
                         obj.Address = r["Address"].ToString();
+                        obj.CreateDate = r["Date"].ToString();
                         lst.Add(obj);
                     }
                     model.lstProcpect = lst;
@@ -283,7 +320,7 @@ namespace AfluexFollowUpDemo.Controllers
 
             }
             ViewBag.saverrormsg = "";
-            return RedirectToAction("GetProspecctList");
+            return RedirectToAction("ProspecctList");
         }
 
         [HttpPost]

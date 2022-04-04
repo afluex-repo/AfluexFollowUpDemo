@@ -194,12 +194,46 @@ namespace AfluexFollowUpDemo.Controllers
             }
             return RedirectToAction("Procpect");
         }
-        public ActionResult GetProspecctList()
+        public ActionResult ProspecctList()
         {
-            return View();
+            List<Procpect> lst = new List<Procpect>();
+            Procpect model = new Procpect();
+            try
+            {
+                model.FromDate = string.IsNullOrEmpty(model.FromDate) ? null : Common.ConvertToSystemDate(model.FromDate, "dd/MM/yyyy");
+                model.ToDate = string.IsNullOrEmpty(model.ToDate) ? null : Common.ConvertToSystemDate(model.ToDate, "dd/MM/yyyy");
+                model.EmployeeId = Session["UserID"].ToString();
+                model.Pk_ProcpectId = model.Pk_ProcpectId;
+                DataSet ds = model.ProspectList();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables.Count > 0)
+                {
+                    foreach (DataRow r in ds.Tables[0].Rows)
+                    {
+                        Procpect obj = new Procpect();
+                        obj.Pk_ProcpectId = r["Pk_ProcpectId"].ToString();
+                        obj.ContactPerson = r["ContactPerson"].ToString();
+                        obj.ContactEmailId = r["ContactEmailId"].ToString();
+                        obj.ContactNo = r["ContactNo"].ToString();
+                        obj.Fk_IndustryCategoryId = r["CategoryName"].ToString();
+                        obj.CompanyName = r["CompanyName"].ToString();
+                        obj.CompanyContactNo = r["CompanyContactNo"].ToString();
+                        obj.Address = r["Address"].ToString();
+                        lst.Add(obj);
+                    }
+                    model.lstProcpect = lst;
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(model);
         }
         [HttpPost]
-        [ActionName("GetProspecctList")]
+        [ActionName("ProspecctList")]
         [OnAction(ButtonName = "GetDetails")]
         public ActionResult ProspectList(Procpect model)
         {
@@ -292,7 +326,7 @@ namespace AfluexFollowUpDemo.Controllers
 
             }
             ViewBag.saverrormsg = "";
-            return RedirectToAction("GetProspecctList");
+            return RedirectToAction("ProspecctList");
         }
         [HttpPost]
         [ActionName("Procpect")]

@@ -378,7 +378,7 @@ namespace AfluexFollowUpDemo.Controllers
         public ActionResult BusinessChanceList(string Pk_BusinessChanceId)
         {
             Master model = new Master();
-         //  model.Pk_BusinessChanceId = Pk_BusinessChanceId;
+            //  model.Pk_BusinessChanceId = Pk_BusinessChanceId;
             List<Master> lst1 = new List<Master>();
 
             DataSet ds = model.ListBusinessChance();
@@ -440,8 +440,8 @@ namespace AfluexFollowUpDemo.Controllers
 
         }
 
-      
-      
+
+
         public ActionResult CategoryMaster(string Pk_CategoryId)
         {
             Master model = new Master();
@@ -737,7 +737,7 @@ namespace AfluexFollowUpDemo.Controllers
             return RedirectToAction(FormName, Controller);
 
         }
-        
+
         #region DeleteCategoryMaster
         public ActionResult DeleteCategoryMaster(string Pk_CategoryId)
         {
@@ -977,7 +977,7 @@ namespace AfluexFollowUpDemo.Controllers
 
             }
             return View(model);
-            return View();
+
         }
         [HttpPost]
         [ActionName("SendEmail")]
@@ -989,6 +989,7 @@ namespace AfluexFollowUpDemo.Controllers
             MailMessage message = new MailMessage();
             try
             {
+
                 int ctrCheck = 0;
                 string ctrRowCount = Request["hdRows"].ToString();
                 string recipientEmail = "";
@@ -1004,8 +1005,6 @@ namespace AfluexFollowUpDemo.Controllers
                         recipientEmail += Request["txtEmail_" + i].ToString() + ";";
                     }
                 }
-
-
                 SmtpClient mailServer = new SmtpClient("smtp.gmail.com", 587);
                 mailServer.EnableSsl = true;
                 // mailServer.Credentials = new System.Net.NetworkCredential("afluex.outdoor@gmail.com", "krishna@9919");
@@ -1014,7 +1013,7 @@ namespace AfluexFollowUpDemo.Controllers
                 myMail.Subject = model.Subject;
                 myMail.Body = model.EmailBodyHTML + signature;
                 myMail.From = new MailAddress("developer5.afluex@gmail.com", "Afluex Multiservices LLP");
-                myMail.To.Add("developer5.afluex@gmail.com");
+                myMail.To.Add("developer2.afluex@gmail.com");
 
                 myMail.IsBodyHtml = true;
                 foreach (var emailid in recipientEmail.Split(new[] { ";" }, StringSplitOptions.RemoveEmptyEntries))

@@ -4,18 +4,18 @@
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-    <div class="breadcrumb-title pe-3">Follow Up</div>
+    <div class="breadcrumb-title pe-3">DWR</div>
     <div class="ps-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0 p-0">
                 <li class="breadcrumb-item">
                     <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Follow Up</li>
+                <li class="breadcrumb-item active" aria-current="page">DWR</li>
             </ol>
         </nav>
     </div>
-
+    <hr/>
 </div><div class="row">
     @using (Html.BeginForm("EmployeeDWR", "EmployeeDWR", FormMethod.Post, new { @id = "signup-form",enctype="multipart-form"  }))
     {
@@ -86,7 +86,7 @@
                         </div>
                    
                         <div class="col-md-4 mt-2">
-                            <label class="form-label">InterAction Name</label>
+                            <label class="form-label">Inter Action Name</label>
                             <label class="form-control" id="spFk_ModeInterActionId">&nbsp;</label>
                              @Html.DisplayFor(q => q.Fk_ModeInterActionId)
                         </div>
@@ -102,7 +102,7 @@
                         </div>
                    
                         <div class="col-md-4 mt-2">
-                            <label class="form-label">Mode Of InterAction <span style="color: red">*</span></label>
+                            <label class="form-label">Mode Of Inter Action <span style="color: red">*</span></label>
                         
                             @Html.DropDownListFor(q => q.Fk_ModeInterActionId, new SelectList(ViewBag.ddlInterAction, "Value", "Text"), new { @class = "form-control" })
                         </div>
