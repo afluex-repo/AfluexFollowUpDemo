@@ -12,7 +12,7 @@
                 <li class="breadcrumb-item">
                     <a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Registration</li>
+                <li class="breadcrumb-item active" aria-current="page">Employee</li>
             </ol>
         </nav>
     </div>
@@ -60,7 +60,7 @@
                         }
                         <div class="row">
                             <div class="col-md-4">
-                                <label class="form-label">User Type <span style="color: red">*</span></label>
+                                <label class="form-label">User<span style="color: red">*</span></label>
                                 @Html.DropDownListFor(m => m.Fk_UserTypeId, new SelectList(ViewBag.ddlUserName, "Value", "Text"), new { @class = "form-select", })
                                 @Html.HiddenFor(m => m.Pk_Id)
                             </div>
@@ -69,8 +69,8 @@
                                 @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @Placeholder = "Enter Your Name" })
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Contact No<span style="color: red">*</span></label>
-                                @Html.TextBoxFor(m => m.ContactNo, new { @class = "form-control", @Placeholder = "Enter Contact No.", @onkeypress = "return isNumber(event)", @maxlength = "10" })
+                                <label class="form-label">Mobile No<span style="color: red">*</span></label>
+                                @Html.TextBoxFor(m => m.ContactNo, new { @class = "form-control", @Placeholder = "Enter Mobile No.", @onkeypress = "return isNumber(event)", @maxlength = "10" })
                             </div>
                         </div>
                         <div class="row">

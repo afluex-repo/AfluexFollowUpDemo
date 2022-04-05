@@ -28,7 +28,7 @@ namespace AfluexFollowUpDemo.Controllers
                 {
                     if (count == 0)
                     {
-                        ddlUserName.Add(new SelectListItem { Text = "Select User Type", Value = "0" });
+                        ddlUserName.Add(new SelectListItem { Text = "Select User", Value = "0" });
                     }
                     ddlUserName.Add(new SelectListItem { Text = r["UserName"].ToString(), Value = r["Pk_UserTypeID"].ToString() });
                     count = count + 1;
@@ -177,6 +177,7 @@ namespace AfluexFollowUpDemo.Controllers
                     obj.Pk_Id = r["Pk_Id"].ToString();
                     obj.Fk_UserTypeId = r["UserName"].ToString();
                     obj.Name = r["Name"].ToString();
+                    obj.Password = r["Password"].ToString();
                     obj.ContactNo = r["ContactNo"].ToString();
                     obj.EmailId = r["EmailId"].ToString();
                     obj.Address = r["Address"].ToString();
@@ -196,7 +197,7 @@ namespace AfluexFollowUpDemo.Controllers
                 {
                     if (count == 0)
                     {
-                        ddlUserName.Add(new SelectListItem { Text = "Select User Type", Value = "0" });
+                        ddlUserName.Add(new SelectListItem { Text = "Select User", Value = "0" });
                     }
                     ddlUserName.Add(new SelectListItem { Text = r["UserName"].ToString(), Value = r["Pk_UserTypeID"].ToString() });
                     count = count + 1;
@@ -289,7 +290,7 @@ namespace AfluexFollowUpDemo.Controllers
                 {
                     if (count == 0)
                     {
-                        ddlUserName.Add(new SelectListItem { Text = "Select User Type", Value = "0" });
+                        ddlUserName.Add(new SelectListItem { Text = "Select User", Value = "0" });
                     }
                     ddlUserName.Add(new SelectListItem { Text = r["UserName"].ToString(), Value = r["Pk_UserTypeID"].ToString() });
                     count = count + 1;
