@@ -25,7 +25,7 @@ namespace AfluexFollowUpDemo.Controllers
                 {
                     if (count == 0)
                     {
-                        ddlcategory.Add(new SelectListItem { Text = "Select Category Type", Value = "0" });
+                        ddlcategory.Add(new SelectListItem { Text = "Select Category", Value = "0" });
                     }
                     ddlcategory.Add(new SelectListItem { Text = r["CategoryName"].ToString(), Value = r["Pk_CategoryId"].ToString() });
                     count = count + 1;
@@ -45,7 +45,7 @@ namespace AfluexFollowUpDemo.Controllers
                 {
                     if (count1 == 0)
                     {
-                        ddlInteraction.Add(new SelectListItem { Text = "Select InterAction Type", Value = "0" });
+                        ddlInteraction.Add(new SelectListItem { Text = "Select Inter Action", Value = "0" });
                     }
                     ddlInteraction.Add(new SelectListItem { Text = r["InterActionName"].ToString(), Value = r["PK_InterActionId"].ToString() });
                     count1 = count1 + 1;
@@ -64,7 +64,7 @@ namespace AfluexFollowUpDemo.Controllers
                 {
                     if (count2 == 0)
                     {
-                        ddlExpected.Add(new SelectListItem { Text = "Select Product Type", Value = "0" });
+                        ddlExpected.Add(new SelectListItem { Text = "Select Product", Value = "0" });
                     }
                     ddlExpected.Add(new SelectListItem { Text = r["ProductCategoryName"].ToString(), Value = r["Pk_ProductCategoryId"].ToString() });
                     count2 = count2 + 1;
@@ -84,7 +84,7 @@ namespace AfluexFollowUpDemo.Controllers
                 {
                     if (count3 == 0)
                     {
-                        ddlSource.Add(new SelectListItem { Text = "Select Source Type", Value = "0" });
+                        ddlSource.Add(new SelectListItem { Text = "Select Source", Value = "0" });
                     }
                     ddlSource.Add(new SelectListItem { Text = r["SourceName"].ToString(), Value = r["Pk_SourceId"].ToString() });
                     count3 = count3 + 1;
@@ -104,7 +104,7 @@ namespace AfluexFollowUpDemo.Controllers
                 {
                     if (count4 == 0)
                     {
-                        ddlExecutive.Add(new SelectListItem { Text = "Select Executive Type", Value = "0" });
+                        ddlExecutive.Add(new SelectListItem { Text = "Select Executive", Value = "0" });
                     }
                     ddlExecutive.Add(new SelectListItem { Text = r["Name"].ToString(), Value = r["Pk_Id"].ToString() });
                     count4 = count4 + 1;
