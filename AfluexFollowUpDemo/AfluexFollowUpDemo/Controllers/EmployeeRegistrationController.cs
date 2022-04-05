@@ -316,6 +316,7 @@ namespace AfluexFollowUpDemo.Controllers
                         obj.Pk_Id = r["Pk_Id"].ToString();
                         obj.Fk_UserTypeId = r["UserName"].ToString();
                         obj.Name = r["Name"].ToString();
+                        obj.Password = r["Password"].ToString();
                         obj.ContactNo = r["ContactNo"].ToString();
                         obj.EmailId = r["EmailId"].ToString();
                         obj.Address = r["Address"].ToString();
