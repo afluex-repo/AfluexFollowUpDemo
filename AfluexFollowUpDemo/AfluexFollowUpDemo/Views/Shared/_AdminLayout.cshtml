@@ -80,28 +80,36 @@
                                 <li>
                                     <a class="dropdown-item" href="#">
                                         <div class="d-flex align-items-center">
-                                            <img src="~/assets/images/avatars/user.png" alt="" class="rounded-circle" width="60" height="60">
+                                            <img src="~/assets/images/avatars/user.png" alt="" class="rounded-circle" width="30" height="30">
                                             <div class="ms-3">
-                                                <h6 class="mb-0 dropdown-user-name">@Session["Username"]</h6>
+                                                <p class="mb-0 dropdown-user-name">@Session["Username"]</p>
                                                 @*<small class="mb-0 dropdown-user-designation text-secondary">HR Manager</small>*@
                                             </div>
                                         </div>
                                     </a>
                                 </li>
                                 <li><hr class="dropdown-divider"></li>
-                                @*<li>
-                                    <a class="dropdown-item" href="#">
+                                <li>
+                                    <a class="dropdown-item" href="/Admin/EmployeeProfile">
                                         <div class="d-flex align-items-center">
                                             <div class="setting-icon"><i class="bi bi-person-fill"></i></div>
                                             <div class="setting-text ms-3"><span>Profile</span></div>
                                         </div>
                                     </a>
-                                </li>*@
-                                <li><hr class="dropdown-divider"></li>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="/Home/ChangeEmployeePassword">
+                                        <div class="d-flex align-items-center">
+                                            <div class="setting-icon"><i class="bi bi-lock-fill"></i></div>
+                                            <div class="setting-text ms-3"><span>Change password</span></div>
+                                        </div>
+                                    </a>
+                                </li>
+                                @*<li><hr class="dropdown-divider"></li>*@
                                 <li>
                                     <a class="dropdown-item" href="/Home/index">
                                         <div class="d-flex align-items-center">
-                                            <div class="setting-icon"><i class="bi bi-lock-fill"></i></div>
+                                            <div class="setting-icon"><i class="bi bi-exclamation-circle-fill"></i></div>
                                             <div class="setting-text ms-3"><span>Logout</span></div>
                                         </div>
                                     </a>
@@ -299,17 +307,17 @@
                         <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-Master" type="button"><i class="bi bi-grid-fill"></i></button>
                     </li>
                     <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Employee">
-                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-Employee" type="button"><i class="bi bi-briefcase-fill"></i></button>
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-Employee" type="button"><i class="bi bi-people-fill"></i></button>
                     </li>
                    
                     <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Procpect">
-                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-Procpect" type="button"><i class="bi bi-bookmark-star-fill"></i></button>
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-Procpect" type="button"><i class="bi bi-diamond-half"></i></button>
                     </li>
                     <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Lead">
                         <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-Lead" type="button"><i class="bi bi-bag-check-fill"></i></button>
                     </li>
                     <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="FollowUp">
-                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-forms" type="button"><i class="bi bi-file-earmark-break-fill"></i></button>
+                        <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-forms" type="button"><i class="bi bi-diagram-3-fill"></i></button>
                     </li>
                     <li class="nav-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Setting">
                         <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-Password" type="button"><i class="bi bi-gear-fill"></i></button>
@@ -328,7 +336,7 @@
             </div>
             <div class="textmenu active">
                 <div class="brand-logo">
-                    <a href="/Home/DashBoard"><img src="~/assets/images/logo-black.png" width="140" alt="" /></a>
+                    <a href="/Home/DashBoard"><img src="~/assets/images/logo-white.png" width="140" alt="" /></a>
 </div>
                 <div class="tab-content active">
                     <div class="tab-pane fade" id="pills-dashboards">
@@ -354,13 +362,13 @@
                                 </div>
                                 @*<small class="mb-0">Some placeholder content</small>*@
                             </div>
-                            <a href="/Master/CategoryMaster" class="list-group-item"><i class="bi bi-chat-left-text"></i>Category</a>
-                            <a href="/Master/InterActionMaster" class="list-group-item"><i class="bi bi-chat-left-text"></i>Inter Action</a>
+                            <a href="/Master/CategoryMaster" class="list-group-item"><i class="bi bi-menu-button"></i>Category</a>
+                            <a href="/Master/InterActionMaster" class="list-group-item"><i class="bi bi-intersect"></i>Interction</a>
                             <a href="/Master/DataSourceMaster" class="list-group-item"><i class="bi bi-archive"></i>Data Source</a>
                             <a href="/Master/ProspectActivityMaster" class="list-group-item"><i class="bi bi-check2-square"></i>Prospect Activity</a>
-                            <a href="/Master/BusinessChanceMaster" class="list-group-item"><i class="bi bi-receipt"></i>Business Chance</a>
-                            <a href="/Master/ProductCategoryMaster" class="list-group-item"><i class="bi bi-receipt"></i>Product Category</a>
-                            <a href="/Master/SendEmail" class="list-group-item"><i class="bi bi-receipt"></i>Send Email</a>
+                            <a href="/Master/BusinessChanceMaster" class="list-group-item"><i class="bi bi-award"></i>Business Chance</a>
+                            <a href="/Master/ProductCategoryMaster" class="list-group-item"><i class="bi bi-box"></i>Product Category</a>
+                            <a href="/Master/SendEmail" class="list-group-item"><i class="bi bi-mailbox2"></i>Send Email</a>
 
                         </div>
                     </div>
@@ -372,8 +380,8 @@
                                 </div>
 
                             </div>
-                            <a href="/EmployeeRegistration/EmployeeRegistration" class="list-group-item"><i class="bi bi-box"></i>Employee</a>
-                            <a href="/EmployeeRegistration/EmpolyeeRegistrationList" class="list-group-item"><i class="bi bi-bar-chart"></i>Employee List</a>
+                            <a href="/EmployeeRegistration/EmployeeRegistration" class="list-group-item"><i class="bi bi-card-text"></i>Registration</a>
+                            <a href="/EmployeeRegistration/EmpolyeeRegistrationList" class="list-group-item"><i class="bi bi-list-ol"></i>Registration List</a>
                         </div>
                     </div>
                     
@@ -385,8 +393,8 @@
                                 </div>
 
                             </div>
-                            <a href="/Procpect/Procpect" class="list-group-item"><i class="bi bi-bell"></i>Prospect</a>
-                            <a href="/Procpect/ProspecctList" class="list-group-item"><i class="bi bi-arrows-collapse"></i>Prospect List</a>
+                            <a href="/Procpect/Procpect" class="list-group-item"><i class="bi bi-x-diamond"></i>Prospect</a>
+                            <a href="/Procpect/ProspecctList" class="list-group-item"><i class="bi bi-list-ol"></i>Prospect List</a>
 
                         </div>
                     </div>
@@ -398,8 +406,8 @@
                                 </div>
 
                             </div>
-                            <a href="/Lead/LeadMaster" class="list-group-item"><i class="bi bi-box-seam"></i>Add Lead</a>
-                            <a href="/Lead/ListLead" class="list-group-item"><i class="bi bi-box-seam"></i>Lead List</a>
+                            <a href="/Lead/LeadMaster" class="list-group-item"><i class="bi bi-person-circle"></i>Add Lead</a>
+                            <a href="/Lead/ListLead" class="list-group-item"><i class="bi bi-list-ol"></i>Lead List</a>
 
                         </div>
                     </div>
@@ -411,7 +419,7 @@
                                 </div>
 
                             </div>
-                            <a href="/DWR/DWRMaster" class="list-group-item"><i class="bi bi-award"></i>DWR</a>
+                            <a href="/DWR/DWRMaster" class="list-group-item"><i class="bi bi-person-square"></i>DWR</a>
 
                         </div>
                     </div>

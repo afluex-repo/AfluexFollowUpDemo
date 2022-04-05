@@ -13,6 +13,10 @@ namespace AfluexFollowUpDemo.Controllers
         {
             return View();
         }
+        public ActionResult EmployeeProfile()
+        {
+            return View();
+        }
         //public ActionResult Logout()
         //{
         //    Session.Abandon();

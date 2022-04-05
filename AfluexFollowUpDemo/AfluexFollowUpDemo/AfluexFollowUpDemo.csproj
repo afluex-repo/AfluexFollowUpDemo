@@ -720,6 +720,7 @@
     <Content Include="assets\images\error\login-img.jpg" />
     <Content Include="assets\images\favicon-32x32.png" />
     <Content Include="assets\images\favicon-32x322.png" />
+    <Content Include="assets\images\logo-white.png" />
     <Content Include="assets\images\icons\search.svg" />
     <Content Include="assets\images\logo-black.png" />
     <Content Include="assets\js\app-chat-box.js" />
@@ -907,7 +908,7 @@
     <Content Include="Views\Employee\EmployeeDashBoard.cshtml" />
     <Content Include="Views\EmployeeProcpect\EmployeeProspect.cshtml" />
     <Content Include="Views\Master\EmailMaster.cshtml" />
-    <Content Include="Views\Home\ChangeEmployeePassword.cshtml" />
+    <Content Include="Views\Admin\EmployeeProfile.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
