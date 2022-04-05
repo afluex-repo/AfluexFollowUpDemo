@@ -271,5 +271,10 @@ namespace AfluexFollowUpDemo.Controllers
             Session.Abandon();
             return RedirectToAction("Index", "Home");
         }
+
+        public ActionResult ChangeEmployeePassword()
+        {
+            return View();
+        }
     }
 }
