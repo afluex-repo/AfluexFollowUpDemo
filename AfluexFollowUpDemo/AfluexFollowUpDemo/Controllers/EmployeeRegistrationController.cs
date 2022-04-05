@@ -341,5 +341,7 @@ namespace AfluexFollowUpDemo.Controllers
             Session.Abandon();
             return RedirectToAction("Index", "Home");
         }
+
+
     }
 }

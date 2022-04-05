@@ -907,6 +907,7 @@
     <Content Include="Views\Employee\EmployeeDashBoard.cshtml" />
     <Content Include="Views\EmployeeProcpect\EmployeeProspect.cshtml" />
     <Content Include="Views\Master\EmailMaster.cshtml" />
+    <Content Include="Views\Home\ChangeEmployeePassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

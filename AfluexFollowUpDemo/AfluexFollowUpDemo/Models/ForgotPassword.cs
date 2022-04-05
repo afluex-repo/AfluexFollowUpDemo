@@ -13,6 +13,11 @@ namespace AfluexFollowUpDemo.Models
         public string LoginId { get; set; }
         public string EmailId { get; set; }
 
+        public string OldPassword { get; set; }
+        public string NewPassword { get; set; }
+        public string ConfirmPassword { get; set; }
+        public string CreatedBy { get; set; }
+
 
         public DataSet PasswordForget()
         {
