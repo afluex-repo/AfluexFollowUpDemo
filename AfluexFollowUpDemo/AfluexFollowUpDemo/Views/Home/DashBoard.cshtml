@@ -19,9 +19,9 @@
 </div>
 <hr />
 
-<h6 class="mb-0 text-uppercase">Today's Followup</h6>
+<h6 class="mb-0 text-uppercase todays">Today's Followup</h6>
 <hr />
-<div class="card">
+<div class="card todays">
     <div class="card-body">
         <div class="table-responsive">
             <table id="example1" class="table table-striped table-bordered" style="width:100%" >
@@ -70,9 +70,9 @@
         </div>
     </div>
 </div>
-<h6 class="mb-0 text-uppercase">Next Followup</h6>
+<h6 class="mb-0 text-uppercase next">Next Followup</h6>
 <hr />
-<div class="card">
+<div class="card next">
     <div class="card-body">
         <div class="table-responsive">
             <table id="example2" class="table table-striped table-bordered" style="width:100%">
@@ -121,9 +121,9 @@
     </div>
 </div>
 
-<h6 class="mb-0 text-uppercase">Pending Followup</h6>
+<h6 class="mb-0 text-uppercase pending">Pending Followup</h6>
 <hr />
-<div class="card">
+<div class="card pending">
     <div class="card-body">
         <div class="table-responsive">
             <table id="example3" class="table table-striped table-bordered" style="width:100%">
@@ -175,5 +175,24 @@
     .errortext {
         border: 1px solid #dc3545;
         border-color: #f7a5a5;
+    }
+    h6.mb-0.todays {
+    color: #006800;
+}
+    h6.mb-0.next {
+    color: #005b67;
+}
+    h6.mb-0.pending {
+    color: #ff002d;
+}
+    .card.todays {
+        background-color: #dff3df;
+    }
+    .card.next {
+        margin-bottom: 1.5rem;
+        background-color: #dbf2f5;
+    }
+    .card.pending {
+        background-color: #f7dde0;
     }
 </style>
