@@ -272,9 +272,5 @@ namespace AfluexFollowUpDemo.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult ChangeEmployeePassword()
-        {
-            return View();
-        }
     }
 }
