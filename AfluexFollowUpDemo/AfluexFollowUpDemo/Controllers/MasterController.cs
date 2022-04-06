@@ -1202,5 +1202,42 @@ namespace AfluexFollowUpDemo.Controllers
             return RedirectToAction("EmailMaster");
         }
 
+
+        public ActionResult ChangeEmployeePassword()
+        {
+            ForgotPassword obj = new ForgotPassword();
+            return View();
+        }
+
+        [HttpPost]
+        [ActionName("ChangeEmployeePassword")]
+        [OnAction(ButtonName = "btnChange")]
+        public ActionResult UpdatePassword(ForgotPassword obj)
+        {
+            try
+            {
+                obj.LoginId = Session["LoginID"].ToString();
+                obj.UserType = Session["FK_UserTypeID"].ToString();
+                obj.UpdatedBy = Session["UserID"].ToString();
+                DataSet ds = obj.UpdatePassword();
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0][0].ToString() == "1")
+                    {
+                        TempData["Success"] = "Password updated Successfully";
+                    }
+                    else
+                    {
+                        TempData["Error"] = ds.Tables[0].Rows[0]["ErrorMessage"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["Error"] = ex.Message;
+            }
+            return RedirectToAction("ChangeEmployeePassword", "Master");
+        }
+
     }
 }
